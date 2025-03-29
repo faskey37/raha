@@ -639,7 +639,8 @@
         ];
 
         // Cart state
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        try {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartCount = document.getElementById('cartCount');
         const cartNotification = document.getElementById('cartNotification');
         const medicineGrid = document.getElementById('medicineGrid');
@@ -821,6 +822,10 @@
             document.getElementById('medicineSearch').value = '';
             displayMedicines(medicines);
         }
+        } catch (error) {
+            alert("This feature is under development for Android Apps")
+        }
+        
     </script>
     <script src="https://faskey37.github.io/raha/js/common.js"></script>
 </body>
