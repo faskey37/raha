@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raha Health App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/loader.css">
+  
+  <style>
+  </style>
+</head>
+<body class="medium-text">
+  <div class="custom-loader">
+    <svg viewBox="0 0 187.3 93.7" class="loader-svg">
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3498db" />
+          <stop offset="50%" stop-color="#3498db" />
+          <stop offset="100%" stop-color="#556270" />
+        </linearGradient>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      
+      <path class="loader-path" 
+            d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z"
+            filter="url(#glow)"/>
+    </svg>
+    
+    <div class="loader-text">Processing Health Data...</div>
+    <div class="progress-counter">0%</div>
+  </div>
+  
+  <!-- Header with Enhanced Search -->
+  <header>
+    <div class="container">
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search doctors, medicines, or services..." id="searchInput">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+  
+    <!-- Quick Access -->
+    <h2 class="section-title"><i class="fas fa-th-large"></i> Our specialty</h2>
+    <section>
+      <div class="quick-access">
+        <div class="access-item">
+          <div class="access-icon">A1</div>
+          <div class="access-label">Cardiology</div>
+        </div>
+        <div class="access-item">
+          <div class="access-icon" >
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="access-label">Dermatology</div>
+        </div>
+        <div class="access-item">
+          <div class="access-icon" >
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="access-label">Neurology</div>
+        </div>
+        <div class="access-item">
+          <div class="access-icon">
+            <i class="fas fa-bone"></i>
+          </div>
+          <div class="access-label">Orthopedics</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Section with Labels -->
+    <section class="quick-access-section">
+      <h2 class="section-title"><i class="fas fa-th-large"></i> Quick Access</h2>
+      <div class="quick-access-grid">
+        <a href="doctors.html" class="access-item" data-category="doctors">
+          <div class="access-icon">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <span class="access-label">Doctors</span>
+        </a>
+        <a href="pharmacy.html" class="access-item" data-category="medicine">
+          <div class="access-icon">
+            <i class="fas fa-pills"></i>
+          </div>
+          <span class="access-label">Pharmacy</span>
+        </a>
+        <a href="labtests.html" class="access-item" data-category="lab">
+          <div class="access-icon">
+            <i class="fas fa-flask"></i>
+          </div>
+          <span class="access-label">Lab Tests</span>
+        </a>
+        <a href="hospitals.html" class="access-item" data-category="hospital">
+          <div class="access-icon">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <span class="access-label">Hospitals</span>
+        </a>
+        <a href="emergency.html" class="access-item" data-category="emergency">
+          <div class="access-icon">
+            <i class="fas fa-ambulance"></i>
+          </div>
+          <span class="access-label">Emergency</span>
+        </a>
+        <a href="tracker.html" class="access-item" data-category="tracker">
+          <div class="access-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <span class="access-label">Health Tracker</span>
+        </a>
+        <a href="login.html" class="access-item" data-category="account">
+          <div class="access-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <span class="access-label">Period Tracker</span>
+        </a>
+        <a href="medications.html" class="access-item" data-category="medications">
+          <div class="access-icon">
+            <i class="fas fa-tablet"></i>
+          </div>
+          <span class="access-label">Medications</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Featured Services -->
+    <section class="featured-services">
+      <h2 class="section-title"><i class="fas fa-medal"></i> Premium Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('/img/blog1.jpg')"></div>
+          <div class="service-content">
+            <h3>24/7 Doctor Consultations</h3>
+            <p>Connect with certified doctors anytime for virtual consultations and medical advice.</p>
+            <a href="telemedicine.html" class="btn">Learn More</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('/img/blog3.jpg')"></div>
+          <div class="service-content">
+            <h3>Medicine Delivery</h3>
+            <p>Get your prescribed medicines delivered to your doorstep within hours.</p>
+            <a href="pharmacy.html" class="btn">Order Now</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('/img/blog2.jpg')"></div>
+          <div class="service-content">
+            <h3>Home Lab Tests</h3>
+            <p>Book diagnostic tests with sample collection from the comfort of your home.</p>
+            <a href="labtests.html" class="btn">Book Test</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <div class="navbar-container">
+    <div class="navbar">
+      <a href="index.html" class="nav-link active">
+        <i class="fas fa-home nav-icon"></i>
+        <span class="nav-text">Home</span>
+      </a>
+      <a href="doctors.html" class="nav-link">
+        <i class="fas fa-user-md nav-icon"></i>
+        <span class="nav-text">Doctors</span>
+      </a>
+      <a href="appointment.html" class="nav-link">
+        <i class="fas fa-calendar-check nav-icon"></i>
+        <span class="nav-text">Appointments</span>
+      </a>
+      <a href="profile.html" class="nav-link">
+        <i class="fas fa-user nav-icon"></i>
+        <span class="nav-text">Profile`</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="/js/home.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

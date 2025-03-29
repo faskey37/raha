@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        /* Emergency Page Specific Styles */
+        .emergency-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .emergency-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .emergency-header h1 {
+            color: var(--danger);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .emergency-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .emergency-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .emergency-card h2 {
+            color: var(--danger);
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .emergency-card h2 i {
+            margin-right: 10px;
+        }
+
+        .emergency-contact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .emergency-contact:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .contact-action {
+            margin-left: 15px;
+        }
+
+        .emergency-btn {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .emergency-btn i {
+            font-size: 16px;
+        }
+
+        .hospital-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .hospital-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .hospital-card h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--highlight);
+        }
+
+        .hospital-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .hospital-card .distance {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .first-aid-section {
+            margin-top: 30px;
+        }
+
+        .first-aid-item {
+            margin-bottom: 20px;
+        }
+
+        .first-aid-item h3 {
+            color: var(--danger);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .first-aid-item p {
+            margin-bottom: 15px;
+        }
+
+        .emergency-map {
+            width: 100%;
+            height: 300px;
+            background-color: var(--light-gray);
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            flex-direction: column;
+        }
+
+        .emergency-map i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--danger);
+        }
+
+        @media (max-width: 480px) {
+            .emergency-contact {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-action {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            .emergency-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .navbar-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .navbar {
+    border-radius: 32px;
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 
+                0 10px 10px rgba(0, 0, 0, 0.05);
+    padding: 8px;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: #555;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .list-item i {
+    font-size: 18px;
+    margin-bottom: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .list-item-name {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .nav-link.active .list-item {
+    color: var(--highlight);
+    transform: translateY(-3px);
+  }
+
+  .nav-link.active .list-item i {
+    color: var(--highlight);
+  }
+
+  .nav-link.active .list-item-name {
+    color: var(--highlight);
+  }
+  :root {
+    --primary: #3498db;
+    --primary-light: #7a84d8;
+    --secondary: #E8EDFF;
+    --background: #F8F9FF;
+    --text: #2c3e50;
+    --light-text: #888;
+    --white: #fff;
+    --gray-border: #e0e6f7;
+    --success: #4CAF50;
+    --danger: #F44336;
+    --card-bg: #ffffff; /* Ensure this is a solid color */
+}
+    </style>
+</head>
+<body class="medium-text">
+    <div class="emergency-container">
+        <div class="emergency-header">
+            <h1><i class="fas fa-exclamation-triangle"></i> Emergency Assistance</h1>
+            <p>Immediate help and important contacts when you need them most</p>
+        </div>
+
+        <!-- Emergency Contacts -->
+        <div class="emergency-card">
+            <h2><i class="fas fa-phone-alt"></i> Emergency Contacts</h2>
+            
+            <div class="emergency-contact">
+                <div class="contact-info">
+                    <h3>National Emergency Number</h3>
+                    <p>Police, Fire, Ambulance</p>
+                </div>
+                <div class="contact-action">
+                    <button class="emergency-btn" onclick="callEmergency('911')">
+                        <i class="fas fa-phone"></i> Call 911
+                    </button>
+                </div>
+            </div>
+            
+            <div class="emergency-contact">
+                <div class="contact-info">
+                    <h3>Poison Control Center</h3>
+                    <p>24/7 poison information</p>
+                </div>
+                <div class="contact-action">
+                    <button class="emergency-btn" onclick="callEmergency('1-800-222-1222')">
+                        <i class="fas fa-phone"></i> Call 1-800-222-1222
+                    </button>
+                </div>
+            </div>
+            
+            <div class="emergency-contact">
+                <div class="contact-info">
+                    <h3>Suicide Prevention Lifeline</h3>
+                    <p>24/7 crisis support</p>
+                </div>
+                <div class="contact-action">
+                    <button class="emergency-btn" onclick="callEmergency('988')">
+                        <i class="fas fa-phone"></i> Call 988
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nearby Hospitals -->
+        <div class="emergency-card">
+            <h2><i class="fas fa-hospital"></i> Nearby Hospitals</h2>
+            
+            <div class="emergency-map">
+                <i class="fas fa-map-marked-alt"></i>
+                <p>Loading nearby medical facilities...</p>
+            </div>
+            
+            <div class="hospital-list">
+                <div class="hospital-card">
+                    <h3>City General Hospital</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Medical Center Drive</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p class="distance">1.2 miles away</p>
+                    <button class="emergency-btn" onclick="callEmergency('5551234567')">
+                        <i class="fas fa-phone"></i> Call Hospital
+                    </button>
+                </div>
+                
+                <div class="hospital-card">
+                    <h3>Community Medical Center</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 456 Health Avenue</p>
+                    <p><i class="fas fa-phone"></i> (555) 987-6543</p>
+                    <p class="distance">2.5 miles away</p>
+                    <button class="emergency-btn" onclick="callEmergency('5559876543')">
+                        <i class="fas fa-phone"></i> Call Hospital
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- First Aid Information -->
+        <div class="emergency-card">
+            <h2><i class="fas fa-first-aid"></i> First Aid Information</h2>
+            
+            <div class="first-aid-section">
+                <div class="first-aid-item">
+                    <h3><i class="fas fa-heartbeat"></i> CPR Instructions</h3>
+                    <p>1. Check for responsiveness</p>
+                    <p>2. Call for help (911)</p>
+                    <p>3. Begin chest compressions (100-120 per minute)</p>
+                    <p>4. Give rescue breaths if trained</p>
+                </div>
+                
+                <div class="first-aid-item">
+                    <h3><i class="fas fa-burn"></i> For Burns</h3>
+                    <p>1. Cool the burn with cool (not cold) running water</p>
+                    <p>2. Remove jewelry or tight clothing</p>
+                    <p>3. Cover loosely with sterile bandage</p>
+                    <p>4. Take pain relievers if needed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contacts -->
+        <div class="emergency-card">
+            <h2><i class="fas fa-user-md"></i> Your Emergency Contacts</h2>
+            
+            <div class="emergency-contact">
+                <div class="contact-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Primary Care Physician</p>
+                </div>
+                <div class="contact-action">
+                    <button class="emergency-btn" onclick="callEmergency('5557891234')">
+                        <i class="fas fa-phone"></i> Call Doctor
+                    </button>
+                </div>
+            </div>
+            
+            <div class="emergency-contact">
+                <div class="contact-info">
+                    <h3>Jane Smith</h3>
+                    <p>Emergency Contact</p>
+                </div>
+                <div class="contact-action">
+                    <button class="emergency-btn" onclick="callEmergency('5554567890')">
+                        <i class="fas fa-phone"></i> Call Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-home"></i>
+                    <span class="list-item-name">Home</span>
+                </div>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-user"></i>
+                    <span class="list-item-name">Profile</span>
+                </div>
+            </a>
+            <a href="pharmacy.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span class="list-item-name">Pharmacy</span>
+                </div>
+            </a>
+            <a href="emergency.html" class="nav-link active">
+                <div class="list-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="list-item-name">Emergency</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script>
+        // Emergency page specific JavaScript
+        function callEmergency(number) {
+            if (confirm(`Call ${number}?`)) {
+                // In a real app, this would initiate a phone call
+                console.log(`Calling ${number}`);
+                SettingsManager.showToast(`Connecting to ${number}...`);
+                
+                // Simulate call (in a real app, use tel: link)
+                window.location.href = `tel:${number}`;
+            }
+        }
+
+        // In a real app, you would implement:
+        // - Geolocation to find nearby hospitals
+        // - Integration with emergency services
+        // - User's personal emergency contacts from profile
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user's emergency contacts from profile
+            // loadEmergencyContacts();
+            
+            // Get current location for hospital search
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(showNearbyHospitals);
+            // }
+        });
+
+        function showNearbyHospitals(position) {
+            // This would call an API to find nearby hospitals
+            console.log("Finding hospitals near:", position.coords);
+            // Update the emergency-map div with actual map
+        }
+    </script>
+</body>
+</html>

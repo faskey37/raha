@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/404.css">
+    
+    <style>
+       
+    </style>
+</head>
+<body class="medium-text">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-code">
+                404<span>Oops! Page Not Found</span>
+            </div>
+            <p class="error-message">
+                The page you're looking for doesn't exist or has been moved. 
+                Try searching for what you need or return to the homepage.
+            </p>
+            <form class="search-form">
+                <input type="text" placeholder="Search our site...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i> Return to Homepage
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="doctors.html" class="nav-link">
+                <i class="fas fa-user-md nav-icon"></i>
+                <span class="nav-text">Doctors</span>
+            </a>
+            <a href="appointment.html" class="nav-link">
+                <i class="fas fa-calendar-check nav-icon"></i>
+                <span class="nav-text">Appointments</span>
+            </a>
+            <a href="profile.html" class="nav-link active">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Simple search functionality
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.querySelector('.search-form input').value;
+            if(searchTerm.trim() !== '') {
+                alert('In a real app, this would search for: ' + searchTerm);
+                // window.location.href = 'search.html?q=' + encodeURIComponent(searchTerm);
+            }
+        });
+    </script>
+    <script src="js/common.js"></script>
+</body>
+</html>

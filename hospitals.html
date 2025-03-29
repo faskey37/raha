@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        /* Hospital Page Specific Styles */
+        .hospital-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 80px; /* Space for navbar */
+        }
+
+        .hospital-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hospital-header h1 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .hospital-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-border);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .filter-btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 0 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hospital-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .hospital-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .hospital-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .hospital-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .hospital-card h3 {
+            font-size: 18px;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .hospital-rating {
+            background-color: var(--success);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .hospital-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .detail-item i {
+            color: var(--primary);
+        }
+
+        .distance {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .hospital-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .secondary-btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .emergency-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .specialty-tag {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 200px;
+            background-color: var(--light-gray);
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            flex-direction: column;
+        }
+
+        .map-container i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--text);
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .hospital-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .hospital-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Navbar styles (same as emergency.html) */
+        .navbar-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            border-radius: 32px;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px rgba(0, 0, 0, 0.05);
+            padding: 8px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #555;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .list-item {
+            list-style-type: none;
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .list-item i {
+            font-size: 18px;
+            margin-bottom: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .list-item-name {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .nav-link.active .list-item {
+            color: var(--highlight);
+            transform: translateY(-3px);
+        }
+
+        .nav-link.active .list-item i {
+            color: var(--highlight);
+        }
+
+        .nav-link.active .list-item-name {
+            color: var(--highlight);
+        }
+
+        :root {
+            --primary: #3498db;
+            --primary-light: #7a84d8;
+            --secondary: #E8EDFF;
+            --background: #F8F9FF;
+            --text: #2c3e50;
+            --light-text: #888;
+            --white: #fff;
+            --gray-border: #e0e6f7;
+            --success: #4CAF50;
+            --danger: #F44336;
+            --card-bg: #ffffff;
+            --highlight: #3498db;
+        }
+    </style>
+</head>
+<body class="medium-text">
+    <div class="hospital-container">
+        <div class="hospital-header">
+            <h1><i class="fas fa-hospital"></i> Nearby Hospitals</h1>
+            <p>Find medical centers and specialists near you</p>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search hospitals or specialists...">
+            <button class="filter-btn">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+        </div>
+
+        <div class="map-container">
+            <i class="fas fa-map-marked-alt"></i>
+            <p>Loading your location and nearby hospitals...</p>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-stethoscope"></i> Recommended Hospitals</h2>
+
+        <div class="hospital-list">
+            <!-- Hospital Card 1 -->
+            <div class="hospital-card">
+                <div class="hospital-card-header">
+                    <div>
+                        <h3>City General Hospital</h3>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 123 Medical Center Drive</div>
+                    </div>
+                    <div class="hospital-rating">
+                        <i class="fas fa-star"></i> 4.8
+                    </div>
+                </div>
+                
+                <div class="hospital-details">
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i> (555) 123-4567
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i> Open 24/7
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-ambulance"></i> Emergency Dept.
+                    </div>
+                    <div class="detail-item distance">
+                        <i class="fas fa-location-arrow"></i> 1.2 miles away
+                    </div>
+                </div>
+                
+                <div class="specialties">
+                    <span class="specialty-tag">Cardiology</span>
+                    <span class="specialty-tag">Pediatrics</span>
+                    <span class="specialty-tag">Orthopedics</span>
+                </div>
+                
+                <div class="hospital-actions">
+                    <button class="action-btn primary-btn" onclick="callHospital('5551234567')">
+                        <i class="fas fa-phone"></i> Call
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
+                        <i class="fas fa-directions"></i> Directions
+                    </button>
+                    <button class="action-btn emergency-btn" onclick="callEmergency('5551234567')">
+                        <i class="fas fa-ambulance"></i> Emergency
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hospital Card 2 -->
+            <div class="hospital-card">
+                <div class="hospital-card-header">
+                    <div>
+                        <h3>Community Medical Center</h3>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 456 Health Avenue</div>
+                    </div>
+                    <div class="hospital-rating">
+                        <i class="fas fa-star"></i> 4.6
+                    </div>
+                </div>
+                
+                <div class="hospital-details">
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i> (555) 987-6543
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i> 6AM - 10PM
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-ambulance"></i> Emergency Dept.
+                    </div>
+                    <div class="detail-item distance">
+                        <i class="fas fa-location-arrow"></i> 2.5 miles away
+                    </div>
+                </div>
+                
+                <div class="specialties">
+                    <span class="specialty-tag">Neurology</span>
+                    <span class="specialty-tag">Oncology</span>
+                    <span class="specialty-tag">Maternity</span>
+                </div>
+                
+                <div class="hospital-actions">
+                    <button class="action-btn primary-btn" onclick="callHospital('5559876543')">
+                        <i class="fas fa-phone"></i> Call
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
+                        <i class="fas fa-directions"></i> Directions
+                    </button>
+                    <button class="action-btn emergency-btn" onclick="callEmergency('5559876543')">
+                        <i class="fas fa-ambulance"></i> Emergency
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hospital Card 3 -->
+            <div class="hospital-card">
+                <div class="hospital-card-header">
+                    <div>
+                        <h3>Children's Healthcare</h3>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 789 Pediatric Way</div>
+                    </div>
+                    <div class="hospital-rating">
+                        <i class="fas fa-star"></i> 4.9
+                    </div>
+                </div>
+                
+                <div class="hospital-details">
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i> (555) 456-7890
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i> 7AM - 9PM
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-child"></i> Pediatric Specialists
+                    </div>
+                    <div class="detail-item distance">
+                        <i class="fas fa-location-arrow"></i> 3.1 miles away
+                    </div>
+                </div>
+                
+                <div class="specialties">
+                    <span class="specialty-tag">Pediatrics</span>
+                    <span class="specialty-tag">Neonatal</span>
+                    <span class="specialty-tag">Allergy</span>
+                </div>
+                
+                <div class="hospital-actions">
+                    <button class="action-btn primary-btn" onclick="callHospital('5554567890')">
+                        <i class="fas fa-phone"></i> Call
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
+                        <i class="fas fa-directions"></i> Directions
+                    </button>
+                    <button class="action-btn emergency-btn" onclick="callEmergency('5554567890')">
+                        <i class="fas fa-ambulance"></i> Emergency
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-heartbeat"></i> Specialty Centers</h2>
+
+        <div class="hospital-list">
+            <!-- Specialty Center 1 -->
+            <div class="hospital-card">
+                <div class="hospital-card-header">
+                    <div>
+                        <h3>Cardiac Care Institute</h3>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 101 Heart Lane</div>
+                    </div>
+                    <div class="hospital-rating">
+                        <i class="fas fa-star"></i> 4.7
+                    </div>
+                </div>
+                
+                <div class="hospital-details">
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i> (555) 789-0123
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i> 8AM - 8PM
+                    </div>
+                    <div class="detail-item distance">
+                        <i class="fas fa-location-arrow"></i> 4.2 miles away
+                    </div>
+                </div>
+                
+                <div class="specialties">
+                    <span class="specialty-tag">Cardiology</span>
+                    <span class="specialty-tag">Cardiac Surgery</span>
+                    <span class="specialty-tag">Rehabilitation</span>
+                </div>
+                
+                <div class="hospital-actions">
+                    <button class="action-btn primary-btn" onclick="callHospital('5557890123')">
+                        <i class="fas fa-phone"></i> Call
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
+                        <i class="fas fa-directions"></i> Directions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-home"></i>
+                    <span class="list-item-name">Home</span>
+                </div>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-user"></i>
+                    <span class="list-item-name">Profile</span>
+                </div>
+            </a>
+            <a href="pharmacy.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-hospital"></i>
+                    <span class="list-item-name">Hospital</span>
+                </div>
+            </a>
+            <a href="emergency.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="list-item-name">Emergency</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Hospital page specific JavaScript
+        function callHospital(number) {
+            if (confirm(`Call ${number}?`)) {
+                console.log(`Calling hospital: ${number}`);
+                // In a real app, this would initiate a phone call
+                window.location.href = `tel:${number}`;
+            }
+        }
+
+        function callEmergency(number) {
+            if (confirm(`Call emergency number ${number}?`)) {
+                console.log(`Calling emergency: ${number}`);
+                window.location.href = `tel:${number}`;
+            }
+        }
+
+        function navigateToHospital() {
+            // In a real app, this would open maps navigation
+            console.log("Opening navigation to hospital");
+            alert("This would open your maps app with directions in a real application");
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // In a real app, you would:
+            // 1. Get user's location
+            // 2. Fetch nearby hospitals from an API
+            // 3. Populate the hospital list dynamically
+            
+            // Example:
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(loadHospitals);
+            // }
+        });
+
+        function loadHospitals(position) {
+            // This would call an API to find nearby hospitals
+            console.log("Loading hospitals near:", position.coords);
+            // Update the map and hospital list
+        }
+    </script>
+</body>
+</html>

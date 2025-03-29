@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Doctors - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/doctor.css">
+    
+</head>
+<body class="medium-text">
+    <div class="container">
+        <div class="section-title">
+            <h2>Find a Doctor</h2>
+            <p>Search and book appointments with specialized doctors</p>
+        </div>
+
+        <div class="search-filter">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search by name or specialty...">
+            </div>
+            <div class="filter-box">
+                <i class="fas fa-filter"></i>
+                <select>
+                    <option value="">All Specialties</option>
+                    <option value="gynecologist">Gynecologist</option>
+                    <option value="cardiologist">Cardiologist</option>
+                    <option value="dermatologist">Dermatologist</option>
+                    <option value="pediatrician">Pediatrician</option>
+                    <option value="neurologist">Neurologist</option>
+                    <option value="dentist">Dentist</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="specialty-tags">
+            <div class="tag active" data-specialty="">All</div>
+            <div class="tag" data-specialty="gynecologist">Gynecologist</div>
+            <div class="tag" data-specialty="cardiologist">Cardiologist</div>
+            <div class="tag" data-specialty="dermatologist">Dermatologist</div>
+            <div class="tag" data-specialty="pediatrician">Pediatrician</div>
+        </div>
+
+        <div class="doctors-grid">
+            <!-- Doctor 1 -->
+            <div class="doctor-card" data-specialty="gynecologist">
+                <div class="doctor-image">
+                    <img src="/img/doctor.png" alt="Dr. Jane Doe">
+                    <div class="rating-badge">
+                        <i class="fas fa-star"></i> 4.8
+                    </div>
+                </div>
+                <div class="doctor-info">
+                    <h4>Dr. Jane Doe</h4>
+                    <p class="specialty">Gynecologist</p>
+                    <p class="experience"><i class="fas fa-briefcase"></i> 10+ years</p>
+                    <p class="location">
+                        <i class="fas fa-map-marker-alt"></i> New York, USA
+                    </p>
+                    <div class="availability">
+                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
+                    </div>
+                    <a href="appointment.html" class="btn">Book Appointment</a>
+                </div>
+            </div>
+
+            <!-- Doctor 2 -->
+            <div class="doctor-card" data-specialty="cardiologist">
+                <div class="doctor-image">
+                    <img src="/img/doctor.png" alt="Dr. John Smith">
+                    <div class="rating-badge">
+                        <i class="fas fa-star"></i> 4.9
+                    </div>
+                </div>
+                <div class="doctor-info">
+                    <h4>Dr. John Smith</h4>
+                    <p class="specialty">Cardiologist</p>
+                    <p class="experience"><i class="fas fa-briefcase"></i> 15+ years</p>
+                    <p class="location">
+                        <i class="fas fa-map-marker-alt"></i> Los Angeles, USA
+                    </p>
+                    <div class="availability">
+                        <span class="available"><i class="fas fa-check-circle"></i> Available Tomorrow</span>
+                    </div>
+                    <a href="appointment.html" class="btn">Book Appointment</a>
+                </div>
+            </div>
+
+            <!-- Doctor 3 -->
+            <div class="doctor-card" data-specialty="dermatologist">
+                <div class="doctor-image">
+                    <img src="/img/doctor.png" alt="Dr. Emily Brown">
+                    <div class="rating-badge">
+                        <i class="fas fa-star"></i> 4.7
+                    </div>
+                </div>
+                <div class="doctor-info">
+                    <h4>Dr. Emily Brown</h4>
+                    <p class="specialty">Dermatologist</p>
+                    <p class="experience"><i class="fas fa-briefcase"></i> 8+ years</p>
+                    <p class="location">
+                        <i class="fas fa-map-marker-alt"></i> Chicago, USA
+                    </p>
+                    <div class="availability">
+                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
+                    </div>
+                    <a href="appointment.html" class="btn">Book Appointment</a>
+                </div>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="doctor-card" data-specialty="pediatrician">
+                <div class="doctor-image">
+                    <img src="/img/doctor.png" alt="Dr. Michael Johnson">
+                    <div class="rating-badge">
+                        <i class="fas fa-star"></i> 4.6
+                    </div>
+                </div>
+                <div class="doctor-info">
+                    <h4>Dr. Michael Johnson</h4>
+                    <p class="specialty">Pediatrician</p>
+                    <p class="experience"><i class="fas fa-briefcase"></i> 12+ years</p>
+                    <p class="location">
+                        <i class="fas fa-map-marker-alt"></i> Miami, USA
+                    </p>
+                    <div class="availability">
+                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
+                    </div>
+                    <a href="appointment.html" class="btn">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="doctors.html" class="nav-link active">
+                <i class="fas fa-user-md nav-icon"></i>
+                <span class="nav-text">Doctors</span>
+            </a>
+            <a href="tracker.html" class="nav-link">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span class="nav-text">Tracker</span>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="js/doctor.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

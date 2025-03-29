@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raha - App Settings</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/setting.css">
+</head>
+<body class="medium-text">
+  <div class="settings-container">
+    <div class="settings-header">
+      <h1>App Settings</h1>
+      <p>Customize your Raha health experience</p>
+    </div>
+
+    <!-- Notification Settings -->
+    <div class="settings-card">
+      <h2><i class="fas fa-bell"></i> Notifications</h2>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Appointment Reminders</h3>
+          <p>Receive notifications for upcoming appointments</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="appointmentReminders">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Medication Alerts</h3>
+          <p>Get reminders to take your medications</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="medicationAlerts">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Health Tips</h3>
+          <p>Daily health and wellness suggestions</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="healthTips">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Settings -->
+    <div class="settings-card">
+      <h2><i class="fas fa-lock"></i> Privacy</h2>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Data Sharing</h3>
+          <p>Allow anonymized data to improve app experience</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="dataSharing">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Medical Records Access</h3>
+          <p>Allow doctors to view your health history</p>
+        </div>
+        <div class="setting-control">
+          <select id="recordsAccess">
+            <option value="all">All doctors</option>
+            <option value="my">My doctors only</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display Settings -->
+    <div class="settings-card">
+      <h2><i class="fas fa-palette"></i> Display</h2>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Theme</h3>
+          <p>Choose light or dark mode</p>
+        </div>
+        <div class="setting-control">
+          <select id="themeSelect">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="system">System Default</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Font Size</h3>
+          <p>Adjust text size for better readability</p>
+        </div>
+        <div class="setting-control">
+          <select id="fontSize">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Settings -->
+    <div class="settings-card">
+      <h2><i class="fas fa-user-cog"></i> Account</h2>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Change Password</h3>
+          <p>Update your account security</p>
+        </div>
+        <div class="setting-control">
+          <button id="changePasswordBtn">Change</button>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Delete Account</h3>
+          <p>Permanently remove your account and data</p>
+        </div>
+        <div class="setting-control">
+          <button class="danger" id="deleteAccountBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Change Modal -->
+  <div class="modal" id="passwordModal">
+    <div class="modal-content">
+      <h3 class="modal-title">Change Password</h3>
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" placeholder="Enter current password">
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" placeholder="Enter new password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+      </div>
+      <div class="modal-actions">
+        <button id="cancelPasswordChange">Cancel</button>
+        <button id="savePassword">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar-container">
+    <div class="navbar">
+      <a href="index.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-home"></i>
+          <span class="list-item-name">Home</span>
+        </div>
+      </a>
+      <a href="profile.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-user"></i>
+          <span class="list-item-name">Profile</span>
+        </div>
+      </a>
+      <a href="settings.html" class="nav-link active">
+        <div class="list-item">
+          <i class="fas fa-gear"></i>
+          <span class="list-item-name">Settings</span>
+        </div>
+      </a>
+      <a href="cart.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="list-item-name">Cart</span>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script src="/js/setting.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

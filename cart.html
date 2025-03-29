@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raha - Pharmacy Cart</title>
+  <link rel="icon" href="img/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body class="medium-text">
+  <div class="cart-container">
+    <div class="cart-header">
+      <h1>Your Pharmacy Cart</h1>
+      <p>Review and checkout your medications</p>
+    </div>
+
+    <div class="cart-card" id="cartItems">
+      <h2><i class="fas fa-prescription-bottle-alt"></i> Medications</h2>
+      
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+
+    <div class="summary-card">
+      <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+      
+      <div class="summary-row">
+        <span>Subtotal (<span id="itemCount">0</span> items)</span>
+        <span id="subtotal">$0.00</span>
+      </div>
+      
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span id="shipping">$3.99</span>
+      </div>
+      
+      <div class="summary-row">
+        <span>Tax</span>
+        <span id="tax">$0.00</span>
+      </div>
+      
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="total">$0.00</span>
+      </div>
+      
+      <button class="checkout-btn" id="checkoutBtn">
+        <i class="fas fa-lock"></i> Proceed to Checkout
+      </button>
+    </div>
+
+    <div class="cart-card empty-cart">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>Your cart is empty</h3>
+      <p>Browse our pharmacy to add medications to your cart</p>
+      <button class="shop-btn" id="shopBtn">
+        <i class="fas fa-prescription-bottle-alt"></i> Shop Now
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar-container">
+    <div class="navbar">
+      <a href="index.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-home"></i>
+          <span class="list-item-name">Home</span>
+        </div>
+      </a>
+      <a href="profile.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-user"></i>
+          <span class="list-item-name">Profile</span>
+        </div>
+      </a>
+      <a href="pharmacy.html" class="nav-link">
+        <div class="list-item">
+          <i class="fas fa-prescription-bottle-alt"></i>
+          <span class="list-item-name">Pharmacy</span>
+        </div>
+      </a>
+      <a href="cart.html" class="nav-link active">
+        <div class="list-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="list-item-name">Cart</span>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script src="js/cart.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

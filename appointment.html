@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Appointments - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/appointment.css">
+    <link rel="icon" href="/img/favicon.png">
+    
+</head>
+<body class="medium-text">
+    <div class="container">
+        <!-- Month Header -->
+        <div class="month-header">
+            <div class="month-selector">
+                <div class="month-nav">
+                    <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                    <span id="currentMonthYear">March 2023</span>
+                    <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <button id="openMonthModal"><i class="fas fa-calendar-alt"></i></button>
+            </div>
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Date Pills -->
+        <div class="date-scroll-container">
+            <div class="date-scroll" id="dateScroll">
+                <!-- Dates will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Specialist Tags -->
+        <div class="specialist-tags" id="specialistTags">
+            <div class="specialist-tag active" data-specialty="all">All</div>
+            <div class="specialist-tag" data-specialty="cardiologist">Cardiologist</div>
+            <div class="specialist-tag" data-specialty="dentist">Dentist</div>
+            <div class="specialist-tag" data-specialty="neurologist">Neurologist</div>
+            <div class="specialist-tag" data-specialty="pediatrician">Pediatrician</div>
+        </div>
+
+        <!-- Today's Appointments -->
+        <h3>Today's Appointments</h3>
+        <div id="appointmentsList">
+            <!-- Appointments will be populated by JavaScript -->
+        </div>
+        <section class="appointments-section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Upcoming Appointments</h2>
+            
+            <div class="appointment-carousel">
+              <div class="appointment-track" id="appointmentTrack">
+                <!-- Appointment 1 -->
+                <div class="appointment-card">
+                  <div class="appointment-header">
+                    <span class="appointment-time">Today, 10:30 AM</span>
+                    <span class="appointment-type">Cardiology</span>
+                  </div>
+                  
+                  <div class="doctor-info">
+                    <div class="doctor-avatar">NK</div>
+                    <div class="doctor-details">
+                      <h4>Dr. Nathan Keys</h4>
+                      <p>Cardiologist • City Hospital</p>
+                    </div>
+                  </div>
+                  
+                  <div class="appointment-actions">
+                    <a href="#" class="btn btn-small"><i class="fas fa-video"></i> Join</a>
+                    <a href="#" class="btn btn-outline btn-small"><i class="fas fa-clock"></i> Reschedule</a>
+                  </div>
+                </div>
+                
+                <!-- Appointment 2 -->
+                <div class="appointment-card">
+                  <div class="appointment-header">
+                    <span class="appointment-time">Tomorrow, 2:00 PM</span>
+                    <span class="appointment-type">Dermatology</span>
+                  </div>
+                  
+                  <div class="doctor-info">
+                    <div class="doctor-avatar">SM</div>
+                    <div class="doctor-details">
+                      <h4>Dr. Sarah Miller</h4>
+                      <p>Dermatologist • Skin Care Center</p>
+                    </div>
+                  </div>
+                  
+                  <div class="appointment-actions">
+                    <a href="#" class="btn btn-small"><i class="fas fa-directions"></i> Directions</a>
+                    <a href="#" class="btn btn-outline btn-small"><i class="fas fa-clock"></i> Reschedule</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="carousel-nav">
+              <div class="carousel-dot active" data-index="0"></div>
+              <div class="carousel-dot" data-index="1"></div>
+            </div>
+          </section>
+          <section>
+            <section class="appointments-section">
+            <h2 class="section-title">Recent Appointments</h2>
+            <div class="appointment-card">
+              <div class="doctor-info">
+                <div class="doctor-avatar">OC</div>
+                <div class="doctor-details">
+                  <h4>Dr. Olivia Carter</h4>
+                  <div class="doctor-specialty">Nephrology</div>
+                </div>
+              </div>
+              <div class="appointment-meta">
+                <div>24 Jul, Monday</div>
+                <div>7:00 am - 7:30 am</div>
+              </div>
+              <div class="appointment-actions">
+                    <a href="#" class="btn btn-small"><i class="fas fa-clock"></i> Reschedule</a>
+                    <a href="#" class="btn btn-outline btn-small"><i class="fas fa-user"></i> View Profile</a>
+                  </div>
+            </div>
+          </section>
+        <!-- Top Doctors Section -->
+        <div class="top-doctors">
+            <h3>Top Doctors For You</h3>
+            <div id="topDoctorsList">
+                <!-- Top doctors will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Month/Year Selection Modal -->
+    <div class="modal-overlay" id="monthModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Select Month</div>
+                <button class="close-modal" id="closeMonthModal">&times;</button>
+            </div>
+            <div class="year-selector">
+                <button id="prevYear"><i class="fas fa-chevron-left"></i></button>
+                <div class="year-display" id="modalYear">2023</div>
+                <button id="nextYear"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="month-grid" id="monthGrid">
+                <!-- Months will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Book Appointment Button -->
+    <button class="book-btn" id="openBooking">
+        <i class="fas fa-plus"></i>
+    </button>
+    <div class="popup-overlay" id="bookingPopup">
+        <div class="popup-form">
+            <div class="popup-header">
+                <h3 class="popup-title">Book Appointment</h3>
+                <button class="close-popup" id="closePopup">&times;</button>
+            </div>
+            <form id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDate">Date</label>
+                        <input type="date" id="appointmentDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Time</label>
+                        <input type="time" id="appointmentTime" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="doctorSelect">Doctor</label>
+                    <select id="doctorSelect" class="form-control" required>
+                        <option value="">Select a doctor</option>
+                        <option value="Dr. Nathan Keys">Dr. Nathan Keys (Cardiologist)</option>
+                        <option value="Dr. Andrew Moss">Dr. Andrew Moss (Dentist)</option>
+                        <option value="Dr. Ivory Williams">Dr. Ivory Williams (Neurologist)</option>
+                        <option value="Dr. Michael Brown">Dr. Michael Brown (Pediatrician)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentReason">Reason</label>
+                    <textarea id="appointmentReason" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBooking">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="doctors.html" class="nav-link">
+                <i class="fas fa-user-md nav-icon"></i>
+                <span class="nav-text">Doctors</span>
+            </a>
+            <a href="appointments.html" class="nav-link active">
+                <i class="fas fa-calendar-check nav-icon"></i>
+                <span class="nav-text">Appointments</span>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="/js/appointment.js"></script>
+    <script src="js/common.js"></script>
+   
+</body>
+</html>

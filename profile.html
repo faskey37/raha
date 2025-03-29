@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body class="medium-text">
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Profile updated successfully!</span>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="container">
+        <section class="profile-section">
+            <div class="section-header">
+                <h1>My Profile</h1>
+                <p>Manage your personal information and health preferences</p>
+            </div>
+            
+            <div class="profile-container">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-pic-container" id="profilePicContainer">
+                        <div class="profile-pic">
+                            <img src="img/default-profile.jpg" alt="Profile Picture" id="profilePic">
+                            <div class="change-photo">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h2 id="displayName">John Doe</h2>
+                        <p class="member-since">Member since <span id="joinDate">2022</span></p>
+                        
+                        <div class="health-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-heartbeat"></i>
+                                <div>
+                                    <span class="stat-value">72</span>
+                                    <span class="stat-label">BPM</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-weight"></i>
+                                <div>
+                                    <span class="stat-value">68</span>
+                                    <span class="stat-label">kg</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-ruler-vertical"></i>
+                                <div>
+                                    <span class="stat-value">175</span>
+                                    <span class="stat-label">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <ul class="profile-details">
+                            <li>
+                                <i class="fas fa-user"></i>
+                                <span id="displayUsername">johndoe123</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span id="displayEmail">john.doe@example.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span id="displayPhone">+123 456 7890</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="displayLocation">New York, USA</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-birthday-cake"></i>
+                                <span id="displayAge">32 years</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-venus-mars"></i>
+                                <span id="displayGender">Male</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Edit Form -->
+                <div class="edit-form">
+                    <div class="form-header">
+                        <h2>Edit Profile</h2>
+                        <button class="edit-toggle" id="editToggle">
+                            <i class="fas fa-pencil-alt"></i> Edit
+                        </button>
+                    </div>
+                    
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" value="John Doe" required>
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" value="john.doe@example.com" required>
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" class="form-control" value="+123 456 7890">
+                                <div class="error-message" id="phoneError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" class="form-control" value="32">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" class="form-control" value="New York, USA">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bio">About Me</label>
+                            <textarea id="bio" class="form-control" rows="3">Passionate about health and wellness. Always learning!</textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-home"></i>
+                    <span class="list-item-name">Home</span>
+                </div>
+            </a>
+            <a href="profile.html" class="nav-link active">
+                <div class="list-item">
+                    <i class="fas fa-user"></i>
+                    <span class="list-item-name">Profile</span>
+                </div>
+            </a>
+            <a href="pharmacy.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span class="list-item-name">Pharmacy</span>
+                </div>
+            </a>
+            <a href="cart.html" class="nav-link">
+                <div class="list-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="list-item-name">Cart</span>
+                    <span class="cart-badge" id="navCartCount">0</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script src="/js/profile.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

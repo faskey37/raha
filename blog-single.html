@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --white: #ffffff;
+            --gray: #f5f7fa;
+            --dark: #2c3e50;
+            --light-gray: #e9ecef;
+            --highlight: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumbs ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .breadcrumbs li {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Blog Content */
+        .blog-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .blog-main {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .blog-sidebar {
+            width: 300px;
+        }
+
+        .blog-header img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .blog-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-content {
+            margin-bottom: 30px;
+        }
+
+        .blog-content p {
+            margin-bottom: 15px;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        blockquote {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Blog Actions */
+        .blog-actions {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .social-share a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background-color: var(--light-gray);
+        }
+
+        .post-navigation {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Comments */
+        .comments-section {
+            margin-top: 40px;
+        }
+
+        .comments-section h3 {
+            margin-bottom: 20px;
+        }
+
+        .comment {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .comment-avatar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .comment-content h5 {
+            margin-bottom: 5px;
+        }
+
+        .comment-meta {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .comment-reply {
+            color: var(--primary);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .comment-form {
+            margin-top: 40px;
+        }
+
+        .comment-form h3 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Sidebar */
+        .sidebar-widget {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-widget h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .search-widget input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .category-list a:hover {
+            color: var(--primary);
+        }
+
+        .recent-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .recent-post img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .recent-post h5 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .recent-post .post-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-cloud a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--light-gray);
+            color: var(--dark);
+            border-radius: 4px;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        /* Navigation Bar */
+        .navbar-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1000;
+            padding: 0 10px;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 10px;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .nav-text {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .blog-sidebar {
+                width: 100%;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li>Blog Post</li>
+            </ul>
+        </div>
+
+        <div class="blog-container">
+            <main class="blog-main">
+                <article class="blog-post">
+                    <div class="blog-header">
+                        <img src="https://source.unsplash.com/random/800x400/?health" alt="Blog post image">
+                    </div>
+                    
+                    <h1 class="blog-title">More than 80 clinical trials launch to test coronavirus treatments</h1>
+                    
+                    <div class="blog-meta">
+                        <span>
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" style="width:30px;height:30px;border-radius:50%;">
+                            <span>Naimur Rahman</span>
+                        </span>
+                        <span>
+                            <i class="far fa-calendar"></i> 03 Feb 2023
+                        </span>
+                        <span>
+                            <i class="far fa-comment"></i> 5 Comments
+                        </span>
+                        <span>
+                            <i class="far fa-eye"></i> 33K Views
+                        </span>
+                    </div>
+                    
+                    <div class="blog-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse facilisis ultricies tortor, nec sollicitudin lorem sagittis vitae. Curabitur rhoncus commodo rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam nec lacus pulvinar, laoreet dolor quis, pellentesque ante. Cras nulla orci, pharetra at dictum consequat, pretium pretium nulla.</p>
+                        
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam nec lacus pulvinar, laoreet dolor quis, pellentesque ante. Cras nulla orci, pharetra at dictum consequat, pretium pretium nulla. Suspendisse porttitor nunc a sodales tempor.</p>
+                        
+                        <div class="image-gallery">
+                            <img src="https://source.unsplash.com/random/400x300/?medical" alt="Medical image 1">
+                            <img src="https://source.unsplash.com/random/400x300/?hospital" alt="Medical image 2">
+                        </div>
+                        
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse facilisis ultricies tortor, nec sollicitudin lorem sagittis vitae. Curabitur rhoncus commodo rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        
+                        <blockquote>
+                            <p>Aliquam nec lacus pulvinar, laoreet dolor quis, pellentesque ante. Cras nulla orci, pharetra at dictum consequat, pretium pretium nulla. Suspendisse porttitor nunc a sodales tempor.</p>
+                        </blockquote>
+                        
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse facilisis ultricies tortor, nec sollicitudin lorem sagittis vitae. Curabitur rhoncus commodo rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    </div>
+                    
+                    <div class="blog-actions">
+                        <ul class="social-share">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i> Share</a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i> Tweet</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                        
+                        <div class="post-navigation">
+                            <a href="#" class="btn"><i class="fas fa-arrow-left"></i> Previous</a>
+                            <a href="#" class="btn">Next <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <section class="comments-section">
+                        <h3>5 Comments</h3>
+                        
+                        <div class="comment">
+                            <div class="comment-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Commenter avatar">
+                            </div>
+                            <div class="comment-content">
+                                <h5>Afsana Mimi</h5>
+                                <div class="comment-meta">
+                                    <span><i class="far fa-calendar"></i> March 05, 2023</span>
+                                    <span><i class="far fa-clock"></i> 03:38 AM</span>
+                                </div>
+                                <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words Mirum est notare quam littera gothica, quam nunc putamus parum claram.</p>
+                                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+                            </div>
+                        </div>
+                        
+                        <div class="comment" style="margin-left: 50px;">
+                            <div class="comment-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Commenter avatar">
+                            </div>
+                            <div class="comment-content">
+                                <h5>Naimur Rahman</h5>
+                                <div class="comment-meta">
+                                    <span><i class="far fa-calendar"></i> March 05, 2023</span>
+                                    <span><i class="far fa-clock"></i> 05:42 AM</span>
+                                </div>
+                                <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words Mirum est notare quam littera gothica.</p>
+                                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+                            </div>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Commenter avatar">
+                            </div>
+                            <div class="comment-content">
+                                <h5>Suriya Molharta</h5>
+                                <div class="comment-meta">
+                                    <span><i class="far fa-calendar"></i> March 06, 2023</span>
+                                    <span><i class="far fa-clock"></i> 10:15 AM</span>
+                                </div>
+                                <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
+                                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="comment-form">
+                        <h3>Leave a Comment</h3>
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Post Comment</button>
+                        </form>
+                    </section>
+                </article>
+            </main>
+            
+            <aside class="blog-sidebar">
+                <div class="sidebar-widget search-widget">
+                    <h3>Search</h3>
+                    <input type="text" placeholder="Search...">
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Health News</a></li>
+                        <li><a href="#">Medical Research</a></li>
+                        <li><a href="#">Wellness Tips</a></li>
+                        <li><a href="#">Disease Prevention</a></li>
+                        <li><a href="#">Mental Health</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3>Recent Posts</h3>
+                    <div class="recent-post">
+                        <img src="https://source.unsplash.com/random/100x100/?health1" alt="Recent post">
+                        <div>
+                            <h5><a href="#">We have announced our new product</a></h5>
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> Jan 11, 2023</span>
+                                <span><i class="far fa-comment"></i> 35</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-post">
+                        <img src="https://source.unsplash.com/random/100x100/?health2" alt="Recent post">
+                        <div>
+                            <h5><a href="#">Top five way for solving teeth problems</a></h5>
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> Mar 05, 2023</span>
+                                <span><i class="far fa-comment"></i> 59</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-post">
+                        <img src="https://source.unsplash.com/random/100x100/?health3" alt="Recent post">
+                        <div>
+                            <h5><a href="#">We provide highly business solutions</a></h5>
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> June 09, 2023</span>
+                                <span><i class="far fa-comment"></i> 44</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3>Tags</h3>
+                    <div class="tag-cloud">
+                        <a href="#">health</a>
+                        <a href="#">medical</a>
+                        <a href="#">research</a>
+                        <a href="#">covid</a>
+                        <a href="#">wellness</a>
+                        <a href="#">treatment</a>
+                        <a href="#">prevention</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="blog.html" class="nav-link active">
+                <i class="fas fa-newspaper nav-icon"></i>
+                <span class="nav-text">Blog</span>
+            </a>
+            <a href="doctors.html" class="nav-link">
+                <i class="fas fa-user-md nav-icon"></i>
+                <span class="nav-text">Doctors</span>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to handle comment form submission
+        document.querySelector('.comment-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your comment!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

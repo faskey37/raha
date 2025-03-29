@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Reminder - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --white: #ffffff;
+            --gray: #f5f7fa;
+            --dark: #2c3e50;
+            --light-gray: #e9ecef;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: var(--dark);
+            padding-bottom: 100px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header */
+        .tracker-header {
+            background-color: var(--white);
+            padding: 20px 0;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .date-display {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Medication Cards */
+        .medication-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .medication-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 10px;
+        }
+        
+        .medication-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .dosage {
+            background-color: #e3f2fd;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .schedule {
+            margin: 15px 0;
+        }
+        
+        .time-slot {
+            display: inline-block;
+            background-color: #e8f5e9;
+            padding: 5px 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .instructions {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .status-btn {
+            padding: 8px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .taken {
+            background-color: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .taken:hover {
+            background-color: #b2d8b3;
+        }
+        
+        .missed {
+            background-color: #ffcdd2;
+            color: #c62828;
+        }
+        
+        .missed:hover {
+            background-color: #f5bcc1;
+        }
+        
+        .snooze {
+            background-color: #fff9c4;
+            color: #f9a825;
+        }
+        
+        .snooze:hover {
+            background-color: #f5eeb5;
+        }
+        
+        .add-medication {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            width: 200px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        
+        .add-medication:hover {
+            background-color: #1565b8;
+        }
+
+        /* Bottom Navigation - Consistent with Health Tracker */
+        .navbar-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1000;
+            padding: 0 10px;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 10px;
+            position: relative;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .nav-text {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body class="medium-text">
+    <!-- Medication Header -->
+    <header class="tracker-header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="section-title">Medication Reminder</h1>
+                    <p class="date-display" id="currentDate">Loading date...</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Medication Content -->
+    <div class="container">
+        <div class="medication-card">
+            <div class="medication-header">
+                <span class="medication-name">Lisinopril</span>
+                <span class="dosage">10mg</span>
+            </div>
+            <div class="schedule">
+                <span class="time-slot">8:00 AM</span>
+                <span class="time-slot">8:00 PM</span>
+            </div>
+            <div class="instructions">Take with a full glass of water. May cause dizziness.</div>
+            <div class="status">
+                <button class="status-btn taken">Taken</button>
+                <button class="status-btn missed">Missed</button>
+                <button class="status-btn snooze">Remind in 30 min</button>
+            </div>
+        </div>
+        
+        <div class="medication-card">
+            <div class="medication-header">
+                <span class="medication-name">Atorvastatin</span>
+                <span class="dosage">20mg</span>
+            </div>
+            <div class="schedule">
+                <span class="time-slot">9:00 PM</span>
+            </div>
+            <div class="instructions">Take at bedtime. Avoid grapefruit.</div>
+            <div class="status">
+                <button class="status-btn taken">Taken</button>
+                <button class="status-btn missed">Missed</button>
+                <button class="status-btn snooze">Remind in 30 min</button>
+            </div>
+        </div>
+        
+        <div class="medication-card">
+            <div class="medication-header">
+                <span class="medication-name">Metformin</span>
+                <span class="dosage">500mg</span>
+            </div>
+            <div class="schedule">
+                <span class="time-slot">7:00 AM</span>
+                <span class="time-slot">7:00 PM</span>
+            </div>
+            <div class="instructions">Take with meals to reduce stomach upset.</div>
+            <div class="status">
+                <button class="status-btn taken">Taken</button>
+                <button class="status-btn missed">Missed</button>
+                <button class="status-btn snooze">Remind in 30 min</button>
+            </div>
+        </div>
+        
+        <button class="add-medication">+ Add Medication</button>
+    </div>
+
+    <!-- Bottom Navigation - Consistent with Health Tracker -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="tracker.html" class="nav-link">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span class="nav-text">Tracker</span>
+            </a>
+            <a href="medications.html" class="nav-link active">
+                <i class="fas fa-pills nav-icon"></i>
+                <span class="nav-text">Meds</span>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Current date display
+        function updateCurrentDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+        }
+
+        // Simple functionality for the buttons
+        document.querySelectorAll('.status-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.medication-card');
+                
+                // Reset all buttons in this card
+                card.querySelectorAll('.status-btn').forEach(btn => {
+                    btn.style.boxShadow = 'none';
+                    btn.style.transform = 'none';
+                });
+                
+                // Highlight the clicked button
+                this.style.boxShadow = '0 0 0 2px rgba(0,0,0,0.1)';
+                this.style.transform = 'scale(0.98)';
+                
+                // For demo purposes, show an alert
+                if(this.classList.contains('taken')) {
+                    alert('Marked as taken. Good job!');
+                } else if(this.classList.contains('missed')) {
+                    alert('Marked as missed. You can take it now if appropriate.');
+                } else if(this.classList.contains('snooze')) {
+                    alert('Reminder will come again in 30 minutes.');
+                }
+            });
+        });
+        
+        // Add medication button
+        document.querySelector('.add-medication').addEventListener('click', function() {
+            alert('This would open a form to add a new medication in a full implementation.');
+        });
+
+        // Initialize
+        updateCurrentDate();
+
+        // Simple active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="js/common.js"></script>
+</body>
+</html>

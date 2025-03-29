@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracker - Raha Health App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/tracker.css">
+    <style>
+    </style>
+</head>
+<body class="medium-text">
+    <!-- Tracker Header -->
+    <header class="tracker-header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="section-title">Health Tracker</h1>
+                    <p class="date-display" id="currentDate">Loading date...</p>
+                </div>
+                <button class="btn" id="addHealthLog">
+                    <i class="fas fa-plus"></i> Add Log
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Health Tracker Content -->
+    <div class="container">
+        <!-- Health Metrics -->
+        <div class="tracker-grid">
+            <!-- Water Intake -->
+            <div class="tracker-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-tint card-icon"></i> Water
+                    </h3>
+                    <i class="fas fa-info-circle" style="color: #aaa;"></i>
+                </div>
+                <div class="card-value" id="waterValue">0.0L</div>
+                <div class="card-target">Target: 2.5L</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="waterProgress" style="width: 0%"></div>
+                </div>
+                <button class="log-btn" id="logWater">
+                    <i class="fas fa-plus"></i> Add 250ml
+                </button>
+            </div>
+
+            <!-- Steps -->
+            <div class="tracker-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-walking card-icon"></i> Steps
+                    </h3>
+                    <i class="fas fa-info-circle" style="color: #aaa;"></i>
+                </div>
+                <div class="card-value" id="stepsValue">0</div>
+                <div class="card-target">Target: 10,000 steps</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="stepsProgress" style="width: 0%"></div>
+                </div>
+                <button class="log-btn" id="logSteps">
+                    <i class="fas fa-plus"></i> Add Steps
+                </button>
+            </div>
+
+            <!-- Sleep -->
+            <div class="tracker-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-moon card-icon"></i> Sleep
+                    </h3>
+                    <i class="fas fa-info-circle" style="color: #aaa;"></i>
+                </div>
+                <div class="card-value" id="sleepValue">0h 0m</div>
+                <div class="card-target">Target: 8 hours</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="sleepProgress" style="width: 0%"></div>
+                </div>
+                <button class="log-btn" id="logSleep">
+                    <i class="fas fa-plus"></i> Log Sleep
+                </button>
+            </div>
+        </div>
+
+
+        <div class="sleep-tracker">
+            <h3>🌙 Rate Your Sleep</h3>
+            <input type="range" min="1" max="5" value="3" class="sleep-slider">
+            <div class="sleep-labels">
+              <span>😴 Poor</span>
+              <span>😊 Great</span>
+            </div>
+          </div>
+
+
+
+          
+        <!-- Recent Logs Section -->
+        <section class="log-section">
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> Today's Logs</h2>
+                <a href="#">View All</a>
+            </div>
+            <div class="log-items" id="healthLogs">
+                <!-- Log items will be added here -->
+                <div class="log-item">
+                    <div>
+                        <span class="log-time">No logs yet today</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- Enhanced Health Score -->
+<div class="health-score-container">
+    <h3 class="health-score-title">Your Health Score</h3>
+    <div class="health-score-value">87</div>
+    <div class="health-score-label">Excellent! Better than 92% of users</div>
+  </div>
+
+  <!-- Mood Tracker -->
+  <div class="mood-tracker">
+    <h3>How are you feeling today?</h3>
+    <div class="emoji-options">
+      <button class="emoji-btn" data-mood="happy">😊</button>
+      <button class="emoji-btn" data-mood="neutral">😐</button>
+      <button class="emoji-btn" data-mood="sad">😞</button>
+      <button class="emoji-btn" data-mood="excited">😃</button>
+      <button class="emoji-btn" data-mood="tired">😴</button>
+    </div>
+    <textarea placeholder="Add notes about your mood or health..." class="mood-notes"></textarea>
+  </div>
+
+
+
+
+        <!-- Health Tips Section -->
+        <section class="log-section">
+            <div class="section-header">
+                <h2><i class="fas fa-lightbulb"></i> Health Tips</h2>
+            </div>
+            <div class="log-items">
+                <div class="log-item">
+                    <div>
+                        <span>Drink water first thing in the morning</span>
+                    </div>
+                    <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <span>Take a 5-minute walk every hour</span>
+                    </div>
+                    <i class="far fa-circle" style="color: #ccc;"></i>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <span>Avoid screens 30 minutes before bed</span>
+                    </div>
+                    <i class="far fa-circle" style="color: #ccc;"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="tracker.html" class="nav-link active">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span class="nav-text">Tracker</span>
+            </a>
+            <a href="medications.html" class="nav-link">
+                <i class="fas fa-pills nav-icon"></i>
+                <span class="nav-text">Meds</span>
+            </a>
+            <a href="profile.html" class="nav-link">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-text">Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+
+const slider = document.querySelector('.sleep-slider');
+slider.addEventListener('input', () => {
+  localStorage.setItem('sleepQuality', slider.value);
+});
+
+        // Current date display
+        function updateCurrentDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+        }
+
+        // Health tracking data
+        const healthData = {
+            water: { current: 0, target: 2500 }, // in ml
+            steps: { current: 0, target: 10000 },
+            sleep: { current: 0, target: 8 * 60 } // in minutes
+        };
+
+        // Update progress bars and values
+        function updateHealthDisplay() {
+            // Water
+            const waterProgress = (healthData.water.current / healthData.water.target) * 100;
+            document.getElementById('waterValue').textContent = `${(healthData.water.current / 1000).toFixed(1)}L`;
+            document.getElementById('waterProgress').style.width = `${Math.min(waterProgress, 100)}%`;
+
+            // Steps
+            const stepsProgress = (healthData.steps.current / healthData.steps.target) * 100;
+            document.getElementById('stepsValue').textContent = healthData.steps.current.toLocaleString();
+            document.getElementById('stepsProgress').style.width = `${Math.min(stepsProgress, 100)}%`;
+
+            // Sleep
+            const hours = Math.floor(healthData.sleep.current / 60);
+            const minutes = healthData.sleep.current % 60;
+            const sleepProgress = (healthData.sleep.current / healthData.sleep.target) * 100;
+            document.getElementById('sleepValue').textContent = `${hours}h ${minutes}m`;
+            document.getElementById('sleepProgress').style.width = `${Math.min(sleepProgress, 100)}%`;
+        }
+
+        // Add log entry
+        function addLogEntry(type, value, unit) {
+            const logContainer = document.getElementById('healthLogs');
+            
+            // Remove "no logs" message if present
+            if (logContainer.children.length === 1 && logContainer.children[0].textContent.includes("No logs")) {
+                logContainer.innerHTML = '';
+            }
+
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item';
+            logItem.innerHTML = `
+                <div>
+                    <span class="log-time">${timeString}</span>
+                    <span> - ${type}: </span>
+                    <span class="log-value">${value} ${unit}</span>
+                </div>
+                <i class="fas fa-check" style="color: var(--success);"></i>
+            `;
+
+            logContainer.prepend(logItem);
+        }
+
+        // Event listeners
+        document.getElementById('logWater').addEventListener('click', function() {
+            healthData.water.current += 250;
+            updateHealthDisplay();
+            addLogEntry('Water', '250', 'ml');
+        });
+
+        document.getElementById('logSteps').addEventListener('click', function() {
+            const steps = Math.floor(Math.random() * 1000) + 500; // Simulate step count
+            healthData.steps.current += steps;
+            updateHealthDisplay();
+            addLogEntry('Steps', steps.toLocaleString(), 'steps');
+        });
+
+        document.getElementById('logSleep').addEventListener('click', function() {
+            const minutes = Math.floor(Math.random() * 120) + 30; // Simulate sleep
+            healthData.sleep.current += minutes;
+            updateHealthDisplay();
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            addLogEntry('Sleep', `${hours}h ${mins}m`, '');
+        });
+
+        document.getElementById('addHealthLog').addEventListener('click', function() {
+            alert('Open health log form to add custom entries');
+            // In a real app, this would open a form to log various health metrics
+        });
+
+        // Initialize
+        updateCurrentDate();
+        updateHealthDisplay();
+
+        // Simple active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="js/common.js"></script>
+</body>
+</html>
