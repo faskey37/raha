@@ -17,7 +17,31 @@
   </style>
 </head>
 
-<body>
+<body class="medium-text">
+  <div class="custom-loader">
+    <svg viewBox="0 0 187.3 93.7" class="loader-svg">
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3498db" />
+          <stop offset="50%" stop-color="#3498db" />
+          <stop offset="100%" stop-color="#556270" />
+        </linearGradient>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+
+      <path class="loader-path"
+        d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z"
+        filter="url(#glow)" />
+    </svg>
+
+    <div class="loader-text">Processing Health Data...</div>
+    <div class="progress-counter">0%</div>
+  </div>
+
+  <!-- Header with Enhanced Search -->
   <header>
     <div class="container">
       <div class="search-container">
@@ -28,8 +52,11 @@
       </div>
     </div>
   </header>
-  
-  <div class="container">
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Quick Access -->
     <h2 class="section-title"><i class="fas fa-th-large"></i> Our specialty</h2>
     <section>
       <div class="quick-access">
@@ -147,8 +174,9 @@
         </div>
       </div>
     </section>
-  </div>
-  
+  </main>
+
+  <!-- Bottom Navigation -->
   <div class="navbar-container">
     <div class="navbar">
       <a href="index.html" class="nav-link active">
@@ -169,4 +197,9 @@
       </a>
     </div>
   </div>
+
+  <script src="https://faskey37.github.io/raha/js/home.js"></script>
+  <script src="https://faskey37.github.io/raha/js/common.js"></script>
 </body>
+
+</html>
