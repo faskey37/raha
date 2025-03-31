@@ -449,7 +449,8 @@ body {
  
   .navbar-container {
     position: fixed;
-   bottom: 30px; 
+   bottom: 30px;
+   border-radius: 30%; 
   }
   .header-content {
     flex-direction: column;
