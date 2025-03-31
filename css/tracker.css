@@ -384,7 +384,7 @@ body {
 
 .navbar {
   background-color: var(--white);
-  border-radius: 10px;
+  border-radius: 30%;
   display: flex;
   justify-content: space-around;
   padding: 10px;
