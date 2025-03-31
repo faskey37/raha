@@ -416,9 +416,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
-    background-color: #F44336 !important;
-  }
+  
 
   .tracker-grid {
     grid-template-columns: 1fr;
@@ -433,9 +431,7 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  body {
-    background-color: #F44336 !important;
-  }
+  
   .section-title {
     font-size: 24px;
   }
@@ -450,8 +446,10 @@ body {
 }
 
 @media (max-width: 480px) {
-  body {
-    background-color: #F44336 !important;
+ 
+  .navbar-container {
+    position: fixed;
+   bottom: 30px; 
   }
   .header-content {
     flex-direction: column;
