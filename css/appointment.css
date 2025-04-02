@@ -85,12 +85,18 @@ h3 {
     overflow-x: auto;
     margin-bottom: 20px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.date-scroll-container::-webkit-scrollbar {
+    display: none;
 }
 
 .date-scroll {
     display: flex;
     gap: 10px;
     padding-bottom: 10px;
+    padding-left: 5px;
     width: max-content;
 }
 
@@ -144,6 +150,11 @@ h3 {
     padding-bottom: 15px;
     margin-bottom: 20px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.specialist-tags::-webkit-scrollbar {
+    display: none;
 }
 
 .specialist-tag {
@@ -248,6 +259,11 @@ h3 {
     overflow-x: auto;
     padding-bottom: 15px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+#topDoctorsList::-webkit-scrollbar {
+    display: none;
 }
 
 .doctor-card {
@@ -388,31 +404,31 @@ h3 {
     color: white;
 }
 
-/* Book Appointment Button */
+/* Book Appointment Button - Centered */
+.book-btn-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
 .book-btn {
+    margin-right: 20px;
     display: inline-block;
-    width: auto; /* Changed from fixed width */
-    height: auto; /* Changed from fixed height */
-    padding: 12px 24px;
-    margin: 20px 0; /* Added margin */
-    border-radius: 8px; /* Changed from 50% */
+    padding: 12px 30px;
     background: #3498db;
     color: white;
     border: none;
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 500;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
     transition: all 0.3s ease;
-    text-align: center;
-    margin: 20px 0;
 }
 
 .book-btn:hover {
     background: #2980b9;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
 /* Popup Form */
@@ -536,53 +552,51 @@ textarea.form-control {
 
 /* Bottom Navigation */
 .navbar-container {
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-width: 100%;
-max-width: 400px;
-z-index: 1000;
-padding: 0 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 1000;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar {
-background-color: var(--white);
-border-radius: 30px;
-display: flex;
-justify-content: space-around;
-padding: 10px;
-box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .nav-link {
-text-decoration: none;
-color: #555;
-flex: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 5px 10px;
+    text-decoration: none;
+    color: #555;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
 }
 
 .nav-icon {
-font-size: 18px;
-margin-bottom: 3px;
-transition: all 0.3s;
+    font-size: 18px;
+    margin-bottom: 3px;
+    transition: all 0.3s;
 }
 
 .nav-text {
-font-size: 11px;
-font-weight: 500;
-transition: all 0.3s;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.3s;
 }
 
 .nav-link.active {
-color: var(--primary);
+    color: #3498db;
 }
 
 .nav-link.active .nav-icon {
-transform: translateY(-3px);
+    transform: translateY(-3px);
 }
 
 /* Responsive Adjustments */
@@ -647,157 +661,88 @@ transform: translateY(-3px);
         font-size: 0.7rem;
     }
     
+    .book-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
     
+    .nav-icon {
+        font-size: 16px;
+    }
     
+    .nav-text {
+        font-size: 10px;
+    }
 }
 
-@media (max-width: 480px) {
-.month-selector {
-font-size: 16px;
-}
-
-.date-pill {
-min-width: 60px;
-padding: 10px 8px;
-}
-
-.date-pill .date {
-font-size: 16px;
-}
-}
-
-
-@media (max-width: 480px) {
-.month-nav {
-gap: 10px;
-}
-
-#currentMonthYear {
-font-size: 1rem;
-min-width: 100px;
-}
-
-.date-pill {
-min-width: 45px;
-height: 65px;
-font-size: 0.9rem;
-}
-
-.specialist-tag {
-padding: 6px 12px;
-font-size: 0.7rem;
-}
-
-
-}
-
-/* Fix for date scroll container */
-.date-scroll-container {
-width: 100%;
-overflow-x: auto;
-margin-bottom: 20px;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none; /* Hide scrollbar for Firefox */
-}
-
-.date-scroll-container::-webkit-scrollbar {
-display: none; /* Hide scrollbar for Chrome/Safari */
-}
-
-.date-scroll {
-display: flex;
-gap: 10px;
-padding-bottom: 10px;
-padding-left: 5px; /* Add some padding to start */
-}
-
-/* Fix for navbar */
-
-/* Adjust the book button position to account for navbar */
-.book-btn {
-bottom: 80px; /* Increased from 90px to prevent overlap */
-}
-
-:root {
---primary: #3498db;
---primary-light: #7a84d8;
---secondary: #E8EDFF;
---background: #F8F9FF;
---text: #2c3e50;
---light-text: #888;
---white: #fff;
---gray-border: #e0e6f7;
---success: #4CAF50;
---danger: #F44336;
-}
-
+/* Appointments Section */
 .appointments-section {
     margin: 25px 0;
-  }
+}
 
-  .section-title {
+.section-title {
     font-size: 20px;
     margin-bottom: 15px;
-    color: var(--dark);
+    color: #2c3e50;
     font-weight: 600;
     display: flex;
     align-items: center;
-  }
+}
 
-  .section-title i {
+.section-title i {
     margin-right: 10px;
-    color: var(--primary);
-  }
+    color: #3498db;
+}
 
-  .appointment-carousel {
+.appointment-carousel {
     position: relative;
     overflow: hidden;
     border-radius: 15px;
     background: white;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
+}
 
-  .appointment-track {
+.appointment-track {
     display: flex;
     transition: transform 0.5s ease;
-  }
+}
 
-  .appointment-card {
+.appointment-card {
     min-width: 100%;
     padding: 20px;
     box-sizing: border-box;
-  }
+}
 
-  .appointment-header {
+.appointment-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
-  }
+}
 
-  .appointment-time {
+.appointment-time {
     font-weight: 600;
-    color: var(--primary);
-  }
+    color: #3498db;
+}
 
-  .appointment-type {
+.appointment-type {
     background: #e3f2fd;
-    color: var(--primary);
+    color: #3498db;
     padding: 3px 10px;
     border-radius: 15px;
     font-size: 12px;
-  }
+}
 
-  .doctor-info {
+.doctor-info {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-  }
+}
 
-  .doctor-avatar {
+.doctor-avatar {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--primary-light);
+    background: #7a84d8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -805,58 +750,45 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
     font-weight: bold;
     margin-right: 15px;
     font-size: 24px;
-  }
+}
 
-  .doctor-details h4 {
+.doctor-details h4 {
     margin-bottom: 5px;
-  }
+}
 
-  .doctor-details p {
-    color: var(--text-secondary);
+.doctor-details p {
+    color: #888;
     font-size: 14px;
-  }
+}
 
-  .appointment-actions {
+.appointment-actions {
     display: flex;
     gap: 10px;
-  }
+}
 
-  .btn {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    border: 2px solid var(--primary);
-    text-align: center;
-    flex: 1;
-  }
-
-  .btn-outline {
+.btn-outline {
     background: transparent;
-    color: var(--primary);
-  }
+    color: #3498db;
+    border: 2px solid #3498db;
+}
 
-  .btn-outline:hover {
-    background: var(--primary);
+.btn-outline:hover {
+    background: #3498db;
     color: white;
-  }
+}
 
-  .btn-small {
+.btn-small {
     padding: 8px 15px;
     font-size: 14px;
-  }
+}
 
-  .carousel-nav {
+.carousel-nav {
     display: flex;
     justify-content: center;
     margin-top: 15px;
-  }
+}
 
-  .carousel-dot {
+.carousel-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -864,9 +796,9 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
     margin: 0 5px;
     cursor: pointer;
     transition: all 0.3s;
-  }
+}
 
-  .carousel-dot.active {
-    background: var(--primary);
+.carousel-dot.active {
+    background: #3498db;
     transform: scale(1.2);
-  }
+}
