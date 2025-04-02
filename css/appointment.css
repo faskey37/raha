@@ -1,6 +1,5 @@
 /* Base Styles */
-* {
-    margin: 0;
+* {  
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -668,7 +667,9 @@ font-size: 16px;
 .month-nav {
 gap: 10px;
 }
-
+ #openMonthModal{
+    margin: 0 !important;
+ }
 #currentMonthYear {
 font-size: 1rem;
 min-width: 100px;
