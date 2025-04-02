@@ -793,7 +793,9 @@ header {
   .greeting {
     font-size: 20px;
   }
-  
+  .header-container{
+    top: 10px;
+  }
   .quick-access {
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
