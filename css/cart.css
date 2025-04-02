@@ -265,7 +265,7 @@ body {
 /* Navbar Styles (same as your main page) */
   .navbar-container {
     position: fixed;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
