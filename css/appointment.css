@@ -390,7 +390,7 @@ h3 {
 
 /* Book Appointment Button */
 .book-btn {
-    position: sticky;
+    position: fixed;
     bottom: 90px;
     right: 20px;
     width: 60px;
