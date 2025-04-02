@@ -9,7 +9,7 @@ body {
     background-color: #f5f7fa;
     color: #333;
     line-height: 1.6;
-    padding-bottom: 20px;
+    padding-bottom: 80px;
 }
 
 .container {
@@ -389,32 +389,22 @@ h3 {
 
 /* Book Appointment Button */
 .book-btn {
-    position: static; /* Changed from fixed */
-    display: inline-block;
-    width: auto; /* Changed from fixed width */
-    height: auto; /* Changed from fixed height */
-    padding: 12px 24px;
-    margin: 20px 0; /* Added margin */
-    border-radius: 8px; /* Changed from 50% */
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     background: #3498db;
     color: white;
     border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.book-btn:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-.button-container {
-    text-align: center;
-    margin: 20px 0;
+    z-index: 100;
 }
 
 /* Popup Form */
@@ -649,16 +639,19 @@ transform: translateY(-3px);
         font-size: 0.7rem;
     }
     
-    
+    .book-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        bottom: 80px;
+    }
 }
 
 @media (max-width: 480px) {
 .month-selector {
 font-size: 16px;
 }
-#openMonthModal{
-    margin: 0 !important;
- }
+
 .date-pill {
 min-width: 60px;
 padding: 10px 8px;
@@ -693,7 +686,12 @@ padding: 6px 12px;
 font-size: 0.7rem;
 }
 
-
+.book-btn {
+width: 50px;
+height: 50px;
+font-size: 1.2rem;
+bottom: 80px;
+}
 }
 
 /* Fix for date scroll container */
@@ -737,7 +735,7 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
 }
 
 .appointments-section {
-    margin: 25px ;
+    margin: 25px 0;
   }
 
   .section-title {
