@@ -1,105 +1,75 @@
-/* Loader Container */
-.custom-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  height: 220px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  transition: opacity 0.5s ease-out;
-  animation: fadeIn 0.8s ease-in-out forwards, pulse 2s infinite alternate;
+  /* Fullscreen Loader */
+  .custom-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
 }
 
-/* SVG Loader */
-.loader-svg {
-  width: 200px;
-  height: 100px;
+/* Loader Ring */
+.loader-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    border-top: 6px solid #3498db;
+    animation: spin 1s linear infinite;
+    position: relative;
 }
 
-/* Animated Stroke Path */
-.loader-path {
-  stroke: url(#gradient);
-  stroke-width: 6;
-  stroke-linecap: round;
-  fill: none;
-  stroke-dasharray: 150, 30;
-  stroke-dashoffset: 200;
-  animation: dash-flow 2s ease-in-out infinite;
+/* Glowing Effect */
+.loader-ring::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 6px solid rgba(52, 152, 219, 0.3);
+    animation: pulse 1.5s infinite ease-out;
 }
 
-/* Loader Text */
+/* Text */
 .loader-text {
-  margin-top: 20px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  color: #556270;
-  font-weight: 500;
-  animation: fadeIn 1s ease-in-out forwards;
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
 /* Progress Counter */
 .progress-counter {
-  margin-top: 8px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #3498db;
-  animation: fadeIn 1.5s ease-in-out forwards;
+    margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3498db;
 }
 
-/* Keyframe Animations */
-@keyframes dash-flow {
-  0% {
-      stroke-dashoffset: 200;
-      opacity: 0.6;
-  }
-  50% {
-      stroke-dashoffset: 100;
-      opacity: 1;
-  }
-  100% {
-      stroke-dashoffset: 0;
-      opacity: 0.6;
-  }
+/* Hide Loader */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* Pulse Effect */
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); }
-  100% { transform: scale(1); }
-}
-
-/* Fade In Effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Hide Loader After Completion */
-.custom-loader.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease-out;
-}
-
-/* Stroke Animation for Completion */
-.custom-loader.complete .loader-path {
-  animation: complete 0.5s ease-out forwards;
-}
-
-@keyframes complete {
-  to {
-      stroke-dashoffset: 0;
-      opacity: 0;
-  }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
 }

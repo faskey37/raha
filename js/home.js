@@ -39,68 +39,8 @@ if (link.getAttribute('href') === currentPage) {
 });
 });
 
-let progress = 0;
-const counter = setInterval(() => {
-progress += Math.random() * 15;
-if(progress >= 100) {
-progress = 100;
-clearInterval(counter);
-// Add completion class for animation
-document.querySelector('.custom-loader').classList.add('complete');
-// Hide after animation completes
-setTimeout(() => {
-document.querySelector('.custom-loader').classList.add('hidden');
-}, 500);
-}
-document.querySelector('.progress-counter').textContent = `${Math.floor(progress)}%`;
-}, 300);
 
-// Modified preloader logic
-document.addEventListener('DOMContentLoaded', function() {
-// Check if this is the first visit in this session
-if (!sessionStorage.getItem('preloaderShown')) {
-// Show preloader
-let progress = 0;
-const counter = setInterval(() => {
-progress += Math.random() * 15;
-if(progress >= 100) {
-  progress = 100;
-  clearInterval(counter);
-  document.querySelector('.custom-loader').classList.add('complete');
-  setTimeout(() => {
-    document.querySelector('.custom-loader').classList.add('hidden');
-  }, 500);
-  // Set flag in session storage
-  sessionStorage.setItem('preloaderShown', 'true');
-}
-document.querySelector('.progress-counter').textContent = `${Math.floor(progress)}%`;
-}, 300);
-} else {
-// If preloader was already shown, hide it immediately
-document.querySelector('.custom-loader').classList.add('hidden');
-}
-});
-    // Preloader animation
-    document.addEventListener('DOMContentLoaded', function() {
-      const preloader = document.querySelector('.custom-loader');
-      const counter = document.querySelector('.progress-counter');
-      
-      // Simulate loading progress
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 10) + 5;
-        if (progress > 100) progress = 100;
-        counter.textContent = `${progress}%`;
-        
-        if (progress === 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            preloader.style.opacity = '0';
-            preloader.style.visibility = 'hidden';
-          }, 500);
-        }
-      }, 200);
-    });
+
 
     // User Profile Dropdown Functionality
 document.addEventListener('DOMContentLoaded', function() {
