@@ -9,7 +9,6 @@
   --success: #28a745;
   --warning: #ffc107;
   --danger: #dc3545;
-  
 }
 
 * {
@@ -20,7 +19,19 @@
 }
 
 body {
-  background-color: var(--gray);
+  background: 
+    linear-gradient(135deg, #f5f9fc 0%, #e6f0f9 100%),
+    radial-gradient(circle at 20% 30%, 
+      rgba(74, 157, 248, 0.05) 0%, 
+      transparent 20%
+    ),
+    radial-gradient(circle at 80% 70%, 
+      rgba(74, 157, 248, 0.05) 0%, 
+      transparent 20%
+    ),
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%234a9df8' stroke-width='1' stroke-opacity='0.03'/%3E%3Ccircle cx='150' cy='50' r='25' fill='none' stroke='%234a9df8' stroke-width='1' stroke-opacity='0.03'/%3E%3Ccircle cx='100' cy='150' r='35' fill='none' stroke='%234a9df8' stroke-width='1' stroke-opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-attachment: fixed;
   color: var(--dark);
   padding-bottom: 100px;
   line-height: 1.6;
