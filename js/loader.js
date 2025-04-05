@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const loader = document.querySelector(".custom-loader");
     const counter = document.querySelector(".progress-counter");
     
-    // Check if loader was already shown in this session
-    if (sessionStorage.getItem("loaderShown")) {
+    // Check if loader was already shown in this session (using localStorage instead of sessionStorage)
+    if (localStorage.getItem("loaderShown")) {
         // Hide immediately if already shown
-        loader.classList.add("hidden");
+        loader.style.display = 'none';
         document.body.style.overflow = '';
         return;
     }
@@ -33,17 +33,18 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Hide after delay
             setTimeout(() => {
-                loader.classList.add("hidden");
+                loader.style.display = 'none';
                 document.body.style.overflow = '';
                 
-                // Mark as shown in this session
-                sessionStorage.setItem("loaderShown", "true");
+                // Mark as shown in localStorage (persists across sessions)
+                localStorage.setItem("loaderShown", "true");
             }, 500);
         }
     }, 200);
 
-    // Reset loader when page is fully reloaded (but not on in-app navigation)
-    window.addEventListener("beforeunload", function() {
-        sessionStorage.removeItem("loaderShown");
-    });
+    // Reset loader only when explicitly needed (like after logout)
+    // You can call this function when you want to show loader again
+    window.resetLoader = function() {
+        localStorage.removeItem("loaderShown");
+    };
 });
