@@ -2,49 +2,52 @@ document.addEventListener("DOMContentLoaded", function() {
     const loader = document.querySelector(".custom-loader");
     const counter = document.querySelector(".progress-counter");
     
-    // Check if loader was already shown in this session (using localStorage instead of sessionStorage)
-    if (localStorage.getItem("loaderShown")) {
-        // Hide immediately if already shown
+    // Check if we're in an Android WebView (for hybrid apps)
+    const isAndroidWebView = /Android/.test(navigator.userAgent) && 
+                           /wv|WebView/.test(navigator.userAgent);
+    
+    // Check if loader was shown in this app session (using sessionStorage)
+    if (sessionStorage.getItem("loaderShown")) {
         loader.style.display = 'none';
         document.body.style.overflow = '';
         return;
     }
 
-    // Lock scrolling while loader is active
+    // Show loader only if it's the first load in this session
     document.body.style.overflow = 'hidden';
+    loader.style.display = 'flex'; // Make sure it's visible
 
-    // Start loading animation
     let progress = 0;
     const interval = setInterval(() => {
-        // Increment progress randomly between 5-15% each step
         progress += Math.floor(Math.random() * 10) + 5;
-        
-        // Cap at 100%
         if (progress > 100) progress = 100;
-        
         counter.textContent = `${progress}%`;
 
-        // When complete
         if (progress === 100) {
             clearInterval(interval);
-            
-            // Add completion class for any animations
             loader.classList.add("complete");
             
-            // Hide after delay
             setTimeout(() => {
                 loader.style.display = 'none';
                 document.body.style.overflow = '';
                 
-                // Mark as shown in localStorage (persists across sessions)
-                localStorage.setItem("loaderShown", "true");
+                // Mark as shown for this session
+                sessionStorage.setItem("loaderShown", "true");
+                
+                // For Android WebView, we need to handle this differently
+                if (isAndroidWebView && window.AndroidInterface) {
+                    try {
+                        window.AndroidInterface.setLoaderShown(true);
+                    } catch (e) {
+                        console.error("Android interface error:", e);
+                    }
+                }
             }, 500);
         }
     }, 200);
-
-    // Reset loader only when explicitly needed (like after logout)
-    // You can call this function when you want to show loader again
-    window.resetLoader = function() {
-        localStorage.removeItem("loaderShown");
-    };
 });
+
+// Call this from Android when the app is minimized and brought back
+window.resetLoaderSession = function() {
+    sessionStorage.removeItem("loaderShown");
+};
