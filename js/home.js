@@ -163,27 +163,3 @@ function updateProfileDisplay(user) {
   if (dropdownEmail) dropdownEmail.textContent = user.email;
 }
 
-// Generate particles
-document.addEventListener('DOMContentLoaded', () => {
-  const particleCount = 30;
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    
-    // Random properties
-    const size = Math.random() * 10 + 5;
-    const delay = Math.random() * 15;
-    const duration = Math.random() * 10 + 15;
-    
-    Object.assign(particle.style, {
-      width: `${size}px`,
-      height: `${size}px`,
-      left: `${Math.random() * 100}vw`,
-      top: `${Math.random() * 100}vh`,
-      animationDelay: `${delay}s`,
-      animationDuration: `${duration}s`
-    });
-    
-    document.body.appendChild(particle);
-  }
-});
