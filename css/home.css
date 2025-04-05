@@ -13,6 +13,12 @@
   
 }
 
+body {
+  background-color: var(--gray);
+  color: var(--dark);
+  padding-bottom: 100px;
+  line-height: 1.6;
+}
 
 .container {
   width: 90%;
