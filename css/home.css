@@ -1157,12 +1157,11 @@ transform: translateY(0);
 }
 
 /* Rest of your dropdown styles remain the same */ 
-
 /* Slider Styles */
 .slider-container {
   position: relative;
   max-width: 360px;
-  margin: 30px auto;
+  margin: 30px auto 50px; /* Add bottom space for dots */
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -1193,10 +1192,12 @@ transform: translateY(0);
 .slide-content {
   background: linear-gradient(to right, #3498db, #2980b9);
   color: #fff;
-  padding: 12px;
+  padding: 14px 12px 18px;
   text-align: center;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
+  z-index: 2;
+  position: relative;
 }
 
 .slide-content h3 {
@@ -1208,14 +1209,14 @@ transform: translateY(0);
 .slide-content p {
   margin: 4px 0 0;
   font-size: 14px;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   color: #3498db;
   font-size: 20px;
@@ -1224,7 +1225,7 @@ transform: translateY(0);
   border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
-  z-index: 5;
+  z-index: 3;
 }
 
 .slider-btn:hover {
@@ -1241,24 +1242,31 @@ transform: translateY(0);
 
 .slider-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: -28px; /* Push below the container */
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
+  z-index: 3;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  transition: background 0.3s ease;
+  background: rgba(52, 152, 219, 0.4);
+  transition: background 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
-.dot.active {
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #3498db;
+.dot:hover {
+  background: rgba(52, 152, 219, 0.8);
 }
+
+.dot.active {
+  background: #3498db;
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px #ffffff, 0 0 6px #3498db;
+}
+
