@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Records - Raha Health App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #e3f2fd;
             --white: #ffffff;
             --gray: #f5f7fa;
             --dark: #2c3e50;
             --light-gray: #e9ecef;
             --success: #28a745;
+            --success-light: #e8f5e9;
             --warning: #ffc107;
+            --warning-light: #fff8e1;
             --danger: #dc3545;
+            --danger-light: #ffebee;
+            --text-secondary: #666;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -29,6 +39,7 @@
             background-color: var(--gray);
             color: var(--dark);
             padding-bottom: 100px;
+            line-height: 1.6;
         }
 
         .container {
@@ -38,93 +49,173 @@
             padding: 20px 0;
         }
 
-        /* Header */
+        /* Enhanced Header */
         .records-header {
-            background-color: var(--white);
-            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 25px 0;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .records-header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
-        .section-title {
-            color: var(--primary);
+        .header-text h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
+        .header-text p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
         .btn {
-            background-color: var(--primary);
+            background-color: rgba(255,255,255,0.2);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
         }
 
         .btn:hover {
-            opacity: 0.9;
+            background-color: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            font-size: 0.9rem;
         }
 
         /* Records Sections */
         .records-section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .records-section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--light-gray);
         }
 
         .section-header h2 {
             color: var(--primary);
-            font-size: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Records Cards */
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Records Grid */
         .records-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
 
+        /* Enhanced Record Cards */
         .record-card {
             background: var(--white);
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+
+        .record-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .record-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .record-title {
             font-weight: 600;
             color: var(--dark);
+            font-size: 1.1rem;
         }
 
         .record-date {
-            color: #666;
-            font-size: 14px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            background: var(--light-gray);
+            padding: 3px 8px;
+            border-radius: 20px;
         }
 
         .record-details {
-            margin-bottom: 15px;
-            color: #555;
-            font-size: 14px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .record-details p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .record-details strong {
+            color: var(--dark);
+            min-width: 70px;
+            display: inline-block;
         }
 
         .record-actions {
@@ -133,32 +224,110 @@
         }
 
         .action-btn {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
             cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
             border: none;
+            font-weight: 500;
+        }
+
+        .action-btn i {
+            font-size: 0.9rem;
         }
 
         .view-btn {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .view-btn:hover {
             background-color: var(--primary);
             color: white;
         }
 
         .download-btn {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .download-btn:hover {
             background-color: var(--success);
             color: white;
         }
 
         .share-btn {
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .share-btn:hover {
             background-color: var(--warning);
+            color: white;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+
+        .status-normal {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .status-warning {
+            background-color: var(--warning-light);
+            color: #d4a017;
+        }
+
+        .status-critical {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--white);
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
             color: var(--dark);
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Bottom Navigation */
         .navbar-container {
             position: fixed;
-            bottom: 10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -172,57 +341,266 @@
             border-radius: 30px;
             display: flex;
             justify-content: space-around;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 12px;
+            box-shadow: var(--shadow-lg);
         }
 
         .nav-link {
             text-decoration: none;
-            color: #666;
+            color: var(--text-secondary);
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 5px 10px;
+            transition: var(--transition);
             position: relative;
         }
 
         .nav-icon {
-            font-size: 18px;
+            font-size: 1.1rem;
             margin-bottom: 3px;
+            transition: var(--transition);
         }
 
         .nav-text {
-            font-size: 11px;
+            font-size: 0.7rem;
             font-weight: 500;
+            transition: var(--transition);
         }
 
         .nav-link.active {
             color: var(--primary);
         }
 
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .record-card {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px 0;
+            }
+
             .records-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .header-content {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
+
+        @media (max-width: 480px) {
+            .record-actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .form-header h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: var(--light-gray);
+            color: var(--danger);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+
+        .time-slots-container {
+            margin-top: 15px;
+        }
+
+        .time-slot-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .time-slot-input input {
+            flex: 1;
+        }
+
+        .remove-time-btn {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-time-btn:hover {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .add-time-btn {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+            transition: var(--transition);
+        }
+
+        .add-time-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .cancel-btn {
+            background-color: var(--light-gray);
+            color: var(--text-secondary);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cancel-btn:hover {
+            background-color: #e2e2e2;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+
     </style>
 </head>
-<body class="medium-text">
-    <!-- Records Header -->
+<body>
+    <!-- Enhanced Header -->
     <header class="records-header">
         <div class="container">
             <div class="header-content">
-                <div>
-                    <h1 class="section-title">Medical Records</h1>
+                <div class="header-text">
+                    <h1>Medical Records</h1>
                     <p>Your complete health history in one place</p>
                 </div>
-                <button class="btn">
+                <button class="btn" id="addRecordBtn">
                     <i class="fas fa-plus"></i> Add Record
                 </button>
             </div>
@@ -235,8 +613,9 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</h2>
-                <a href="#">View All</a>
+                <a href="#" class="view-all">View All</a>
             </div>
+            
             <div class="records-grid">
                 <!-- Prescription Card 1 -->
                 <div class="record-card">
@@ -247,10 +626,12 @@
                     <div class="record-details">
                         <p><strong>Doctor:</strong> Dr. Sarah Johnson</p>
                         <p><strong>Dosage:</strong> 1 tablet every 8 hours for 7 days</p>
+                        <p><strong>Pharmacy:</strong> City Pharmacy</p>
+                        <p><strong>Refills:</strong> 1 remaining</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
@@ -267,10 +648,11 @@
                     <div class="record-details">
                         <p><strong>Doctor:</strong> Dr. Michael Chen</p>
                         <p><strong>Dosage:</strong> As needed for pain, max 3/day</p>
+                        <p><strong>Status:</strong> <span class="status-badge status-normal">Active</span></p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
@@ -284,8 +666,9 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-flask"></i> Lab Results</h2>
-                <a href="#">View All</a>
+                <a href="#" class="view-all">View All</a>
             </div>
+            
             <div class="records-grid">
                 <!-- Lab Result Card 1 -->
                 <div class="record-card">
@@ -295,11 +678,12 @@
                     </div>
                     <div class="record-details">
                         <p><strong>Lab:</strong> City Medical Labs</p>
-                        <p><strong>Status:</strong> All values within normal range</p>
+                        <p><strong>Status:</strong> <span class="status-badge status-normal">Normal</span></p>
+                        <p><strong>Notes:</strong> All values within normal range</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
@@ -318,11 +702,12 @@
                     </div>
                     <div class="record-details">
                         <p><strong>Lab:</strong> HealthPlus Diagnostics</p>
-                        <p><strong>Status:</strong> LDL slightly elevated</p>
+                        <p><strong>Status:</strong> <span class="status-badge status-warning">Review Needed</span></p>
+                        <p><strong>Notes:</strong> LDL slightly elevated (142 mg/dL)</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
@@ -336,8 +721,9 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-syringe"></i> Vaccinations</h2>
-                <a href="#">View All</a>
+                <a href="#" class="view-all">View All</a>
             </div>
+            
             <div class="records-grid">
                 <!-- Vaccination Card 1 -->
                 <div class="record-card">
@@ -348,10 +734,11 @@
                     <div class="record-details">
                         <p><strong>Provider:</strong> Community Health Center</p>
                         <p><strong>Next Dose:</strong> Oct 2023</p>
+                        <p><strong>Lot #:</strong> EL3245</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
@@ -368,16 +755,35 @@
                     <div class="record-details">
                         <p><strong>Provider:</strong> City Vaccination Center</p>
                         <p><strong>Type:</strong> Pfizer-BioNTech</p>
+                        <p><strong>Lot #:</strong> FG6789</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
-                            <i class="fas fa-eye"></i> View
+                            <i class="fas fa-eye"></i> View Details
                         </button>
                         <button class="action-btn download-btn">
                             <i class="fas fa-download"></i> Download
                         </button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Medical History Section -->
+        <section class="records-section">
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> Medical History</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            
+            <!-- Empty State Example -->
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <h3>No Medical History Records</h3>
+                <p>Your medical history records will appear here once they're added to your profile.</p>
+                <button class="btn" style="max-width: 200px; margin: 0 auto;">
+                    <i class="fas fa-plus"></i> Add History
+                </button>
             </div>
         </section>
     </div>
@@ -404,6 +810,54 @@
         </div>
     </div>
 
+    <!-- Add Record Modal -->
+    <div class="modal-overlay" id="recordModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Medical Record</h2>
+            <form id="recordForm">
+                <div class="form-group">
+                    <label for="recordType">Record Type</label>
+                    <select id="recordType" class="form-control" required>
+                        <option value="">Select record type</option>
+                        <option value="prescription">Prescription</option>
+                        <option value="lab">Lab Result</option>
+                        <option value="vaccination">Vaccination</option>
+                        <option value="history">Medical History</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordName">Record Name</label>
+                    <input type="text" id="recordName" class="form-control" placeholder="e.g., Amoxicillin 500mg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordDate">Date</label>
+                    <input type="date" id="recordDate" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordProvider">Provider</label>
+                    <input type="text" id="recordProvider" class="form-control" placeholder="Doctor or facility name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordNotes">Notes</label>
+                    <textarea id="recordNotes" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordFile">Upload File (Optional)</label>
+                    <input type="file" id="recordFile" class="form-control">
+                </div>
+                
+                <button type="submit" class="submit-btn">Save Record</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Simple active link highlighting
         document.addEventListener('DOMContentLoaded', function() {
@@ -415,8 +869,55 @@
                     link.classList.add('active');
                 }
             });
+
+            // Add Record Modal functionality
+            const addRecordBtn = document.getElementById('addRecordBtn');
+            const recordModal = document.getElementById('recordModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            if (addRecordBtn && recordModal) {
+                addRecordBtn.addEventListener('click', function() {
+                    recordModal.style.display = 'block';
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    recordModal.style.display = 'none';
+                });
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === recordModal) {
+                        recordModal.style.display = 'none';
+                    }
+                });
+            }
+            
+            // View buttons functionality
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    alert(`Viewing details for: ${title}\n\nThis would show a detailed view in a full implementation.`);
+                });
+            });
+            
+            // Download buttons functionality
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    alert(`Downloading record: ${title}\n\nThis would download the PDF in a full implementation.`);
+                });
+            });
+            
+            // Share buttons functionality
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    alert(`Sharing record: ${title}\n\nThis would open a share dialog in a full implementation.`);
+                });
+            });
         });
     </script>
-    <script src="https://faskey37.github.io/raha/js/common.js"></script>
 </body>
 </html>
