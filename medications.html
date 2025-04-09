@@ -975,12 +975,12 @@
     </div>
 
     <script>
-        // Current date display
-        function updateCurrentDate() {
+ // Current date display
+ function updateCurrentDate() {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
         }
-    
+
         // Show toast notification
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toastNotification');
@@ -996,7 +996,7 @@
                 toast.classList.remove('show');
             }, 3000);
         }
-    
+
         // Medication status functionality with fixed reminders
         function setupStatusButtons() {
             document.querySelectorAll('.status-btn').forEach(button => {
@@ -1043,7 +1043,7 @@
                 });
             });
         }
-    
+
         // Show reminder notification
         function showReminderNotification(medicationName, card) {
             // Create notification element
@@ -1085,10 +1085,223 @@
                 }
             }, 60000);
         }
-    
-        // Rest of your existing JavaScript code...
-        // (setupActionButtons, checkEmptyState, setupModal, createMedicationCard, formatTime, etc.)
-    
+
+        // Edit and delete functionality
+        function setupActionButtons() {
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.medication-card');
+                    const medName = card.querySelector('.medication-name').textContent.trim();
+                    
+                    // In a real app, this would populate the form with existing data
+                    showToast(`Editing ${medName} - This would open the edit form in a full implementation`);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.medication-card');
+                    const medName = card.querySelector('.medication-name').textContent.trim();
+                    
+                    if (confirm(`Are you sure you want to delete ${medName}?`)) {
+                        // Clear any existing reminder
+                        if (card.reminderTimeout) {
+                            clearTimeout(card.reminderTimeout);
+                        }
+                        
+                        card.style.transform = 'scale(0.9)';
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.remove();
+                            checkEmptyState();
+                            showToast(`${medName} deleted successfully`);
+                        }, 300);
+                    }
+                });
+            });
+        }
+
+        // Check if no medications exist
+        function checkEmptyState() {
+            const medicationsList = document.getElementById('medicationsList');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (medicationsList.children.length === 0) {
+                emptyState.style.display = 'block';
+                medicationsList.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                medicationsList.style.display = 'block';
+            }
+        }
+
+        // Modal functionality for add medication form
+        function setupModal() {
+            const modal = document.getElementById('medicationModal');
+            const addBtn = document.getElementById('addMedicationBtn');
+            const addBtnEmpty = document.getElementById('addMedicationBtnEmpty');
+            const closeBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('medicationForm');
+            const addTimeBtn = document.getElementById('addTimeSlot');
+            const timeSlots = document.getElementById('timeSlots');
+
+            // Open modal
+            function openModal() {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Close modal
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                form.reset();
+                timeSlots.innerHTML = '';
+            }
+
+            // Add time slot
+            addTimeBtn.addEventListener('click', function() {
+                const timeInput = document.createElement('div');
+                timeInput.className = 'time-slot-input';
+                timeInput.innerHTML = `
+                    <input type="time" class="form-control" required>
+                    <button type="button" class="remove-time-btn remove-time">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                timeSlots.appendChild(timeInput);
+
+                // Remove time slot
+                timeInput.querySelector('.remove-time').addEventListener('click', function() {
+                    timeInput.remove();
+                });
+            });
+
+            // Open modal from main button
+            addBtn.addEventListener('click', openModal);
+            
+            // Open modal from empty state button
+            addBtnEmpty.addEventListener('click', openModal);
+
+            // Close modal from close button
+            closeBtn.addEventListener('click', closeModal);
+            
+            // Close modal from cancel button
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('medName').value;
+                const dosage = document.getElementById('medDosage').value;
+                const type = document.getElementById('medType').value;
+                const instructions = document.getElementById('medInstructions').value;
+                
+                // Get time slots
+                const times = Array.from(document.querySelectorAll('.time-slot-input input')).map(input => input.value);
+                
+                if (times.length === 0) {
+                    showToast('Please add at least one time for the medication schedule', 'error');
+                    return;
+                }
+                
+                // Create new medication card
+                createMedicationCard(name, dosage, type, times, instructions);
+                
+                // Close modal
+                closeModal();
+                
+                // Show success message
+                showToast(`${name} added successfully!`);
+            });
+        }
+
+        // Create new medication card
+        function createMedicationCard(name, dosage, type, times, instructions) {
+            const medicationsList = document.getElementById('medicationsList');
+            const emptyState = document.getElementById('emptyState');
+            
+            // Hide empty state if shown
+            if (emptyState.style.display === 'block') {
+                emptyState.style.display = 'none';
+                medicationsList.style.display = 'block';
+            }
+            
+            // Create time slots HTML
+            let timeSlotsHTML = '';
+            times.forEach(time => {
+                if (time) {
+                    const formattedTime = formatTime(time);
+                    timeSlotsHTML += `<span class="time-slot"><i class="far fa-clock"></i> ${formattedTime}</span>`;
+                }
+            });
+            
+            // Create card HTML
+            const cardHTML = `
+                <div class="medication-card">
+                    <div class="medication-actions">
+                        <button class="action-btn edit-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="medication-header">
+                        <span class="medication-name">
+                            ${name}
+                            <span class="medication-type">${type}</span>
+                        </span>
+                        <div class="medication-dose-container">
+                            <span class="medication-dose">${dosage}</span>
+                        </div>
+                    </div>
+                    <div class="schedule">
+                        ${timeSlotsHTML}
+                    </div>
+                    <p class="instructions">${instructions || 'No special instructions'}</p>
+                    <div class="status">
+                        <button class="status-btn taken">
+                            <i class="fas fa-check-circle"></i> Taken
+                        </button>
+                        <button class="status-btn missed">
+                            <i class="fas fa-times-circle"></i> Missed
+                        </button>
+                        <button class="status-btn snooze">
+                            <i class="fas fa-clock"></i> Remind Later
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add card to list
+            medicationsList.insertAdjacentHTML('beforeend', cardHTML);
+            
+            // Set up event listeners for new card
+            setupStatusButtons();
+            setupActionButtons();
+        }
+
+        // Format time from 24h to 12h
+        function formatTime(time24) {
+            const [hours, minutes] = time24.split(':');
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const hours12 = hours % 12 || 12;
+            return `${hours12}:${minutes} ${period}`;
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updateCurrentDate();
@@ -1097,6 +1310,23 @@
             setupModal();
             checkEmptyState();
             
+            // Highlight current nav link
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Header buttons
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                showToast('Search functionality would go here');
+            });
+            
+            document.getElementById('notificationsBtn').addEventListener('click', function() {
+                showToast('Notifications would appear here');
+            });
+
             // Add CSS for reminder notification
             const style = document.createElement('style');
             style.textContent = `
@@ -1169,6 +1399,7 @@
             `;
             document.head.appendChild(style);
         });
+    </script>
     </script>
 </body>
 </html>
