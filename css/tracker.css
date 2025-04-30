@@ -604,3 +604,68 @@ body {
 .join-challenge {
   background: #2ecc71;
 }
+
+
+.family-health {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.family-members {
+  margin: 15px 0;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.member-avatar {
+  font-size: 24px;
+  margin-right: 15px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-info {
+  flex: 1;
+}
+
+.member-info h4 {
+  margin: 0;
+}
+
+.member-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.view-profile {
+  background: none;
+  border: 1px solid #4a89dc;
+  color: #4a89dc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-member {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: 1px dashed #4a89dc;
+  color: #4a89dc;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+}
