@@ -248,7 +248,12 @@ const chatMessages = document.getElementById('chat-messages');
 let conversationHistory = [
   {
     role: "system",
-    content: "You are a helpful medical assistant. Provide clear, concise health information. Never diagnose or prescribe. Always recommend consulting a doctor for medical advice."
+    content: `You are a knowledgeable health assistant with broad general knowledge. Follow these rules:
+    1. For medical questions: Provide accurate, evidence-based information but never diagnose or prescribe
+    2. For general knowledge: Answer concisely if relevant to health/wellness
+    3. For personal questions: Be polite but maintain professional boundaries
+    4. For technical questions: Explain simply or redirect to appropriate resources
+    5. Always maintain a helpful, professional tone`
   }
 ];
 
@@ -282,6 +287,12 @@ async function sendMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
+    // First check for special commands
+    if (handleSpecialCommands(input)) {
+      chatMessages.removeChild(typing);
+      return;
+    }
+
     // Call OpenRouter API
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -306,12 +317,8 @@ async function sendMessage() {
     const data = await response.json();
     let botResponse = data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.";
     
-    // Format specific responses
-    if (input.toLowerCase().includes("name any fruit")) {
-      botResponse = formatFruitResponse(botResponse);
-    } else if (input.toLowerCase().includes("diagnostic test") || input.toLowerCase().includes("heart test")) {
-      botResponse = formatTestResponse(botResponse);
-    }
+    // Format the response based on content
+    botResponse = formatResponse(input, botResponse);
     
     // Add bot response to history and chat
     conversationHistory.push({ role: "assistant", content: botResponse });
@@ -325,6 +332,122 @@ async function sendMessage() {
   }
 }
 
+function handleSpecialCommands(input) {
+  const lowerInput = input.toLowerCase();
+  
+  if (lowerInput === 'help' || lowerInput === 'commands') {
+    showHelp();
+    return true;
+  }
+  
+  if (lowerInput === 'clear' || lowerInput === 'reset chat') {
+    clearChat();
+    return true;
+  }
+  
+  if (lowerInput.includes('thank') || lowerInput.includes('thanks')) {
+    addMessage('bot', "You're welcome! Is there anything else I can help you with?");
+    return true;
+  }
+  
+  return false;
+}
+
+function showHelp() {
+  const helpMessage = `
+    <div class="help-message">
+      <h4>How I can help:</h4>
+      <ul>
+        <li><strong>Medical questions:</strong> Symptoms, conditions, medications</li>
+        <li><strong>Wellness advice:</strong> Nutrition, exercise, mental health</li>
+        <li><strong>Doctor information:</strong> Find specialists in our database</li>
+        <li><strong>General knowledge:</strong> Health-related facts and information</li>
+      </ul>
+      <p>Try asking:</p>
+      <ul>
+        <li>"What are symptoms of diabetes?"</li>
+        <li>"How much water should I drink daily?"</li>
+        <li>"Find me a cardiologist"</li>
+      </ul>
+    </div>
+  `;
+  addMessage('bot', helpMessage);
+}
+
+function clearChat() {
+  // Keep only the system message in history
+  conversationHistory = [conversationHistory[0]];
+  // Clear the chat UI
+  chatMessages.innerHTML = `
+    <div class="bot-message">
+      <div class="message-content">
+        Chat cleared. How can I help you now?
+      </div>
+      <div class="message-time">Just now</div>
+    </div>
+  `;
+}
+
+function formatResponse(input, text) {
+  const lowerInput = input.toLowerCase();
+  
+  // Format fruit responses
+  if (lowerInput.includes("name any fruit") || lowerInput.includes("suggest a fruit")) {
+    const fruitMatch = text.match(/\{([^}]+)\}/);
+    const fruit = fruitMatch ? fruitMatch[1] : "apple";
+    return `
+      <div class="fruit-response">
+        <p>Here's a fruit suggestion:</p>
+        <p><strong>${fruit.charAt(0).toUpperCase() + fruit.slice(1)}</strong> is an excellent choice!</p>
+        <p>Nutritional benefits: Rich in vitamins, fiber, and antioxidants.</p>
+      </div>
+    `;
+  }
+  
+  // Format test responses
+  if (lowerInput.includes("diagnostic test") || lowerInput.includes("medical test")) {
+    return `
+      <div class="test-suggestion">
+        <h4>Relevant Medical Tests:</h4>
+        ${extractTestInformation(text)}
+        <p>Always consult with your healthcare provider about which tests are appropriate for you.</p>
+      </div>
+    `;
+  }
+  
+  // Format medication responses
+  if (lowerInput.includes("medicine") || lowerInput.includes("medication") || lowerInput.includes("pill")) {
+    return `
+      <div class="medication-response">
+        <h4>Medication Information:</h4>
+        ${text}
+        <p class="disclaimer">Note: This is general information only. Always follow your doctor's prescription.</p>
+      </div>
+    `;
+  }
+  
+  // Format general responses
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>')
+    .replace(/^- (.*?)(<br>|$)/gm, '<li>$1</li>');
+}
+
+function extractTestInformation(text) {
+  // Simple extraction of test information
+  if (text.includes("ECG") || text.includes("EKG")) {
+    return `
+      <ul>
+        <li><strong>Electrocardiogram (ECG/EKG)</strong> - Records heart's electrical activity</li>
+        <li><strong>Blood Tests</strong> - Checks cholesterol, sugar levels, etc.</li>
+        <li><strong>Imaging Tests</strong> - X-rays, CT scans, or MRIs if needed</li>
+      </ul>
+    `;
+  }
+  return text; // Fallback to original text if no specific tests found
+}
+
 function addMessage(sender, text) {
   const msgDiv = document.createElement('div');
   msgDiv.className = `${sender}-message`;
@@ -336,31 +459,33 @@ function addMessage(sender, text) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function formatFruitResponse(text) {
-  // Extract the fruit name if it's boxed
-  const fruitMatch = text.match(/\{([^}]+)\}/);
-  const fruit = fruitMatch ? fruitMatch[1] : "apple"; // Default to apple if no match
+// Add CSS for new message types
+const style = document.createElement('style');
+style.textContent = `
+  .fruit-response, .test-suggestion, .medication-response {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+    border-left: 3px solid #4a89dc;
+  }
   
-  return `
-    <div class="fruit-response">
-      <p>Here's a fruit suggestion for you:</p>
-      <p><strong>${fruit.charAt(0).toUpperCase() + fruit.slice(1)}</strong> would be a great choice!</p>
-      <p>Did you know ${fruit.toLowerCase()}s are rich in vitamins and fiber?</p>
-    </div>
-  `;
-}
-
-function formatTestResponse(text) {
-  return `
-    <div class="test-suggestion">
-      <h4>Common Heart Diagnostic Tests:</h4>
-      <ul>
-        <li><strong>Electrocardiogram (ECG/EKG)</strong> - Measures electrical activity</li>
-        <li><strong>Echocardiogram</strong> - Ultrasound of your heart</li>
-        <li><strong>Stress Test</strong> - Checks heart function during exercise</li>
-        <li><strong>Cardiac CT Scan</strong> - Detailed images of your heart</li>
-      </ul>
-      <p>Please consult with your doctor to determine which tests are appropriate for you.</p>
-    </div>
-  `;
-}
+  .help-message {
+    background-color: #f0f7ff;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .help-message h4 {
+    margin-top: 0;
+    color: #2c3e50;
+  }
+  
+  .disclaimer {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
+  }
+`;
+document.head.appendChild(style);
