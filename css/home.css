@@ -1647,12 +1647,11 @@ transform: translateY(0);
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-  display: none;
+  display: flex; /* ✅ Must be flex for internal layout */
   flex-direction: column;
   z-index: 999;
   overflow: hidden;
   transition: all 0.3s ease;
-  display: flex; /* ✨ Critical: needed for flex-grow to work */
 }
 
 
