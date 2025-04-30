@@ -1425,7 +1425,7 @@ transform: translateY(0);
   position: fixed;
   bottom: 80px;
   right: 20px;
-  z-index: 1000;
+  z-index: 9999;
   background-color: #28a745;
   color: white;
   border: none;
@@ -1443,8 +1443,8 @@ transform: translateY(0);
 }
 
 .chatbot-container {
-  position: relative;
-  bottom: 90px;
+  position: fixed;
+  bottom: 100px;
   right: 20px;
   width: 350px;
   max-height: 520px;
@@ -1453,7 +1453,7 @@ transform: translateY(0);
   box-shadow: 0 10px 40px rgba(0,0,0,0.15);
   display: none;
   flex-direction: column;
-  z-index: 999;
+  z-index: 9998;
   overflow: hidden;
   transition: all 0.3s ease;
 }
