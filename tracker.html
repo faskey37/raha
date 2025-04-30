@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://faskey37.github.io/raha/css/tracker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
     </style>
 </head>
@@ -85,7 +86,32 @@
             </div>
         </div>
 
-
+<!-- Enhance your medication tracker -->
+<div class="medication-history">
+    <h3>Medication History</h3>
+    <div class="history-tabs">
+      <button class="tab active" data-period="week">This Week</button>
+      <button class="tab" data-period="month">This Month</button>
+    </div>
+    <div class="history-stats">
+      <div class="stat">
+        <span class="value">85%</span>
+        <span class="label">Adherence</span>
+      </div>
+      <div class="stat">
+        <span class="value">2</span>
+        <span class="label">Missed</span>
+      </div>
+      <div class="stat">
+        <span class="value">14</span>
+        <span class="label">Taken</span>
+      </div>
+    </div>
+    <div class="history-graph">
+      <!-- Graph will be rendered here -->
+      <canvas id="medicationChart" width="400" height="200"></canvas>
+    </div>
+  </div>
         <div class="sleep-tracker">
             <h3>🌙 Rate Your Sleep</h3>
             <input type="range" min="1" max="5" value="3" class="sleep-slider">
@@ -297,7 +323,67 @@ slider.addEventListener('input', () => {
                 }
             });
         });
+
+
+// Add Chart.js to your project (include this in your HTML head)
+// <script src="https://cdn.jsdelivr.net/npm/chart.js">
+// Then add this JavaScript
+
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.history-tabs .tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      updateChart(this.getAttribute('data-period'));
+    });
+  });
+  
+  // Initialize chart
+  const ctx = document.getElementById('medicationChart').getContext('2d');
+  let medicationChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Taken',
+        data: [2, 2, 2, 1, 2, 2, 2],
+        backgroundColor: '#4a89dc',
+      }, {
+        label: 'Missed',
+        data: [0, 0, 0, 1, 0, 0, 0],
+        backgroundColor: '#e74c3c',
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 2
+        }
+      }
+    }
+  });
+  
+  function updateChart(period) {
+    // In a real app, you would fetch different data based on the period
+    if (period === 'month') {
+      medicationChart.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      medicationChart.data.datasets[0].data = [8, 7, 8, 6];
+      medicationChart.data.datasets[1].data = [0, 1, 0, 2];
+      medicationChart.options.scales.y.max = 10;
+    } else {
+      medicationChart.data.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      medicationChart.data.datasets[0].data = [2, 2, 2, 1, 2, 2, 2];
+      medicationChart.data.datasets[1].data = [0, 0, 0, 1, 0, 0, 0];
+      medicationChart.options.scales.y.max = 2;
+    }
+    medicationChart.update();
+  }
+});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/common.js"></script>
 </body>
 </html>

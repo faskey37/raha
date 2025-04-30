@@ -479,3 +479,55 @@ body {
     font-size: 16px;
   }
 }
+
+.medication-history {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.history-tabs {
+  display: flex;
+  margin: 15px 0;
+}
+
+.history-tabs .tab {
+  flex: 1;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  cursor: pointer;
+}
+
+.history-tabs .tab.active {
+  border-bottom: 2px solid #4a89dc;
+  color: #4a89dc;
+  font-weight: bold;
+}
+
+.history-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+.history-stats .stat {
+  text-align: center;
+}
+
+.history-stats .value {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+}
+
+.history-stats .label {
+  color: #666;
+  font-size: 14px;
+}
+
+.history-graph {
+  margin-top: 20px;
+}
