@@ -1692,15 +1692,14 @@ body {
 
 .chatbot-body {
   padding: 15px;
-  height: 320px;
+  min-height: 100px; /* Changed from fixed height */
+  flex: 1; /* Takes remaining space */
   overflow-y: auto;
   font-size: 14px;
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overscroll-behavior: contain; /* Prevent scroll bleed */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .message {
@@ -1732,6 +1731,7 @@ body {
   display: flex;
   border-top: 1px solid #eaeaea;
   background-color: #fff;
+  padding: 10px;
 }
 
 .chatbot-input input {
@@ -1782,10 +1782,6 @@ body {
     max-height: 60vh;
   }
   
-  .chatbot-body {
-    height: calc(60vh - 120px); /* Adjust height considering header and input */
-  }
-  
   .chatbot-toggle {
     bottom: 15px;
     right: 15px;
@@ -1798,9 +1794,5 @@ body {
 @media (max-height: 600px) {
   .chatbot-container {
     max-height: 70vh;
-  }
-  
-  .chatbot-body {
-    height: calc(70vh - 120px);
   }
 }
