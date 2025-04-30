@@ -236,244 +236,45 @@ document.getElementById('refresh-quote').addEventListener('click', function() {
 });
 
 
-const API_KEY = "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"; // Your Gemini 1.5 API key
-const chatbotToggle = document.getElementById('chatbot-toggle');
-const chatbotContainer = document.getElementById('chatbot-container');
-const closeButton = document.getElementById('close-chatbot');
-const sendButton = document.getElementById('send-button');
-const userInput = document.getElementById('userInput');
-const chatMessages = document.getElementById('chat-messages');
-
-// Message history
-let conversationHistory = [
-  {
-    role: "user",
-    parts: [{ text: "You are a helpful medical assistant. Provide clear, concise health information. Never diagnose or prescribe. Always recommend consulting a doctor for medical advice. Keep responses under 200 words unless more detail is specifically requested." }]
-  }
-];
-
-chatbotToggle.addEventListener('click', () => {
-  chatbotContainer.classList.toggle('active');
-});
-
-closeButton.addEventListener('click', () => {
-  chatbotContainer.classList.remove('active');
-});
-
-sendButton.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') sendMessage();
-});
+function toggleChat() {
+  const bot = document.getElementById('chatbot');
+  bot.style.display = bot.style.display === 'flex' ? 'none' : 'flex';
+}
 
 async function sendMessage() {
-  const input = userInput.value.trim();
-  if (!input) return;
+  const inputField = document.getElementById('userInput');
+  const message = inputField.value.trim();
+  const responseDiv = document.getElementById('response');
 
-  // Add user message to chat and history
-  addMessage('user', input);
-  conversationHistory.push({
-    role: "user",
-    parts: [{ text: input }]
-  });
-  userInput.value = '';
+  if (!message) return;
 
-  // Show typing indicator
-  const typing = document.createElement('div');
-  typing.className = 'bot-message typing-indicator';
-  typing.innerHTML = '<span></span><span></span><span></span>';
-  chatMessages.appendChild(typing);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  // Show user message
+  responseDiv.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+  inputField.value = '';
+  responseDiv.innerHTML += `<div><em>Bot is typing...</em></div>`;
+  responseDiv.scrollTop = responseDiv.scrollHeight;
 
   try {
-    // Call Gemini 1.5 API
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`, {
-      method: "POST",
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        Authorization: 'Bearer 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',
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://your-site.com',
+        'X-Title': 'WSP ChatBot'
       },
       body: JSON.stringify({
-        contents: conversationHistory,
-        generationConfig: {
-          temperature: 0.7,
-          topP: 0.9,
-          topK: 40,
-          maxOutputTokens: 2000
-        },
-        safetySettings: [
-          {
-            category: "HARM_CATEGORY_MEDICAL",
-            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-          }
-        ]
+        model: 'mistralai/mistral-7b-instruct',
+        messages: [{ role: 'user', content: message }]
       })
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error?.message || `API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    let botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response. Please try again.";
-    
-    // Add bot response to history and chat
-    conversationHistory.push({
-      role: "model",
-      parts: [{ text: botResponse }]
-    });
-    
-    chatMessages.removeChild(typing);
-    addMessage('bot', formatResponse(input, botResponse));
-    
-  } catch (error) {
-    console.error('Error:', error);
-    chatMessages.removeChild(typing);
-    addMessage('bot', "Sorry, I'm having technical difficulties. Please try again later or ask a different question.");
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || 'No response received.';
+    responseDiv.innerHTML = responseDiv.innerHTML.replace(`<em>Bot is typing...</em>`, '');
+    responseDiv.innerHTML += `<div><strong>Bot:</strong> ${marked.parseInline(reply)}</div>`;
+    responseDiv.scrollTop = responseDiv.scrollHeight;
+  } catch (err) {
+    responseDiv.innerHTML += `<div><strong>Error:</strong> ${err.message}</div>`;
   }
 }
-
-function formatResponse(input, text) {
-  const lowerInput = input.toLowerCase();
-  
-  // Format fruit responses
-  if (lowerInput.includes("name any fruit") || lowerInput.includes("suggest a fruit")) {
-    const fruitMatch = text.match(/\b(apple|banana|orange|mango|strawberry|blueberry)\b/i) || ["apple"];
-    const fruit = fruitMatch[0];
-    return `
-      <div class="fruit-response">
-        <p>Here's a healthy fruit suggestion:</p>
-        <p><strong>${fruit.charAt(0).toUpperCase() + fruit.slice(1)}</strong> would be excellent!</p>
-        <p>Nutritional benefits: Rich in ${getFruitBenefits(fruit)}.</p>
-      </div>
-    `;
-  }
-  
-  // Format test responses
-  if (lowerInput.includes("test") || lowerInput.includes("diagnostic") || lowerInput.includes("checkup")) {
-    return `
-      <div class="test-suggestion">
-        <h4>Medical Information:</h4>
-        ${formatMedicalText(text)}
-        <p class="disclaimer">Consult your healthcare provider for personalized medical advice.</p>
-      </div>
-    `;
-  }
-  
-  // Format medication responses
-  if (lowerInput.includes("medicine") || lowerInput.includes("medication") || lowerInput.includes("pill")) {
-    return `
-      <div class="medication-response">
-        <h4>Medication Information:</h4>
-        ${formatMedicalText(text)}
-        <p class="disclaimer">Always follow your doctor's prescription and dosage instructions.</p>
-      </div>
-    `;
-  }
-  
-  // Format general responses
-  return formatGeneralText(text);
-}
-
-function formatMedicalText(text) {
-  // Format medical information with proper structure
-  return text
-    .replace(/([^.]+)(\.|$)/g, '<p>$1$2</p>') // Paragraphs
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n/g, '<br>')
-    .replace(/^- (.*?)(<br>|$)/gm, '<li>$1</li>');
-}
-
-function formatGeneralText(text) {
-  // Format general conversation
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n/g, '<br>')
-    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
-}
-
-function getFruitBenefits(fruit) {
-  const benefits = {
-    apple: "fiber and antioxidants",
-    banana: "potassium and vitamin B6",
-    orange: "vitamin C and flavonoids",
-    mango: "vitamin A and enzymes",
-    strawberry: "vitamin C and polyphenols",
-    blueberry: "antioxidants and vitamin K"
-  };
-  return benefits[fruit.toLowerCase()] || "essential vitamins and minerals";
-}
-
-function addMessage(sender, text) {
-  const msgDiv = document.createElement('div');
-  msgDiv.className = `${sender}-message`;
-  msgDiv.innerHTML = `
-    <div class="message-content">${text}</div>
-    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-  `;
-  chatMessages.appendChild(msgDiv);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Add CSS for the chatbot
-const style = document.createElement('style');
-style.textContent = `
-  .fruit-response, .test-suggestion, .medication-response {
-    background-color: #f8f9fa;
-    padding: 12px;
-    border-radius: 8px;
-    margin: 8px 0;
-    border-left: 3px solid #4a89dc;
-  }
-  
-  .test-suggestion h4, .medication-response h4 {
-    color: #2c3e50;
-    margin-top: 0;
-  }
-  
-  .disclaimer {
-    font-size: 0.8em;
-    color: #666;
-    font-style: italic;
-    margin-top: 10px;
-  }
-  
-  .typing-indicator {
-    display: inline-block;
-    padding: 10px 15px;
-  }
-  
-  .typing-indicator span {
-    height: 8px;
-    width: 8px;
-    background: #ccc;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 2px;
-    animation: bounce 1.5s infinite ease-in-out;
-  }
-  
-  .typing-indicator span:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  
-  .typing-indicator span:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-  
-  @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-5px); }
-  }
-  
-  a {
-    color: #4a89dc;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-`;
-document.head.appendChild(style);
