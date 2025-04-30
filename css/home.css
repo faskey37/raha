@@ -1425,7 +1425,7 @@ transform: translateY(0);
   position: fixed;
   bottom: 80px;
   right: 20px;
-  z-index: 9999;
+  z-index: 998;
   background-color: #4a89dc;
   color: white;
   border: none;
@@ -1453,7 +1453,7 @@ transform: translateY(0);
   box-shadow: 0 10px 40px rgba(0,0,0,0.15);
   display: none;
   flex-direction: column;
-  z-index: 9998;
+  z-index: 997;
   overflow: hidden;
   transition: all 0.3s ease;
 }
