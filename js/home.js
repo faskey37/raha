@@ -266,7 +266,7 @@ async function sendMessage() {
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer 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',
+        Authorization: 'Bearer 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',
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://your-site.com',
         'X-Title': 'WSP ChatBot'
