@@ -235,61 +235,117 @@ document.getElementById('refresh-quote').addEventListener('click', function() {
   document.querySelector('.motivational-quote p').textContent = `"${randomQuote}"`;
 });
 
-// In your app's JavaScript
-async function queryMedicalAI(prompt, userContext = {}) {
+
+// Updated sendMessage function to work with new HTML
+async function sendMessage() {
+  const inputElement = document.getElementById('userInput');
+  const input = inputElement.value.trim();
+  const chatHistory = document.getElementById('chat-history');
+  
+  if (!input) return;
+  
+  // Add user message to chat
+  const userMessageDiv = document.createElement('div');
+  userMessageDiv.className = 'user-message';
+  userMessageDiv.innerHTML = `
+    <div class="message-content">${input}</div>
+    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+  `;
+  chatHistory.appendChild(userMessageDiv);
+  
+  // Add loading indicator
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'bot-message typing-indicator';
+  typingIndicator.innerHTML = `
+    <span></span>
+    <span></span>
+    <span></span>
+  `;
+  chatHistory.appendChild(typingIndicator);
+  
+  // Clear input
+  inputElement.value = '';
+  
+  // Scroll to bottom
+  chatHistory.scrollTop = chatHistory.scrollHeight;
+  
   try {
-    const response = await fetch('/api/ai/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        prompt,
-        context: {
-          age: getUserAge(),
-          gender: getUserGender(),
-          medications: getUserMeds(),
-          // other relevant context
-          ...userContext
-        }
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer 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",
+        "Content-Type": "application/json",
+        "HTTP-Referer": window.location.href,
+        "X-Title": document.title
+      },
+      body: JSON.stringify({
+        "model": "deepseek/deepseek-r1-zero:free",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a helpful medical assistant. Provide clear, concise health information. Never diagnose or prescribe. Always recommend consulting a doctor for medical advice."
+          },
+          {
+            "role": "user",
+            "content": input
+          }
+        ],
+        "temperature": 0.7,
+        "max_tokens": 500
       })
     });
-    
-    if (!response.ok) throw new Error('Network response was not ok');
-    
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
     const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
+    
+    // Remove typing indicator
+    chatHistory.removeChild(typingIndicator);
+    
+    // Add bot response
+    const botMessageDiv = document.createElement('div');
+    botMessageDiv.className = 'bot-message';
+    botMessageDiv.innerHTML = `
+      <div class="message-content">${formatResponse(data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.")}</div>
+      <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+    `;
+    chatHistory.appendChild(botMessageDiv);
+    
+    // Scroll to bottom again
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+    
   } catch (error) {
-    console.error('Error querying AI:', error);
-    return "Our health assistant is currently unavailable. Please try again later.";
+    console.error('Error:', error);
+    // Remove typing indicator
+    chatHistory.removeChild(typingIndicator);
+    
+    // Show error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'bot-message';
+    errorDiv.innerHTML = `
+      <div class="message-content">Sorry, I'm having trouble responding right now. Please try again later.</div>
+      <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+    `;
+    chatHistory.appendChild(errorDiv);
+    
+    chatHistory.scrollTop = chatHistory.scrollHeight;
   }
 }
 
-// Example usage
-document.getElementById('ask-ai-button').addEventListener('click', async () => {
-  const question = document.getElementById('ai-question').value;
-  if (!question) return;
-  
-  const response = await queryMedicalAI(question);
-  displayAIResponse(response);
-});
-
-function displayAIResponse(response) {
-  const formattedResponse = formatMedicalResponse(response);
-  document.getElementById('ai-response-container').innerHTML = formattedResponse;
-}
-
-function formatMedicalResponse(text) {
-  // Simple formatting - you might want to use a markdown parser
+// Format the response (basic markdown support)
+function formatResponse(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
+    .replace(/\*(.*?)\*/g, '<em>$1</em>') // italic
     .replace(/\n/g, '<br>') // line breaks
-    .replace(/- (.*?)(<br>|$)/g, '<li>$1</li>'); // bullets
+    .replace(/^- (.*?)(<br>|$)/gm, '<li>$1</li>'); // bullet points
 }
 
-document.getElementById('chatbot-toggle').addEventListener('click', function() {
-  const chatbot = document.getElementById('chatbot-container');
-  chatbot.classList.toggle('hidden');
-});
-
-document.getElementById('close-chatbot').addEventListener('click', function() {
-  document.getElementById('chatbot-container').classList.add('hidden');
+// Handle Enter key press
+document.getElementById('userInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
 });

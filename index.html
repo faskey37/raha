@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://faskey37.github.io/raha/css/home.css">
   <link rel="stylesheet" href="https://faskey37.github.io/raha/css/loader.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
   <!-- Favicon -->
   <link rel="icon" href="https://faskey37.github.io/raha/img/favicon.png">
   <style>
@@ -135,20 +137,46 @@
 </div>
 
 
-<button id="chatbot-toggle" class="floating-chat-button">
-  <i class="fas fa-robot"></i>
-</button>
-
-<div id="chatbot-container" class="chatbot-window hidden">
-  <iframe 
-    src="https://www.chatbase.co/chatbot-iframe/v9ypVUsspZSF8zqQSPNj9" 
-    width="100%" 
-    height="100%"
-    frameborder="0"
-  ></iframe>
-  <button id="close-chatbot" class="close-button">
-    <i class="fas fa-times"></i>
-  </button>
+<div class="chatbot-container">
+  <div class="chatbot-header">
+    <h2><i class="fas fa-robot"></i> Health Assistant</h2>
+    <p class="subtitle">Ask me about health, medications, or general wellness</p>
+  </div>
+  
+  <div class="chatbot-body">
+    <div id="chat-history" class="chat-messages">
+      <!-- Messages will appear here -->
+      <div class="welcome-message">
+        <div class="bot-message">
+          <div class="message-content">
+            Hello! I'm your health assistant. How can I help you today?
+          </div>
+          <div class="message-time">Just now</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chat-input">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          id="userInput"
+          placeholder="Type your health question..."
+          aria-label="Type your message"
+          aria-describedby="send-button" />
+        <button 
+          class="btn btn-primary"
+          id="send-button"
+          onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i> Send
+        </button>
+      </div>
+      <small class="disclaimer">
+        Responses are AI-generated and should not replace professional medical advice.
+      </small>
+    </div>
+  </div>
 </div>
 
     <!-- Quick Access Section with Labels -->
