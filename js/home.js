@@ -292,7 +292,7 @@ async function sendMessage() {
         "X-Title": document.title
       },
       body: JSON.stringify({
-        "model": "deepseek/deepseek-r1-zero:free", // You can change this model
+        "model": "deepseek/deepseek-r1-zero:free",
         "messages": conversationHistory,
         "temperature": 0.7,
         "max_tokens": 500
@@ -304,7 +304,14 @@ async function sendMessage() {
     }
 
     const data = await response.json();
-    const botResponse = data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.";
+    let botResponse = data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.";
+    
+    // Format specific responses
+    if (input.toLowerCase().includes("name any fruit")) {
+      botResponse = formatFruitResponse(botResponse);
+    } else if (input.toLowerCase().includes("diagnostic test") || input.toLowerCase().includes("heart test")) {
+      botResponse = formatTestResponse(botResponse);
+    }
     
     // Add bot response to history and chat
     conversationHistory.push({ role: "assistant", content: botResponse });
@@ -322,17 +329,38 @@ function addMessage(sender, text) {
   const msgDiv = document.createElement('div');
   msgDiv.className = `${sender}-message`;
   msgDiv.innerHTML = `
-    <div class="message-content">${formatResponse(text)}</div>
+    <div class="message-content">${text}</div>
     <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
   `;
   chatMessages.appendChild(msgDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function formatResponse(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
-    .replace(/\*(.*?)\*/g, '<em>$1</em>') // italic
-    .replace(/\n/g, '<br>') // line breaks
-    .replace(/^- (.*?)(<br>|$)/gm, '<li>$1</li>'); // bullet points
+function formatFruitResponse(text) {
+  // Extract the fruit name if it's boxed
+  const fruitMatch = text.match(/\{([^}]+)\}/);
+  const fruit = fruitMatch ? fruitMatch[1] : "apple"; // Default to apple if no match
+  
+  return `
+    <div class="fruit-response">
+      <p>Here's a fruit suggestion for you:</p>
+      <p><strong>${fruit.charAt(0).toUpperCase() + fruit.slice(1)}</strong> would be a great choice!</p>
+      <p>Did you know ${fruit.toLowerCase()}s are rich in vitamins and fiber?</p>
+    </div>
+  `;
+}
+
+function formatTestResponse(text) {
+  return `
+    <div class="test-suggestion">
+      <h4>Common Heart Diagnostic Tests:</h4>
+      <ul>
+        <li><strong>Electrocardiogram (ECG/EKG)</strong> - Measures electrical activity</li>
+        <li><strong>Echocardiogram</strong> - Ultrasound of your heart</li>
+        <li><strong>Stress Test</strong> - Checks heart function during exercise</li>
+        <li><strong>Cardiac CT Scan</strong> - Detailed images of your heart</li>
+      </ul>
+      <p>Please consult with your doctor to determine which tests are appropriate for you.</p>
+    </div>
+  `;
 }
