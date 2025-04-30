@@ -249,10 +249,18 @@ async function sendMessage() {
   if (!message) return;
 
   // Show user message
-  responseDiv.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-  inputField.value = '';
-  responseDiv.innerHTML += `<div><em>Bot is typing...</em></div>`;
+  const userMsg = document.createElement('div');
+  userMsg.className = 'user-message message';
+  userMsg.textContent = message;
+  responseDiv.appendChild(userMsg);
+
+  // Add typing message
+  const typing = document.createElement('div');
+  typing.className = 'typing message bot-message';
+  typing.textContent = 'Bot is typing...';
+  responseDiv.appendChild(typing);
   responseDiv.scrollTop = responseDiv.scrollHeight;
+  inputField.value = '';
 
   try {
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -271,10 +279,20 @@ async function sendMessage() {
 
     const data = await res.json();
     const reply = data.choices?.[0]?.message?.content || 'No response received.';
-    responseDiv.innerHTML = responseDiv.innerHTML.replace(`<em>Bot is typing...</em>`, '');
-    responseDiv.innerHTML += `<div><strong>Bot:</strong> ${marked.parseInline(reply)}</div>`;
+
+    // Replace typing with actual response
+    typing.remove();
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'bot-message message';
+    botMsg.innerHTML = marked.parseInline(reply);
+    responseDiv.appendChild(botMsg);
     responseDiv.scrollTop = responseDiv.scrollHeight;
   } catch (err) {
-    responseDiv.innerHTML += `<div><strong>Error:</strong> ${err.message}</div>`;
+    typing.remove();
+    const errorMsg = document.createElement('div');
+    errorMsg.className = 'bot-message message';
+    errorMsg.innerHTML = `<strong>Error:</strong> ${err.message}`;
+    responseDiv.appendChild(errorMsg);
   }
 }
