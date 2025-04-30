@@ -284,3 +284,12 @@ function formatMedicalResponse(text) {
     .replace(/\n/g, '<br>') // line breaks
     .replace(/- (.*?)(<br>|$)/g, '<li>$1</li>'); // bullets
 }
+
+document.getElementById('chatbot-toggle').addEventListener('click', function() {
+  const chatbot = document.getElementById('chatbot-container');
+  chatbot.classList.toggle('hidden');
+});
+
+document.getElementById('close-chatbot').addEventListener('click', function() {
+  document.getElementById('chatbot-container').classList.add('hidden');
+});
