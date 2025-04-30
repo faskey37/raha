@@ -531,3 +531,76 @@ body {
 .history-graph {
   margin-top: 20px;
 }
+
+
+.health-challenges {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.challenge-list {
+  margin: 15px 0;
+}
+
+.challenge-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.challenge-card.active {
+  border-left: 5px solid #4a89dc;
+}
+
+.challenge-card h4 {
+  margin: 0 0 5px 0;
+  color: #4a89dc;
+}
+
+.challenge-card p {
+  color: #666;
+  margin: 0 0 10px 0;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.progress-container .progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.progress-container .progress {
+  height: 100%;
+  background: #4a89dc;
+  border-radius: 4px;
+}
+
+.progress-container span {
+  font-size: 14px;
+  color: #666;
+}
+
+.view-challenge, .join-challenge {
+  width: 100%;
+  padding: 10px;
+  background: #4a89dc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.join-challenge {
+  background: #2ecc71;
+}

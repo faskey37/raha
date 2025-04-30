@@ -234,3 +234,53 @@ document.getElementById('refresh-quote').addEventListener('click', function() {
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   document.querySelector('.motivational-quote p').textContent = `"${randomQuote}"`;
 });
+
+// In your app's JavaScript
+async function queryMedicalAI(prompt, userContext = {}) {
+  try {
+    const response = await fetch('/api/ai/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        prompt,
+        context: {
+          age: getUserAge(),
+          gender: getUserGender(),
+          medications: getUserMeds(),
+          // other relevant context
+          ...userContext
+        }
+      })
+    });
+    
+    if (!response.ok) throw new Error('Network response was not ok');
+    
+    const data = await response.json();
+    return data.candidates[0].content.parts[0].text;
+  } catch (error) {
+    console.error('Error querying AI:', error);
+    return "Our health assistant is currently unavailable. Please try again later.";
+  }
+}
+
+// Example usage
+document.getElementById('ask-ai-button').addEventListener('click', async () => {
+  const question = document.getElementById('ai-question').value;
+  if (!question) return;
+  
+  const response = await queryMedicalAI(question);
+  displayAIResponse(response);
+});
+
+function displayAIResponse(response) {
+  const formattedResponse = formatMedicalResponse(response);
+  document.getElementById('ai-response-container').innerHTML = formattedResponse;
+}
+
+function formatMedicalResponse(text) {
+  // Simple formatting - you might want to use a markdown parser
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
+    .replace(/\n/g, '<br>') // line breaks
+    .replace(/- (.*?)(<br>|$)/g, '<li>$1</li>'); // bullets
+}
