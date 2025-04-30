@@ -1426,7 +1426,7 @@ transform: translateY(0);
   bottom: 80px;
   right: 20px;
   z-index: 9999;
-  background-color: #28a745;
+  background-color: #4a89dc;
   color: white;
   border: none;
   border-radius: 50%;
@@ -1439,7 +1439,7 @@ transform: translateY(0);
 }
 
 .chatbot-toggle:hover {
-  background-color: #218838;
+  background-color: #4a89dc;
 }
 
 .chatbot-container {
@@ -1459,7 +1459,7 @@ transform: translateY(0);
 }
 
 .chatbot-header {
-  background-color: #28a745;
+  background-color: #4a89dc;
   color: white;
   padding: 15px;
   font-size: 16px;
@@ -1520,7 +1520,7 @@ transform: translateY(0);
 }
 
 .chatbot-input button {
-  background-color: #28a745;
+  background-color: #4a89dc;
   border: none;
   color: white;
   padding: 0 20px;
@@ -1530,7 +1530,7 @@ transform: translateY(0);
 }
 
 .chatbot-input button:hover {
-  background-color: #218838;
+  background-color: #4a89dc;
 }
 
 .chatbot-body::-webkit-scrollbar {
