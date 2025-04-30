@@ -879,3 +879,84 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
     background: var(--primary);
     transform: scale(1.2);
   }
+  .telemedicine {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .consult-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+  }
+  
+  .consult-option {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px 5px;
+    background: #f8f9fa;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .consult-option i {
+    font-size: 24px;
+    color: #4a89dc;
+    margin-bottom: 5px;
+  }
+  
+  .consult-option span {
+    font-size: 14px;
+  }
+  
+  .available-doctors {
+    margin-top: 20px;
+  }
+  
+  .doctor-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .doctor-avatar {
+    font-size: 24px;
+    margin-right: 15px;
+  }
+  
+  .doctor-info {
+    flex: 1;
+  }
+  
+  .doctor-info h5 {
+    margin: 0;
+  }
+  
+  .doctor-info p {
+    margin: 3px 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .rating {
+    color: #f39c12;
+    font-size: 13px;
+  }
+  
+  .consult-now {
+    background: #4a89dc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
