@@ -221,3 +221,16 @@ document.addEventListener('DOMContentLoaded', function() {
       slideInterval = setInterval(nextSlide, 5000);
   });
 });
+// Add to your JavaScript
+const quotes = [
+  "Health is a relationship between you and your body.",
+  "Take care of your body. It's the only place you have to live.",
+  "Every journey begins with a single step.",
+  "Your health is an investment, not an expense.",
+  "Small steps every day lead to big results."
+];
+
+document.getElementById('refresh-quote').addEventListener('click', function() {
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.querySelector('.motivational-quote p').textContent = `"${randomQuote}"`;
+});
