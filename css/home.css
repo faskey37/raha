@@ -1295,3 +1295,71 @@ transform: translateY(0);
       top: 60px;
   }
 }
+/* Add to your CSS */
+.dashboard-widget {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.summary-item {
+  text-align: center;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+}
+
+.summary-item i {
+  font-size: 24px;
+  color: #4a89dc;
+  margin-bottom: 5px;
+}
+
+.summary-item .value {
+  font-weight: bold;
+  display: block;
+  font-size: 18px;
+}
+
+.summary-item .label {
+  color: #666;
+  font-size: 14px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+.progress {
+  height: 100%;
+  background: #4a89dc;
+  border-radius: 3px;
+}
+
+.motivational-quote {
+  text-align: center;
+  padding: 15px;
+  font-style: italic;
+  border-top: 1px solid #eee;
+  margin-top: 15px;
+}
+
+#refresh-quote {
+  background: none;
+  border: none;
+  color: #4a89dc;
+  cursor: pointer;
+  margin-top: 5px;
+}
