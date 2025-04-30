@@ -1420,111 +1420,104 @@ transform: translateY(0);
   margin-top: 10px;
 }
 
-.floating-chat-button {
+ /* Floating Chatbot Styles */
+ .floating-chatbot {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Chatbot Button */
+.chatbot-button {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   background: #4a89dc;
   color: white;
   border: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   font-size: 24px;
-  z-index: 1000;
-}
-
-.chatbot-window {
-  position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 350px;
-  height: 500px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  background: white;
-  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
-.chatbot-window.hidden {
+.chatbot-button:hover {
+  transform: scale(1.1);
+  background: #3a79cc;
+}
+
+/* Chatbot Window */
+.chatbot-window {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   transform: translateY(20px);
   opacity: 0;
   visibility: hidden;
+  transition: all 0.3s ease;
 }
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255,255,255,0.8);
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1001;
+.chatbot-window.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Chatbot Container */
-.chatbot-container {
-  max-width: 500px;
-  margin: 20px auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Header */
+/* Chatbot Header */
 .chatbot-header {
   background: #4a89dc;
   color: white;
-  padding: 15px 20px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.chatbot-header h2 {
+.chatbot-header h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.chatbot-header .subtitle {
-  margin: 5px 0 0;
-  font-size: 0.85rem;
-  opacity: 0.9;
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
 }
 
-/* Chat Body */
-.chatbot-body {
-  background: #f9f9f9;
-  display: flex;
-  flex-direction: column;
-  height: 400px;
-}
-
-/* Messages Area */
 .chat-messages {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  background: #f9f9f9;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Message Bubbles */
 .user-message, .bot-message {
   max-width: 80%;
   padding: 10px 15px;
   border-radius: 18px;
   line-height: 1.4;
-  position: relative;
 }
 
 .user-message {
@@ -1548,48 +1541,47 @@ transform: translateY(0);
   margin-top: 4px;
 }
 
-/* Input Area */
 .chat-input {
-  padding: 15px;
+  display: flex;
+  padding: 10px;
   border-top: 1px solid #e0e0e0;
   background: white;
 }
 
-.input-group {
-  display: flex;
-  gap: 8px;
-}
-
-.form-control {
+.chat-input input {
   flex: 1;
   padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
   outline: none;
-  transition: border 0.3s;
+  margin-right: 10px;
 }
 
-.form-control:focus {
+.chat-input input:focus {
   border-color: #4a89dc;
 }
 
-#send-button {
-  border-radius: 20px;
-  padding: 0 20px;
+.send-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #4a89dc;
+  color: white;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
 }
 
-.disclaimer {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.75rem;
-  color: #777;
+.chatbot-footer {
+  padding: 8px;
   text-align: center;
+  background: #f5f5f5;
+  font-size: 0.7rem;
+  color: #777;
 }
 
-/* Loading Indicator */
 .typing-indicator {
   display: inline-block;
   padding: 10px 15px;

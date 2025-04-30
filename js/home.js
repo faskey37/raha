@@ -236,60 +236,64 @@ document.getElementById('refresh-quote').addEventListener('click', function() {
 });
 
 
-// Updated sendMessage function to work with new HTML
+const API_KEY = "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";
+const chatbotToggle = document.getElementById('chatbot-toggle');
+const chatbotContainer = document.getElementById('chatbot-container');
+const closeButton = document.getElementById('close-chatbot');
+const sendButton = document.getElementById('send-button');
+const userInput = document.getElementById('userInput');
+const chatMessages = document.getElementById('chat-messages');
+
+// Message history
+let conversationHistory = [
+  {
+    role: "system",
+    content: "You are a helpful medical assistant. Provide clear, concise health information. Never diagnose or prescribe. Always recommend consulting a doctor for medical advice."
+  }
+];
+
+chatbotToggle.addEventListener('click', () => {
+  chatbotContainer.classList.toggle('active');
+});
+
+closeButton.addEventListener('click', () => {
+  chatbotContainer.classList.remove('active');
+});
+
+sendButton.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') sendMessage();
+});
+
 async function sendMessage() {
-  const inputElement = document.getElementById('userInput');
-  const input = inputElement.value.trim();
-  const chatHistory = document.getElementById('chat-history');
-  
+  const input = userInput.value.trim();
   if (!input) return;
-  
-  // Add user message to chat
-  const userMessageDiv = document.createElement('div');
-  userMessageDiv.className = 'user-message';
-  userMessageDiv.innerHTML = `
-    <div class="message-content">${input}</div>
-    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-  `;
-  chatHistory.appendChild(userMessageDiv);
-  
-  // Add loading indicator
-  const typingIndicator = document.createElement('div');
-  typingIndicator.className = 'bot-message typing-indicator';
-  typingIndicator.innerHTML = `
-    <span></span>
-    <span></span>
-    <span></span>
-  `;
-  chatHistory.appendChild(typingIndicator);
-  
-  // Clear input
-  inputElement.value = '';
-  
-  // Scroll to bottom
-  chatHistory.scrollTop = chatHistory.scrollHeight;
-  
+
+  // Add user message to chat and history
+  addMessage('user', input);
+  conversationHistory.push({ role: "user", content: input });
+  userInput.value = '';
+
+  // Show typing indicator
+  const typing = document.createElement('div');
+  typing.className = 'bot-message typing-indicator';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
   try {
+    // Call OpenRouter API
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
+        "Authorization": `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
         "HTTP-Referer": window.location.href,
         "X-Title": document.title
       },
       body: JSON.stringify({
-        "model": "deepseek/deepseek-r1-zero:free",
-        "messages": [
-          {
-            "role": "system",
-            "content": "You are a helpful medical assistant. Provide clear, concise health information. Never diagnose or prescribe. Always recommend consulting a doctor for medical advice."
-          },
-          {
-            "role": "user",
-            "content": input
-          }
-        ],
+        "model": "deepseek/deepseek-r1-zero:free", // You can change this model
+        "messages": conversationHistory,
         "temperature": 0.7,
         "max_tokens": 500
       })
@@ -300,41 +304,31 @@ async function sendMessage() {
     }
 
     const data = await response.json();
+    const botResponse = data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.";
     
-    // Remove typing indicator
-    chatHistory.removeChild(typingIndicator);
-    
-    // Add bot response
-    const botMessageDiv = document.createElement('div');
-    botMessageDiv.className = 'bot-message';
-    botMessageDiv.innerHTML = `
-      <div class="message-content">${formatResponse(data.choices?.[0]?.message?.content || "I couldn't understand that. Please try again.")}</div>
-      <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-    `;
-    chatHistory.appendChild(botMessageDiv);
-    
-    // Scroll to bottom again
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    // Add bot response to history and chat
+    conversationHistory.push({ role: "assistant", content: botResponse });
+    chatMessages.removeChild(typing);
+    addMessage('bot', botResponse);
     
   } catch (error) {
     console.error('Error:', error);
-    // Remove typing indicator
-    chatHistory.removeChild(typingIndicator);
-    
-    // Show error message
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'bot-message';
-    errorDiv.innerHTML = `
-      <div class="message-content">Sorry, I'm having trouble responding right now. Please try again later.</div>
-      <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-    `;
-    chatHistory.appendChild(errorDiv);
-    
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    chatMessages.removeChild(typing);
+    addMessage('bot', "Sorry, I'm having trouble responding right now. Please try again later.");
   }
 }
 
-// Format the response (basic markdown support)
+function addMessage(sender, text) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `${sender}-message`;
+  msgDiv.innerHTML = `
+    <div class="message-content">${formatResponse(text)}</div>
+    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+  `;
+  chatMessages.appendChild(msgDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 function formatResponse(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
@@ -342,10 +336,3 @@ function formatResponse(text) {
     .replace(/\n/g, '<br>') // line breaks
     .replace(/^- (.*?)(<br>|$)/gm, '<li>$1</li>'); // bullet points
 }
-
-// Handle Enter key press
-document.getElementById('userInput').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    sendMessage();
-  }
-});
