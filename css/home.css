@@ -1426,8 +1426,8 @@ transform: translateY(0);
   margin: 5px;
 }
 .chatbot-close i{
-  margin: 15px;
-  padding: 15px;
+  margin: 5px;
+  /* padding: 15px; */
 }
 .chatbot-toggle {
   position: fixed;

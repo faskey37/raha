@@ -239,6 +239,7 @@ document.getElementById('refresh-quote').addEventListener('click', function() {
 function toggleChat() {
   const bot = document.getElementById('chatbot');
   bot.style.display = bot.style.display === 'flex' ? 'none' : 'flex';
+  $('#btnChatOpen').toggle();
 }
 
 async function sendMessage() {

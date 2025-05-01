@@ -7,10 +7,11 @@
   <title>Raha Health App</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="https://faskey37.github.io/raha/css/home.css">
-  <link rel="stylesheet" href="https://faskey37.github.io/raha/css/loader.css">
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./css/loader.css">
+  <script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  
+
   <!-- Favicon -->
   <link rel="icon" href="https://faskey37.github.io/raha/img/favicon.png">
   <style>
@@ -18,10 +19,10 @@
 </head>
 
 <body class="medium-text">
-    <div class="custom-loader">
-      <div class="loader-ring"></div>
-      <div class="loader-text">Loading Health Data...</div>
-      <div class="progress-counter">0%</div>
+  <div class="custom-loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Loading Health Data...</div>
+    <div class="progress-counter">0%</div>
   </div>
 
 
@@ -68,92 +69,92 @@
         </div>
       </div>
     </section>
-<!-- Add to your dashboard/home screen -->
-<div class="dashboard-widget">
-  <div class="health-summary">
-    <h3>Today's Summary</h3>
-    <div class="summary-grid">
-      <div class="summary-item">
-        <i class="fas fa-tint"></i>
-        <span class="value">0.5L</span>
-        <span class="label">Water</span>
-        <div class="progress-bar">
-          <div class="progress" style="width: 20%"></div>
+    <!-- Add to your dashboard/home screen -->
+    <div class="dashboard-widget">
+      <div class="health-summary">
+        <h3>Today's Summary</h3>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <i class="fas fa-tint"></i>
+            <span class="value">0.5L</span>
+            <span class="label">Water</span>
+            <div class="progress-bar">
+              <div class="progress" style="width: 20%"></div>
+            </div>
+          </div>
+          <div class="summary-item">
+            <i class="fas fa-walking"></i>
+            <span class="value">3,245</span>
+            <span class="label">Steps</span>
+            <div class="progress-bar">
+              <div class="progress" style="width: 32%"></div>
+            </div>
+          </div>
+          <div class="summary-item">
+            <i class="fas fa-moon"></i>
+            <span class="value">6.5h</span>
+            <span class="label">Sleep</span>
+            <div class="progress-bar">
+              <div class="progress" style="width: 81%"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="summary-item">
-        <i class="fas fa-walking"></i>
-        <span class="value">3,245</span>
-        <span class="label">Steps</span>
-        <div class="progress-bar">
-          <div class="progress" style="width: 32%"></div>
-        </div>
-      </div>
-      <div class="summary-item">
-        <i class="fas fa-moon"></i>
-        <span class="value">6.5h</span>
-        <span class="label">Sleep</span>
-        <div class="progress-bar">
-          <div class="progress" style="width: 81%"></div>
-        </div>
+
+      <!-- Motivational Quote -->
+      <div class="motivational-quote">
+        <p>"Small daily improvements lead to stunning results."</p>
+        <button id="refresh-quote">New Quote</button>
       </div>
     </div>
-  </div>
-  
-  <!-- Motivational Quote -->
-  <div class="motivational-quote">
-    <p>"Small daily improvements lead to stunning results."</p>
-    <button id="refresh-quote">New Quote</button>
-  </div>
-</div>
 
-<div class="slider-container">
-  <div class="slider">
-      <div class="slide">
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide">
           <img src="https://faskey37.github.io/raha/img/slider.jpg" alt="Slide 1">
           <div class="slide-content">
-              <h3>Health Tip 1</h3>
-              <p>Stay hydrated for better energy levels</p>
+            <h3>Health Tip 1</h3>
+            <p>Stay hydrated for better energy levels</p>
           </div>
-      </div>
-      <div class="slide">
+        </div>
+        <div class="slide">
           <img src="https://faskey37.github.io/raha/img/slider2.jpg" alt="Slide 2">
           <div class="slide-content">
-              <h3>Health Tip 2</h3>
-              <p>Get 7-8 hours of sleep daily</p>
+            <h3>Health Tip 2</h3>
+            <p>Get 7-8 hours of sleep daily</p>
           </div>
-      </div>
-      <div class="slide">
+        </div>
+        <div class="slide">
           <img src="https://faskey37.github.io/raha/img/slider3.jpg" alt="Slide 3">
           <div class="slide-content">
-              <h3>Health Tip 3</h3>
-              <p>30 minutes of exercise boosts mood</p>
+            <h3>Health Tip 3</h3>
+            <p>30 minutes of exercise boosts mood</p>
           </div>
+        </div>
       </div>
-  </div>
-  <button class="slider-btn prev-btn">❮</button>
-  <button class="slider-btn next-btn">❯</button>
-  <div class="slider-dots"></div>
-</div>
+      <button class="slider-btn prev-btn">❮</button>
+      <button class="slider-btn next-btn">❯</button>
+      <div class="slider-dots"></div>
+    </div>
 
 
-<!-- Floating Button -->
-<button class="chatbot-toggle" onclick="toggleChat()">
-  <i class="fas fa-comment-dots"></i>
-</button>
+    <!-- Floating Button -->
+    <button id="btnChatOpen" class="chatbot-toggle" onclick="toggleChat()">
+      <i class="fas fa-comment-dots"></i>
+    </button>
 
-<!-- Chat Window -->
-<div class="chatbot-container" id="chatbot">
-  <div class="chatbot-close"> <i class="fa-2x fa-close fas"></i></div>
-  <div class="chatbot-header">💬 Ask WSP Bot</div>
-  <div class="chatbot-body" id="response">
-    <div class="bot-message message">Welcome! Ask me anything 👇</div>
-  </div>
-  <div class="chatbot-input">
-    <input type="text" id="userInput" placeholder="Type your message..." />
-    <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-  </div>
-</div>
+    <!-- Chat Window -->
+    <div class="chatbot-container" id="chatbot">
+      <div class="chatbot-close"> <i class="fa-2 fa-close fas" onclick="toggleChat()"></i></div>
+      <div class="chatbot-header">💬 Ask WSP Bot</div>
+      <div class="chatbot-body" id="response">
+        <div class="bot-message message">Welcome! Ask me anything 👇</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
 
 
 
@@ -213,30 +214,30 @@
       </div>
     </section>
 
-    
-<!-- Add to your home or new section -->
-<div class="health-articles">
-  <h3>Health Articles</h3>
-  <div class="article-list">
-    <div class="article-card">
-      <img src="https://via.placeholder.com/300x150?text=Hydration" alt="Hydration">
-      <div class="article-content">
-        <h4>The Importance of Staying Hydrated</h4>
-        <p>Learn why water is essential for your body and how much you should drink daily.</p>
-        <a href="#" class="read-more">Read More</a>
+
+    <!-- Add to your home or new section -->
+    <div class="health-articles">
+      <h3>Health Articles</h3>
+      <div class="article-list">
+        <div class="article-card">
+          <img src="https://via.placeholder.com/300x150?text=Hydration" alt="Hydration">
+          <div class="article-content">
+            <h4>The Importance of Staying Hydrated</h4>
+            <p>Learn why water is essential for your body and how much you should drink daily.</p>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </div>
+        <div class="article-card">
+          <img src="https://via.placeholder.com/300x150?text=Sleep" alt="Sleep">
+          <div class="article-content">
+            <h4>Improving Your Sleep Quality</h4>
+            <p>Discover 5 simple tips to help you fall asleep faster and sleep more soundly.</p>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </div>
       </div>
+      <button class="view-all">View All Articles</button>
     </div>
-    <div class="article-card">
-      <img src="https://via.placeholder.com/300x150?text=Sleep" alt="Sleep">
-      <div class="article-content">
-        <h4>Improving Your Sleep Quality</h4>
-        <p>Discover 5 simple tips to help you fall asleep faster and sleep more soundly.</p>
-        <a href="#" class="read-more">Read More</a>
-      </div>
-    </div>
-  </div>
-  <button class="view-all">View All Articles</button>
-</div>
     <!-- Featured Services -->
     <section class="featured-services">
       <h2 class="section-title"><i class="fas fa-medal"></i> Premium Services</h2>
@@ -294,9 +295,19 @@
     </div>
   </div>
 
-  <script src="https://faskey37.github.io/raha/js/home.js"></script>
-  <script src="https://faskey37.github.io/raha/js/common.js"></script>
-  <script src="https://faskey37.github.io/raha/js/loader.js"></script>
+  <script src="./js/home.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/loader.js"></script>
+  <script>
+    $(document).ready(() => {
+      const input = document.getElementById('userInput');
+      input.addEventListener('focus', () => {
+        setTimeout(() => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300); // Delay to wait for keyboard to open
+      });
+    })
+  </script>
 </body>
 
 </html>
