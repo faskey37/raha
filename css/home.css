@@ -1420,7 +1420,15 @@ transform: translateY(0);
   margin-top: 10px;
 }
 
-
+.chatbot-close{
+  display: flex; 
+  justify-content: end;
+  margin: 5px;
+}
+.chatbot-close i{
+  margin: 15px;
+  padding: 15px;
+}
 .chatbot-toggle {
   position: fixed;
   bottom: 80px;
@@ -1566,7 +1574,7 @@ transform: translateY(0);
     height: 50px;
     font-size: 20px;
   }
-  
+
 }
 
 @media (max-height: 600px) {
