@@ -1477,8 +1477,8 @@ transform: translateY(0);
 
 .chatbot-body {
   padding: 15px;
-  min-height: 100px; /* Changed from fixed height */
-  flex: 1; /* Takes remaining space */
+  min-height: 100px; 
+  flex: 1; 
   overflow-y: auto;
   font-size: 14px;
   background-color: #f9f9f9;
@@ -1486,7 +1486,13 @@ transform: translateY(0);
   flex-direction: column;
   gap: 10px;
 }
-
+.chatbot-toggle {
+  bottom: 120px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
 .message {
   max-width: 80%;
   padding: 10px 14px;
@@ -1561,19 +1567,26 @@ transform: translateY(0);
 /* Media Queries */
 @media (max-width: 480px) {
   .chatbot-container {
-    width: calc(100% - 40px);
+    position: fixed;
+    bottom: 10px;
     right: 20px;
-    bottom: 100px;
-    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh; /* NEW: this allows it to adjust when keyboard shows */
+    background: #fff;
+    z-index: 9999;
+  }
+  .chatbot-body {
+    flex: 1;
+    overflow-y: auto;
   }
   
-  .chatbot-toggle {
-    bottom: 120px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
+  .chatbot-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
   }
+
 
 }
 
