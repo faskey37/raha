@@ -1,3 +1,4 @@
+/* loader.css - UPDATED */
 #loader-overlay {
   position: fixed;
   top: 0;
@@ -8,10 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* stays above everything */
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-/* 3D colorful capsule animation */
 .pill-3d-bounce {
   width: 60px;
   height: 28px;
@@ -27,4 +29,12 @@
 @keyframes bounce3D {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-10px) scale(1.05); }
+}
+
+/* Add this to prevent FOUC (Flash of Unstyled Content) */
+body.loading {
+  overflow: hidden;
+}
+body.loaded {
+  overflow: auto;
 }
