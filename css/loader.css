@@ -1,3 +1,12 @@
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* full screen */
+  width: 100vw;
+  background: #f0f9ff; /* optional soft background */
+}
+
 .pill-3d-bounce {
   width: 60px;
   height: 28px;
