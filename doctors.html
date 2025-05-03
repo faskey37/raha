@@ -6,131 +6,172 @@
     <title>Find Doctors - Raha Health App</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://faskey37.github.io/raha/css/doctor.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="css/doctor-enhanced.css">
 </head>
 <body class="medium-text">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="medical-loader">
+            <div class="pulse"></div>
+            <div class="cross"></div>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="section-title">
-            <h2>Find a Doctor</h2>
-            <p>Search and book appointments with specialized doctors</p>
+        <!-- Enhanced Header with Breadcrumbs -->
+        <div class="page-header">
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> / <span>Doctors</span>
+            </div>
+            <div class="header-actions">
+                <button id="telemed-btn" class="icon-btn">
+                    <i class="fas fa-video"></i> Video Consult
+                </button>
+            </div>
         </div>
 
-        <div class="search-filter">
+        <!-- Main Title Section -->
+        <div class="section-title">
+            <h1>Find Your Specialist</h1>
+            <p>Book appointments with top-rated doctors in your area or online</p>
+        </div>
+
+        <!-- Enhanced Search and Filter Section -->
+        <div class="search-filter-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search by name or specialty...">
+                <input type="text" id="doctor-search" placeholder="Search doctors, specialties, or conditions...">
+                <button class="search-btn">Search</button>
             </div>
-            <div class="filter-box">
-                <i class="fas fa-filter"></i>
-                <select>
-                    <option value="">All Specialties</option>
-                    <option value="gynecologist">Gynecologist</option>
-                    <option value="cardiologist">Cardiologist</option>
-                    <option value="dermatologist">Dermatologist</option>
-                    <option value="pediatrician">Pediatrician</option>
-                    <option value="neurologist">Neurologist</option>
-                    <option value="dentist">Dentist</option>
+
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="specialty-filter"><i class="fas fa-stethoscope"></i> Specialty</label>
+                    <select id="specialty-filter" class="enhanced-select">
+                        <option value="">All Specialties</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="gynecology">Gynecology</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="neurology">Neurology</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="location-filter"><i class="fas fa-map-marker-alt"></i> Location</label>
+                    <select id="location-filter" class="enhanced-select">
+                        <option value="">Near Me</option>
+                        <option value="new-york">New York</option>
+                        <option value="los-angeles">Los Angeles</option>
+                        <option value="chicago">Chicago</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="availability-filter"><i class="fas fa-calendar-check"></i> Availability</label>
+                    <input type="text" id="availability-filter" class="date-picker" placeholder="Select date">
+                </div>
+            </div>
+        </div>
+
+        <!-- Specialty Quick Filters -->
+        <div class="specialty-tags">
+            <div class="tag active" data-specialty="all">All Specialties</div>
+            <div class="tag" data-specialty="cardiology">
+                <i class="fas fa-heartbeat"></i> Cardiology
+            </div>
+            <div class="tag" data-specialty="dermatology">
+                <i class="fas fa-allergies"></i> Dermatology
+            </div>
+            <div class="tag" data-specialty="pediatrics">
+                <i class="fas fa-baby"></i> Pediatrics
+            </div>
+            <div class="tag" data-specialty="orthopedics">
+                <i class="fas fa-bone"></i> Orthopedics
+            </div>
+            <div class="tag" data-specialty="neurology">
+                <i class="fas fa-brain"></i> Neurology
+            </div>
+        </div>
+
+        <!-- Results Summary -->
+        <div class="results-summary">
+            <span id="results-count">24</span> doctors available
+            <div class="sort-options">
+                <label>Sort by:</label>
+                <select id="sort-by">
+                    <option value="rating">Highest Rating</option>
+                    <option value="experience">Most Experienced</option>
+                    <option value="distance">Nearest First</option>
+                    <option value="price">Price (Low to High)</option>
                 </select>
             </div>
         </div>
 
-        <div class="specialty-tags">
-            <div class="tag active" data-specialty="">All</div>
-            <div class="tag" data-specialty="gynecologist">Gynecologist</div>
-            <div class="tag" data-specialty="cardiologist">Cardiologist</div>
-            <div class="tag" data-specialty="dermatologist">Dermatologist</div>
-            <div class="tag" data-specialty="pediatrician">Pediatrician</div>
+        <!-- Doctors Grid View -->
+        <div class="doctors-grid" id="doctors-container">
+            <!-- Doctor cards will be loaded here dynamically -->
         </div>
 
-        <div class="doctors-grid">
-            <!-- Doctor 1 -->
-            <div class="doctor-card" data-specialty="gynecologist">
-                <div class="doctor-image">
-                    <img src="https://faskey37.github.io/raha/img/doctor.png" alt="Dr. Jane Doe">
-                    <div class="rating-badge">
-                        <i class="fas fa-star"></i> 4.8
-                    </div>
-                </div>
-                <div class="doctor-info">
-                    <h4>Dr. Jane Doe</h4>
-                    <p class="specialty">Gynecologist</p>
-                    <p class="experience"><i class="fas fa-briefcase"></i> 10+ years</p>
-                    <p class="location">
-                        <i class="fas fa-map-marker-alt"></i> New York, USA
-                    </p>
-                    <div class="availability">
-                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
-                    </div>
-                    <a href="appointment.html" class="btn">Book Appointment</a>
-                </div>
-            </div>
+        <!-- Map View Toggle -->
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="grid">
+                <i class="fas fa-th"></i> Grid View
+            </button>
+            <button class="view-btn" data-view="list">
+                <i class="fas fa-list"></i> List View
+            </button>
+            <button class="view-btn" data-view="map">
+                <i class="fas fa-map"></i> Map View
+            </button>
+        </div>
 
-            <!-- Doctor 2 -->
-            <div class="doctor-card" data-specialty="cardiologist">
-                <div class="doctor-image">
-                    <img src="https://faskey37.github.io/raha/img/doctor.png" alt="Dr. John Smith">
-                    <div class="rating-badge">
-                        <i class="fas fa-star"></i> 4.9
-                    </div>
-                </div>
-                <div class="doctor-info">
-                    <h4>Dr. John Smith</h4>
-                    <p class="specialty">Cardiologist</p>
-                    <p class="experience"><i class="fas fa-briefcase"></i> 15+ years</p>
-                    <p class="location">
-                        <i class="fas fa-map-marker-alt"></i> Los Angeles, USA
-                    </p>
-                    <div class="availability">
-                        <span class="available"><i class="fas fa-check-circle"></i> Available Tomorrow</span>
-                    </div>
-                    <a href="appointment.html" class="btn">Book Appointment</a>
-                </div>
-            </div>
+        <!-- Map Container (Hidden by default) -->
+        <div class="map-container" id="map-view" style="display: none;">
+            <div id="map" style="height: 400px; border-radius: 12px;"></div>
+        </div>
 
-            <!-- Doctor 3 -->
-            <div class="doctor-card" data-specialty="dermatologist">
-                <div class="doctor-image">
-                    <img src="https://faskey37.github.io/raha/img/doctor.png" alt="Dr. Emily Brown">
-                    <div class="rating-badge">
-                        <i class="fas fa-star"></i> 4.7
-                    </div>
-                </div>
-                <div class="doctor-info">
-                    <h4>Dr. Emily Brown</h4>
-                    <p class="specialty">Dermatologist</p>
-                    <p class="experience"><i class="fas fa-briefcase"></i> 8+ years</p>
-                    <p class="location">
-                        <i class="fas fa-map-marker-alt"></i> Chicago, USA
-                    </p>
-                    <div class="availability">
-                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
-                    </div>
-                    <a href="appointment.html" class="btn">Book Appointment</a>
-                </div>
-            </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
 
-            <!-- Doctor 4 -->
-            <div class="doctor-card" data-specialty="pediatrician">
-                <div class="doctor-image">
-                    <img src="https://faskey37.github.io/raha/img/doctor.png" alt="Dr. Michael Johnson">
-                    <div class="rating-badge">
-                        <i class="fas fa-star"></i> 4.6
+    <!-- Telemedicine Modal -->
+    <div class="modal-overlay" id="telemed-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Start Video Consultation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="telemed-options">
+                    <div class="option-card">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Instant Consultation</h4>
+                        <p>Connect with the first available doctor</p>
+                        <button class="btn primary">Start Now</button>
                     </div>
-                </div>
-                <div class="doctor-info">
-                    <h4>Dr. Michael Johnson</h4>
-                    <p class="specialty">Pediatrician</p>
-                    <p class="experience"><i class="fas fa-briefcase"></i> 12+ years</p>
-                    <p class="location">
-                        <i class="fas fa-map-marker-alt"></i> Miami, USA
-                    </p>
-                    <div class="availability">
-                        <span class="available"><i class="fas fa-check-circle"></i> Available Today</span>
+                    <div class="option-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Schedule Later</h4>
+                        <p>Book a time that works for you</p>
+                        <button class="btn outline">Schedule</button>
                     </div>
-                    <a href="appointment.html" class="btn">Book Appointment</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Doctor Details Modal -->
+    <div class="modal-overlay" id="doctor-modal">
+        <div class="modal-container doctor-modal">
+            <!-- Content loaded dynamically -->
         </div>
     </div>
 
@@ -145,9 +186,9 @@
                 <i class="fas fa-user-md nav-icon"></i>
                 <span class="nav-text">Doctors</span>
             </a>
-            <a href="tracker.html" class="nav-link">
-                <i class="fas fa-heartbeat nav-icon"></i>
-                <span class="nav-text">Tracker</span>
+            <a href="appointments.html" class="nav-link">
+                <i class="fas fa-calendar-check nav-icon"></i>
+                <span class="nav-text">Appointments</span>
             </a>
             <a href="profile.html" class="nav-link">
                 <i class="fas fa-user nav-icon"></i>
@@ -156,7 +197,9 @@
         </div>
     </div>
 
-    <script src="https://faskey37.github.io/raha/js/doctor.js"></script>
-    <script src="https://faskey37.github.io/raha/js/common.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="js/doctor-enhanced.js"></script>
 </body>
 </html>
