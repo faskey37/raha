@@ -736,7 +736,6 @@
   }
   
   /* Bottom Navigation */
-   /* Bottom Navigation */
 .navbar-container {
     position: fixed;
     bottom: 15px;
@@ -746,6 +745,7 @@
     max-width: 400px;
     z-index: 1000;
     padding: 0 10px;
+    background-color: var(--card-bg);
 }
 
 .navbar {
