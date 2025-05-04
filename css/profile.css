@@ -745,7 +745,7 @@
     max-width: 400px;
     z-index: 1000;
     padding: 0 10px;
-    background-color: var(--card-bg);
+    background: var(--card-bg);
 }
 
 .navbar {
