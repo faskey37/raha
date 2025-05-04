@@ -745,11 +745,11 @@
     max-width: 400px;
     z-index: 1000;
     padding: 0 10px;
-    color: var(--card-bg);
+
 }
 
 .navbar {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
