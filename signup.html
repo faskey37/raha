@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Raha Health App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         :root {
-            --primary: #3498db;
-            --white: #ffffff;
-            --gray: #f5f7fa;
-            --dark: #2c3e50;
-            --light-gray: #e9ecef;
+            --primary: #4a6bff;
+            --primary-light: #7a84d8;
+            --primary-dark: #3a56cc;
+            --secondary: #00c6ab;
+            --accent: #ff6b6b;
+            --background: #f8f9ff;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7a7f9a;
+            --text-lighter: #a8aab7;
+            --border: #e0e6f7;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --success: #28a745;
             --warning: #ffc107;
             --danger: #dc3545;
+            --radius: 8px;
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -26,8 +36,8 @@
         }
 
         body {
-            background-color: var(--gray);
-            color: var(--dark);
+            background-color: var(--background);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,10 +46,11 @@
         .container {
             width: 90%;
             max-width: 500px;
-            margin: 40px auto;
-            flex: 1;
+            margin: auto;
+            padding: 20px 0;
         }
 
+        /* Logo Styles */
         .logo {
             text-align: center;
             margin-bottom: 30px;
@@ -47,15 +58,27 @@
 
         .logo img {
             height: 60px;
+            transition: var(--transition);
         }
 
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Auth Card */
         .auth-card {
-            background-color: var(--white);
-            border-radius: 12px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
+        .auth-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Auth Header */
         .auth-header {
             text-align: center;
             margin-bottom: 30px;
@@ -64,17 +87,19 @@
         .auth-title {
             font-size: 24px;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text);
             margin-bottom: 8px;
         }
 
         .auth-subtitle {
-            color: #666;
+            color: var(--text-light);
             font-size: 14px;
         }
 
+        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
 
         .form-label {
@@ -82,7 +107,7 @@
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 500;
-            color: var(--dark);
+            color: var(--text);
         }
 
         .input-group {
@@ -92,15 +117,17 @@
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             font-size: 15px;
-            transition: border 0.3s;
+            background-color: var(--background);
+            transition: var(--transition);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.1);
         }
 
         .input-icon {
@@ -108,51 +135,100 @@
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            color: var(--text-lighter);
+            cursor: pointer;
         }
 
+        .password-toggle {
+            cursor: pointer;
+        }
+
+        /* Validation Styles */
+        .form-control.valid {
+            border-color: var(--success);
+        }
+
+        .form-control.invalid {
+            border-color: var(--danger);
+        }
+
+        .validation-message {
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .validation-message.valid {
+            color: var(--success);
+            display: block;
+        }
+
+        .validation-message.invalid {
+            color: var(--danger);
+            display: block;
+        }
+
+        /* Button Styles */
         .btn {
             width: 100%;
             padding: 14px;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius);
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn:hover {
-            background-color: #1565b8;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
+        .btn:disabled {
+            background-color: var(--text-lighter);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Auth Footer */
         .auth-footer {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: #666;
+            color: var(--text-light);
         }
 
         .auth-link {
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
+            transition: var(--transition);
         }
 
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Divider */
         .divider {
             display: flex;
             align-items: center;
             margin: 25px 0;
-            color: #999;
+            color: var(--text-light);
             font-size: 14px;
         }
 
         .divider::before, .divider::after {
             content: "";
             flex: 1;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--border);
         }
 
         .divider::before {
@@ -163,6 +239,7 @@
             margin-left: 15px;
         }
 
+        /* Social Login */
         .social-login {
             display: flex;
             justify-content: center;
@@ -177,47 +254,183 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--light-gray);
-            background-color: var(--white);
-            color: var(--dark);
+            border: 1px solid var(--border);
+            background-color: var(--card-bg);
+            color: var(--text);
             font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         .social-btn:hover {
-            background-color: var(--gray);
+            background-color: var(--background);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.apple {
+            color: var(--text);
+        }
+
+        .social-btn.facebook {
+            color: #1877F2;
+        }
+
+        /* Terms Text */
         .terms-text {
             font-size: 12px;
-            color: #999;
+            color: var(--text-light);
             text-align: center;
             margin-top: 25px;
+            line-height: 1.5;
         }
 
         .terms-link {
             color: var(--primary);
             text-decoration: none;
+            transition: var(--transition);
         }
 
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 15px 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.active {
+            transform: translateX(0);
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast i {
+            font-size: 22px;
+        }
+
+        .toast.success i {
+            color: var(--success);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        .toast .message {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toast .title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .toast .text {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        /* Responsive Styles */
         @media (max-width: 576px) {
             .container {
                 width: 95%;
-                margin: 20px auto;
+                padding: 10px 0;
             }
             
             .auth-card {
                 padding: 20px;
             }
+            
+            .auth-title {
+                font-size: 22px;
+            }
+            
+            .social-login {
+                gap: 10px;
+            }
+            
+            .social-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-card {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
 </head>
-<body class="medium-text">
+<body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="message">
+                <span class="title">Success!</span>
+                <span class="text" id="toast-message">Account created successfully</span>
+            </div>
+        </div>
+        <button class="close-btn">&times;</button>
+    </div>
+
     <div class="container">
         <div class="logo">
-            <!-- Replace with your actual logo -->
-            <img src="img/raha.png" alt="Raha Health Logo">
+            <img src="./img/raha.png" alt="Raha Health Logo">
         </div>
 
         <div class="auth-card">
@@ -233,6 +446,7 @@
                         <input type="text" id="fullname" class="form-control" placeholder="Enter your full name" required>
                         <i class="fas fa-user input-icon"></i>
                     </div>
+                    <span class="validation-message" id="fullname-validation"></span>
                 </div>
 
                 <div class="form-group">
@@ -241,13 +455,20 @@
                         <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
                         <i class="fas fa-envelope input-icon"></i>
                     </div>
+                    <span class="validation-message" id="email-validation"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
-                        <input type="password" id="password" class="form-control" placeholder="Create a password" required>
-                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-control" placeholder="Create a password (min 8 characters)" required>
+                        <i class="fas fa-eye password-toggle input-icon" id="togglePassword"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strength-bar"></div>
+                        </div>
+                        <span class="validation-message" id="password-validation"></span>
                     </div>
                 </div>
 
@@ -255,29 +476,55 @@
                     <label for="confirm-password" class="form-label">Confirm Password</label>
                     <div class="input-group">
                         <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
-                        <i class="fas fa-lock input-icon"></i>
+                        <i class="fas fa-eye password-toggle input-icon" id="toggleConfirmPassword"></i>
                     </div>
+                    <span class="validation-message" id="confirm-password-validation"></span>
                 </div>
 
-                <button type="submit" class="btn">Sign Up</button>
+                <div class="form-group">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <div class="input-group">
+                        <input type="text" id="dob" class="form-control date-picker" placeholder="Select your date of birth" required>
+                        <i class="fas fa-calendar input-icon"></i>
+                    </div>
+                    <span class="validation-message" id="dob-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" class="form-control" required>
+                        <option value="" disabled selected>Select your gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                    <span class="validation-message" id="gender-validation"></span>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">
+                    <span id="btnText">Sign Up</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
             </form>
 
-            <div class="divider">or</div>
+            <div class="divider">or sign up with</div>
 
             <div class="social-login">
-                <button type="button" class="social-btn">
+                <button type="button" class="social-btn google" id="googleSignup">
                     <i class="fab fa-google"></i>
                 </button>
-                <button type="button" class="social-btn">
+                <button type="button" class="social-btn apple" id="appleSignup">
                     <i class="fab fa-apple"></i>
                 </button>
-                <button type="button" class="social-btn">
+                <button type="button" class="social-btn facebook" id="facebookSignup">
                     <i class="fab fa-facebook-f"></i>
                 </button>
             </div>
 
             <p class="terms-text">
-                By signing up, you agree to our <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                By signing up, you agree to our <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>. 
+                We may send you communications; you may opt out at any time.
             </p>
         </div>
 
@@ -286,40 +533,302 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const fullname = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            
-            // Simple validation
-            if (password !== confirmPassword) {
-                alert("Passwords don't match!");
-                return;
-            }
-            
-            // In a real app, you would send this data to your backend
-            console.log('Signup data:', { fullname, email, password });
-            
-            // Show success message
-            alert('Account created successfully! Redirecting to your dashboard...');
-            
-            // Redirect to dashboard (in a real app)
-            // window.location.href = 'dashboard.html';
-        });
-
-        // Social login buttons
-        document.querySelectorAll('.social-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const provider = this.querySelector('i').classList[1].split('-')[1];
-                alert(`In a real app, this would initiate ${provider} login`);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize date picker
+            flatpickr("#dob", {
+                dateFormat: "Y-m-d",
+                maxDate: "today",
+                allowInput: true
             });
+
+            // Password visibility toggle
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            // Form validation
+            const signupForm = document.getElementById('signupForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const spinner = document.getElementById('spinner');
+
+            // Real-time validation
+            document.getElementById('fullname').addEventListener('input', validateFullName);
+            document.getElementById('email').addEventListener('input', validateEmail);
+            document.getElementById('password').addEventListener('input', validatePassword);
+            document.getElementById('confirm-password').addEventListener('input', validateConfirmPassword);
+            document.getElementById('dob').addEventListener('change', validateDOB);
+            document.getElementById('gender').addEventListener('change', validateGender);
+
+            // Social login buttons
+            document.getElementById('googleSignup').addEventListener('click', initGoogleSignup);
+            document.getElementById('appleSignup').addEventListener('click', initAppleSignup);
+            document.getElementById('facebookSignup').addEventListener('click', initFacebookSignup);
+
+            // Toast notification
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            document.querySelector('.close-btn').addEventListener('click', hideToast);
+
+            // Form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    submitForm();
+                }
+            });
+
+            function validateFullName() {
+                const fullname = document.getElementById('fullname').value.trim();
+                const validation = document.getElementById('fullname-validation');
+                
+                if (fullname.length < 2) {
+                    showValidation(validation, 'Please enter your full name', false);
+                    return false;
+                }
+                
+                if (!/^[a-zA-Z ]+$/.test(fullname)) {
+                    showValidation(validation, 'Name should only contain letters', false);
+                    return false;
+                }
+                
+                showValidation(validation, 'Name looks good!', true);
+                return true;
+            }
+
+            function validateEmail() {
+                const email = document.getElementById('email').value.trim();
+                const validation = document.getElementById('email-validation');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email) {
+                    showValidation(validation, 'Please enter your email', false);
+                    return false;
+                }
+                
+                if (!emailRegex.test(email)) {
+                    showValidation(validation, 'Please enter a valid email address', false);
+                    return false;
+                }
+                
+                showValidation(validation, 'Email looks good!', true);
+                return true;
+            }
+
+            function validatePassword() {
+                const password = document.getElementById('password').value;
+                const validation = document.getElementById('password-validation');
+                const strengthBar = document.getElementById('strength-bar');
+                
+                if (password.length < 8) {
+                    showValidation(validation, 'Password must be at least 8 characters', false);
+                    strengthBar.style.width = '0%';
+                    strengthBar.style.backgroundColor = 'transparent';
+                    return false;
+                }
+                
+                // Check password strength
+                let strength = 0;
+                if (password.length >= 8) strength += 1;
+                if (password.match(/[a-z]/)) strength += 1;
+                if (password.match(/[A-Z]/)) strength += 1;
+                if (password.match(/[0-9]/)) strength += 1;
+                if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+                
+                // Update strength bar
+                const width = (strength / 5) * 100;
+                strengthBar.style.width = width + '%';
+                
+                let message = '';
+                let isValid = true;
+                let color = '';
+                
+                if (strength <= 2) {
+                    message = 'Weak password';
+                    color = var(--danger);
+                    isValid = false;
+                } else if (strength <= 3) {
+                    message = 'Moderate password';
+                    color = var(--warning);
+                    isValid = true;
+                } else {
+                    message = 'Strong password!';
+                    color = var(--success);
+                    isValid = true;
+                }
+                
+                strengthBar.style.backgroundColor = color;
+                showValidation(validation, message, isValid);
+                return isValid;
+            }
+
+            function validateConfirmPassword() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const validation = document.getElementById('confirm-password-validation');
+                
+                if (!confirmPassword) {
+                    showValidation(validation, 'Please confirm your password', false);
+                    return false;
+                }
+                
+                if (password !== confirmPassword) {
+                    showValidation(validation, 'Passwords do not match', false);
+                    return false;
+                }
+                
+                showValidation(validation, 'Passwords match!', true);
+                return true;
+            }
+
+            function validateDOB() {
+                const dob = document.getElementById('dob').value;
+                const validation = document.getElementById('dob-validation');
+                
+                if (!dob) {
+                    showValidation(validation, 'Please select your date of birth', false);
+                    return false;
+                }
+                
+                // Check if user is at least 13 years old
+                const dobDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - dobDate.getFullYear();
+                const monthDiff = today.getMonth() - dobDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+                    age--;
+                }
+                
+                if (age < 13) {
+                    showValidation(validation, 'You must be at least 13 years old', false);
+                    return false;
+                }
+                
+                showValidation(validation, 'Date of birth looks good!', true);
+                return true;
+            }
+
+            function validateGender() {
+                const gender = document.getElementById('gender').value;
+                const validation = document.getElementById('gender-validation');
+                
+                if (!gender) {
+                    showValidation(validation, 'Please select your gender', false);
+                    return false;
+                }
+                
+                validation.style.display = 'none';
+                return true;
+            }
+
+            function validateForm() {
+                const isFullNameValid = validateFullName();
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                const isConfirmPasswordValid = validateConfirmPassword();
+                const isDOBValid = validateDOB();
+                const isGenderValid = validateGender();
+                
+                return isFullNameValid && isEmailValid && isPasswordValid && 
+                       isConfirmPasswordValid && isDOBValid && isGenderValid;
+            }
+
+            function showValidation(element, message, isValid) {
+                element.textContent = message;
+                element.className = 'validation-message ' + (isValid ? 'valid' : 'invalid');
+                
+                const input = element.previousElementSibling.querySelector('input') || 
+                             element.previousElementSibling.querySelector('select');
+                
+                if (isValid) {
+                    input.classList.add('valid');
+                    input.classList.remove('invalid');
+                } else {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                }
+            }
+
+            function submitForm() {
+                // Show loading state
+                btnText.textContent = 'Creating Account...';
+                spinner.style.display = 'block';
+                submitBtn.disabled = true;
+                
+                // Simulate API call (replace with actual fetch in production)
+                setTimeout(() => {
+                    // Get form values
+                    const formData = {
+                        fullname: document.getElementById('fullname').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        password: document.getElementById('password').value,
+                        dob: document.getElementById('dob').value,
+                        gender: document.getElementById('gender').value
+                    };
+                    
+                    console.log('Form submitted:', formData);
+                    
+                    // Show success message
+                    showToast('Account created successfully! Redirecting to your dashboard...', true);
+                    
+                    // Reset form
+                    signupForm.reset();
+                    
+                    // Reset button state
+                    btnText.textContent = 'Sign Up';
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                    
+                    // In a real app, you would redirect after successful signup
+                    // window.location.href = 'dashboard.html';
+                }, 2000);
+            }
+
+            function initGoogleSignup() {
+                showToast('Initiating Google sign up...', true);
+                // In a real app, implement Google OAuth here
+            }
+
+            function initAppleSignup() {
+                showToast('Initiating Apple sign up...', true);
+                // In a real app, implement Apple OAuth here
+            }
+
+            function initFacebookSignup() {
+                showToast('Initiating Facebook sign up...', true);
+                // In a real app, implement Facebook OAuth here
+            }
+
+            function showToast(message, isSuccess) {
+                toastMessage.textContent = message;
+                toast.className = isSuccess ? 'toast success active' : 'toast error active';
+                
+                setTimeout(hideToast, 5000);
+            }
+
+            function hideToast() {
+                toast.classList.remove('active');
+            }
         });
     </script>
-    <script src="js/common.js"></script>
 </body>
 </html>
