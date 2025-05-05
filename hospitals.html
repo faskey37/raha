@@ -6,45 +6,94 @@
     <title>Hospitals - Raha Health App</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <style>
+        /* Base Styles */
+        :root {
+            --primary: #3498db;
+            --primary-light: #7a84d8;
+            --secondary: #E8EDFF;
+            --background: #F8F9FF;
+            --text: #2c3e50;
+            --light-text: #888;
+            --white: #fff;
+            --gray-border: #e0e6f7;
+            --success: #4CAF50;
+            --danger: #F44336;
+            --card-bg: #ffffff;
+            --highlight: #3498db;
+            --warning: #FFC107;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; /* Space for navbar */
+        }
+
         /* Hospital Page Specific Styles */
         .hospital-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 80px; /* Space for navbar */
         }
 
         .hospital-header {
             text-align: center;
             margin-bottom: 30px;
+            padding-top: 15px;
         }
 
         .hospital-header h1 {
             color: var(--primary);
             font-size: 28px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .hospital-header p {
             color: var(--text-secondary);
             font-size: 16px;
+            margin-top: 0;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background-color: var(--background);
+            padding: 10px 0;
+            z-index: 10;
         }
 
         .search-bar {
-            display: flex;
-            margin-bottom: 20px;
-            gap: 10px;
+            flex: 1;
+            position: relative;
         }
 
         .search-bar input {
-            flex: 1;
-            padding: 12px 15px;
+            width: 100%;
+            padding: 12px 15px 12px 40px;
             border-radius: 12px;
             border: 1px solid var(--gray-border);
             font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background-color: var(--white);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
         }
 
         .filter-btn {
@@ -57,6 +106,35 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 200px;
+            background-color: var(--white);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+        }
+
+        .map-placeholder i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
 
         .hospital-list {
@@ -70,11 +148,12 @@
             border-radius: 16px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .hospital-card:hover {
             transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }
 
         .hospital-card-header {
@@ -87,18 +166,19 @@
         .hospital-card h3 {
             font-size: 18px;
             color: var(--text);
-            margin-bottom: 5px;
+            margin: 0 0 5px 0;
         }
 
         .hospital-rating {
             background-color: var(--success);
             color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 5px;
+            font-weight: 500;
         }
 
         .hospital-details {
@@ -118,6 +198,8 @@
 
         .detail-item i {
             color: var(--primary);
+            width: 16px;
+            text-align: center;
         }
 
         .distance {
@@ -125,14 +207,29 @@
             font-weight: 500;
         }
 
-        .hospital-actions {
+        .specialties {
             display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .specialty-tag {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .hospital-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
-            margin-top: 15px;
         }
 
         .action-btn {
-            flex: 1;
             padding: 10px;
             border-radius: 8px;
             border: none;
@@ -142,6 +239,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .action-btn i {
+            font-size: 16px;
         }
 
         .primary-btn {
@@ -149,9 +252,17 @@
             color: white;
         }
 
+        .primary-btn:hover {
+            background-color: #2980b9;
+        }
+
         .secondary-btn {
             background-color: var(--secondary);
             color: var(--primary);
+        }
+
+        .secondary-btn:hover {
+            background-color: #d6defa;
         }
 
         .emergency-btn {
@@ -159,60 +270,71 @@
             color: white;
         }
 
-        .specialties {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .specialty-tag {
-            background-color: var(--secondary);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 200px;
-            background-color: var(--light-gray);
-            border-radius: 12px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            flex-direction: column;
-        }
-
-        .map-container i {
-            font-size: 40px;
-            margin-bottom: 15px;
-            color: var(--primary);
+        .emergency-btn:hover {
+            background-color: #e53935;
         }
 
         .section-title {
             font-size: 20px;
             color: var(--text);
-            margin: 25px 0 15px;
+            margin: 30px 0 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        @media (max-width: 480px) {
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* Emergency Badge */
+        .emergency-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--danger);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Loading Skeleton */
+        .skeleton {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hospital-container {
+                padding: 15px;
+            }
+            
             .hospital-details {
                 grid-template-columns: 1fr;
             }
             
             .hospital-actions {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+            
+            .hospital-header h1 {
+                font-size: 24px;
             }
         }
 
-        /* Navbar styles (same as emergency.html) */
+        /* Navbar Styles - Fixed Highlighting Issue */
         .navbar-container {
             position: fixed;
             bottom: 10px;
@@ -240,10 +362,11 @@
 
         .nav-link {
             text-decoration: none;
-            color: #555;
+            color: var(--light-text);
             flex: 1;
             display: flex;
             justify-content: center;
+            position: relative;
         }
 
         .list-item {
@@ -275,9 +398,8 @@
             white-space: nowrap;
         }
 
-        .nav-link.active .list-item {
+        .nav-link.active {
             color: var(--highlight);
-            transform: translateY(-3px);
         }
 
         .nav-link.active .list-item i {
@@ -288,39 +410,48 @@
             color: var(--highlight);
         }
 
-        :root {
-            --primary: #3498db;
-            --primary-light: #7a84d8;
-            --secondary: #E8EDFF;
-            --background: #F8F9FF;
-            --text: #2c3e50;
-            --light-text: #888;
-            --white: #fff;
-            --gray-border: #e0e6f7;
-            --success: #4CAF50;
-            --danger: #F44336;
-            --card-bg: #ffffff;
-            --highlight: #3498db;
+        .nav-link.active .list-item {
+            transform: translateY(-3px);
+        }
+
+        .nav-indicator {
+            position: absolute;
+            top: -8px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--highlight);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active .nav-indicator {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="medium-text">
+<body>
     <div class="hospital-container">
         <div class="hospital-header">
             <h1><i class="fas fa-hospital"></i> Nearby Hospitals</h1>
             <p>Find medical centers and specialists near you</p>
         </div>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Search hospitals or specialists...">
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search hospitals or specialists...">
+            </div>
             <button class="filter-btn">
-                <i class="fas fa-sliders-h"></i>
+                <i class="fas fa-sliders-h"></i> Filter
             </button>
         </div>
 
         <div class="map-container">
-            <i class="fas fa-map-marked-alt"></i>
-            <p>Loading your location and nearby hospitals...</p>
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <p>Loading your location and nearby hospitals...</p>
+            </div>
         </div>
 
         <h2 class="section-title"><i class="fas fa-stethoscope"></i> Recommended Hospitals</h2>
@@ -357,6 +488,7 @@
                     <span class="specialty-tag">Cardiology</span>
                     <span class="specialty-tag">Pediatrics</span>
                     <span class="specialty-tag">Orthopedics</span>
+                    <span class="specialty-tag">Neurology</span>
                 </div>
                 
                 <div class="hospital-actions">
@@ -403,6 +535,7 @@
                     <span class="specialty-tag">Neurology</span>
                     <span class="specialty-tag">Oncology</span>
                     <span class="specialty-tag">Maternity</span>
+                    <span class="specialty-tag">Dermatology</span>
                 </div>
                 
                 <div class="hospital-actions">
@@ -413,52 +546,6 @@
                         <i class="fas fa-directions"></i> Directions
                     </button>
                     <button class="action-btn emergency-btn" onclick="callEmergency('5559876543')">
-                        <i class="fas fa-ambulance"></i> Emergency
-                    </button>
-                </div>
-            </div>
-
-            <!-- Hospital Card 3 -->
-            <div class="hospital-card">
-                <div class="hospital-card-header">
-                    <div>
-                        <h3>Children's Healthcare</h3>
-                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 789 Pediatric Way</div>
-                    </div>
-                    <div class="hospital-rating">
-                        <i class="fas fa-star"></i> 4.9
-                    </div>
-                </div>
-                
-                <div class="hospital-details">
-                    <div class="detail-item">
-                        <i class="fas fa-phone"></i> (555) 456-7890
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-clock"></i> 7AM - 9PM
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-child"></i> Pediatric Specialists
-                    </div>
-                    <div class="detail-item distance">
-                        <i class="fas fa-location-arrow"></i> 3.1 miles away
-                    </div>
-                </div>
-                
-                <div class="specialties">
-                    <span class="specialty-tag">Pediatrics</span>
-                    <span class="specialty-tag">Neonatal</span>
-                    <span class="specialty-tag">Allergy</span>
-                </div>
-                
-                <div class="hospital-actions">
-                    <button class="action-btn primary-btn" onclick="callHospital('5554567890')">
-                        <i class="fas fa-phone"></i> Call
-                    </button>
-                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
-                        <i class="fas fa-directions"></i> Directions
-                    </button>
-                    <button class="action-btn emergency-btn" onclick="callEmergency('5554567890')">
                         <i class="fas fa-ambulance"></i> Emergency
                     </button>
                 </div>
@@ -490,6 +577,9 @@
                     <div class="detail-item distance">
                         <i class="fas fa-location-arrow"></i> 4.2 miles away
                     </div>
+                    <div class="detail-item">
+                        <i class="fas fa-heartbeat"></i> Cardiac Specialists
+                    </div>
                 </div>
                 
                 <div class="specialties">
@@ -505,6 +595,56 @@
                     <button class="action-btn secondary-btn" onclick="navigateToHospital()">
                         <i class="fas fa-directions"></i> Directions
                     </button>
+                    <button class="action-btn secondary-btn" onclick="viewSpecialists()">
+                        <i class="fas fa-user-md"></i> Specialists
+                    </button>
+                </div>
+            </div>
+
+            <!-- Specialty Center 2 -->
+            <div class="hospital-card">
+                <div class="hospital-card-header">
+                    <div>
+                        <h3>Children's Healthcare</h3>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> 789 Pediatric Way</div>
+                    </div>
+                    <div class="hospital-rating">
+                        <i class="fas fa-star"></i> 4.9
+                    </div>
+                </div>
+                
+                <div class="hospital-details">
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i> (555) 456-7890
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i> 7AM - 9PM
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-child"></i> Pediatric Specialists
+                    </div>
+                    <div class="detail-item distance">
+                        <i class="fas fa-location-arrow"></i> 3.1 miles away
+                    </div>
+                </div>
+                
+                <div class="specialties">
+                    <span class="specialty-tag">Pediatrics</span>
+                    <span class="specialty-tag">Neonatal</span>
+                    <span class="specialty-tag">Allergy</span>
+                    <span class="specialty-tag">Vaccination</span>
+                </div>
+                
+                <div class="hospital-actions">
+                    <button class="action-btn primary-btn" onclick="callHospital('5554567890')">
+                        <i class="fas fa-phone"></i> Call
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="navigateToHospital()">
+                        <i class="fas fa-directions"></i> Directions
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="viewSpecialists()">
+                        <i class="fas fa-user-md"></i> Specialists
+                    </button>
                 </div>
             </div>
         </div>
@@ -515,24 +655,28 @@
         <div class="navbar">
             <a href="index.html" class="nav-link">
                 <div class="list-item">
+                    <div class="nav-indicator"></div>
                     <i class="fas fa-home"></i>
                     <span class="list-item-name">Home</span>
                 </div>
             </a>
             <a href="profile.html" class="nav-link">
                 <div class="list-item">
+                    <div class="nav-indicator"></div>
                     <i class="fas fa-user"></i>
                     <span class="list-item-name">Profile</span>
                 </div>
             </a>
-            <a href="pharmacy.html" class="nav-link">
+            <a href="hospitals.html" class="nav-link active">
                 <div class="list-item">
+                    <div class="nav-indicator"></div>
                     <i class="fas fa-hospital"></i>
-                    <span class="list-item-name">Hospital</span>
+                    <span class="list-item-name">Hospitals</span>
                 </div>
             </a>
             <a href="emergency.html" class="nav-link">
                 <div class="list-item">
+                    <div class="nav-indicator"></div>
                     <i class="fas fa-exclamation-triangle"></i>
                     <span class="list-item-name">Emergency</span>
                 </div>
@@ -563,7 +707,23 @@
             alert("This would open your maps app with directions in a real application");
         }
 
+        function viewSpecialists() {
+            console.log("Viewing hospital specialists");
+            alert("This would show a list of specialists at this hospital");
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Fixed navbar highlighting issue
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
             // In a real app, you would:
             // 1. Get user's location
             // 2. Fetch nearby hospitals from an API
