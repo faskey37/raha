@@ -28,7 +28,6 @@
       opacity: 1;
       transition: opacity 0.3s ease;
     }
-
   </style>
 </head>
 
@@ -40,121 +39,238 @@
   <div class="particles-js-container">
     <div id="particles-js"></div>
   </div>
-  <div id="particles-js"></div>
+  
   <div id="main-content" style="display: none;">
-  <!-- Header with Enhanced Search -->
-  <header>
-    <div class="container">
-      <div class="search-container">
-        <div class="search-bar">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search doctors, medicines, or services..." id="searchInput">
+    <!-- Header with Enhanced Search -->
+    <header>
+      <div class="container">
+        <div class="search-container">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search doctors, medicines, or services..." id="searchInput">
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Main Content -->
-  <main class="container">
-
-    <!-- Quick Access -->
-    <h2 class="section-title"><i class="fas fa-th-large"></i> Our specialty</h2>
-    <section>
-      <div class="quick-access">
-        <div class="access-item">
-          <div class="access-icon">A1</div>
-          <div class="access-label">Cardiology</div>
-        </div>
-        <div class="access-item">
-          <div class="access-icon">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <div class="access-label">Dermatology</div>
-        </div>
-        <div class="access-item">
-          <div class="access-icon">
-            <i class="fas fa-brain"></i>
-          </div>
-          <div class="access-label">Neurology</div>
-        </div>
-        <div class="access-item">
-          <div class="access-icon">
-            <i class="fas fa-bone"></i>
-          </div>
-          <div class="access-label">Orthopedics</div>
-        </div>
-      </div>
-    </section>
-    <!-- Add to your dashboard/home screen -->
-    <div class="dashboard-widget">
-      <div class="health-summary">
-        <h3>Today's Summary</h3>
-        <div class="summary-grid">
-          <div class="summary-item">
-            <i class="fas fa-tint"></i>
-            <span class="value">0.5L</span>
-            <span class="label">Water</span>
-            <div class="progress-bar">
-              <div class="progress" style="width: 20%"></div>
+    <!-- Main Content -->
+    <main class="container">
+      <!-- Hero Section with Health Summary -->
+      <section class="hero-section">
+        <div class="health-summary-card">
+          <div class="summary-grid">
+            <div class="summary-item">
+              <i class="fas fa-tint"></i>
+              <span class="value">0.5L</span>
+              <span class="label">Water</span>
+              <div class="progress-bar">
+                <div class="progress" style="width: 20%"></div>
+              </div>
+            </div>
+            <div class="summary-item">
+              <i class="fas fa-walking"></i>
+              <span class="value">3,245</span>
+              <span class="label">Steps</span>
+              <div class="progress-bar">
+                <div class="progress" style="width: 32%"></div>
+              </div>
+            </div>
+            <div class="summary-item">
+              <i class="fas fa-moon"></i>
+              <span class="value">6.5h</span>
+              <span class="label">Sleep</span>
+              <div class="progress-bar">
+                <div class="progress" style="width: 81%"></div>
+              </div>
             </div>
           </div>
-          <div class="summary-item">
-            <i class="fas fa-walking"></i>
-            <span class="value">3,245</span>
-            <span class="label">Steps</span>
-            <div class="progress-bar">
-              <div class="progress" style="width: 32%"></div>
+          <div class="motivational-quote">
+            <p>"Small daily improvements lead to stunning results."</p>
+            <button id="refresh-quote">New Quote</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Health Tips Slider -->
+      <section class="slider-section">
+        <h2 class="section-title"><i class="fas fa-lightbulb"></i> Health Tips</h2>
+        <div class="slider-container">
+          <div class="slider">
+            <div class="slide">
+              <img src="https://faskey37.github.io/raha/img/slider.jpg" alt="Stay Hydrated">
+              <div class="slide-content">
+                <h3>Stay Hydrated</h3>
+                <p>Drink at least 2L of water daily for better energy levels</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="https://faskey37.github.io/raha/img/slider2.jpg" alt="Quality Sleep">
+              <div class="slide-content">
+                <h3>Quality Sleep</h3>
+                <p>Get 7-8 hours of sleep for optimal health</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="https://faskey37.github.io/raha/img/slider3.jpg" alt="Daily Exercise">
+              <div class="slide-content">
+                <h3>Daily Exercise</h3>
+                <p>30 minutes of exercise boosts mood and health</p>
+              </div>
             </div>
           </div>
-          <div class="summary-item">
-            <i class="fas fa-moon"></i>
-            <span class="value">6.5h</span>
-            <span class="label">Sleep</span>
-            <div class="progress-bar">
-              <div class="progress" style="width: 81%"></div>
+          <button class="slider-btn prev-btn">❮</button>
+          <button class="slider-btn next-btn">❯</button>
+          <div class="slider-dots"></div>
+        </div>
+      </section>
+
+      <!-- Quick Access Section -->
+      <section class="quick-access-section">
+        <h2 class="section-title"><i class="fas fa-th-large"></i> Quick Access</h2>
+        <div class="quick-access-grid">
+          <a href="doctors.html" class="access-item" data-category="doctors">
+            <div class="access-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <span class="access-label">Doctors</span>
+          </a>
+          <a href="pharmacy.html" class="access-item" data-category="medicine">
+            <div class="access-icon">
+              <i class="fas fa-pills"></i>
+            </div>
+            <span class="access-label">Pharmacy</span>
+          </a>
+          <a href="labtests.html" class="access-item" data-category="lab">
+            <div class="access-icon">
+              <i class="fas fa-flask"></i>
+            </div>
+            <span class="access-label">Lab Tests</span>
+          </a>
+          <a href="hospitals.html" class="access-item" data-category="hospital">
+            <div class="access-icon">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <span class="access-label">Hospitals</span>
+          </a>
+          <a href="emergency.html" class="access-item" data-category="emergency">
+            <div class="access-icon">
+              <i class="fas fa-ambulance"></i>
+            </div>
+            <span class="access-label">Emergency</span>
+          </a>
+          <a href="tracker.html" class="access-item" data-category="tracker">
+            <div class="access-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <span class="access-label">Health Tracker</span>
+          </a>
+          <a href="404.html" class="access-item" data-category="account">
+            <div class="access-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <span class="access-label">Period Tracker</span>
+          </a>
+          <a href="medications.html" class="access-item" data-category="medications">
+            <div class="access-icon">
+              <i class="fas fa-tablet"></i>
+            </div>
+            <span class="access-label">Medications</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Medical Specialties Section -->
+      <section class="specialties-section">
+        <h2 class="section-title"><i class="fas fa-star"></i> Our Specialties</h2>
+        <div class="specialties-grid">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h3>Cardiology</h3>
+            <p>Expert care for your heart health</p>
+          </div>
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-allergies"></i>
+            </div>
+            <h3>Dermatology</h3>
+            <p>Skin care and treatment</p>
+          </div>
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3>Neurology</h3>
+            <p>Brain and nervous system care</p>
+          </div>
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-bone"></i>
+            </div>
+            <h3>Orthopedics</h3>
+            <p>Bone and joint specialists</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Premium Services Section -->
+      <section class="premium-services">
+        <h2 class="section-title"><i class="fas fa-medal"></i> Premium Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-img" style="background-image: url('https://faskey37.github.io/raha//img/blog1.jpg')"></div>
+            <div class="service-content">
+              <h3>24/7 Doctor Consultations</h3>
+              <p>Connect with certified doctors anytime for virtual consultations and medical advice.</p>
+              <a href="telemedicine.html" class="btn">Learn More</a>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-img" style="background-image: url('https://faskey37.github.io/raha/img/blog3.jpg')"></div>
+            <div class="service-content">
+              <h3>Medicine Delivery</h3>
+              <p>Get your prescribed medicines delivered to your doorstep within hours.</p>
+              <a href="pharmacy.html" class="btn">Order Now</a>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-img" style="background-image: url('https://faskey37.github.io/raha/img/blog2.jpg')"></div>
+            <div class="service-content">
+              <h3>Home Lab Tests</h3>
+              <p>Book diagnostic tests with sample collection from the comfort of your home.</p>
+              <a href="labtests.html" class="btn">Book Test</a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Motivational Quote -->
-      <div class="motivational-quote">
-        <p>"Small daily improvements lead to stunning results."</p>
-        <button id="refresh-quote">New Quote</button>
-      </div>
-    </div>
-
-    <div class="slider-container">
-      <div class="slider">
-        <div class="slide">
-          <img src="https://faskey37.github.io/raha/img/slider.jpg" alt="Slide 1">
-          <div class="slide-content">
-            <h3>Health Tip 1</h3>
-            <p>Stay hydrated for better energy levels</p>
+      <!-- Health Articles Section -->
+      <section class="health-articles">
+        <h2 class="section-title"><i class="fas fa-newspaper"></i> Health Articles</h2>
+        <div class="article-list">
+          <div class="article-card">
+            <img src="https://faskey37.github.io/raha/img/blog1.jpg" alt="Hydration">
+            <div class="article-content">
+              <h4>The Importance of Staying Hydrated</h4>
+              <p>Learn why water is essential for your body and how much you should drink daily.</p>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          <div class="article-card">
+            <img src="https://faskey37.github.io/raha/img/blog2.jpg" alt="Sleep">
+            <div class="article-content">
+              <h4>Improving Your Sleep Quality</h4>
+              <p>Discover 5 simple tips to help you fall asleep faster and sleep more soundly.</p>
+              <a href="#" class="read-more">Read More</a>
+            </div>
           </div>
         </div>
-        <div class="slide">
-          <img src="https://faskey37.github.io/raha/img/slider2.jpg" alt="Slide 2">
-          <div class="slide-content">
-            <h3>Health Tip 2</h3>
-            <p>Get 7-8 hours of sleep daily</p>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://faskey37.github.io/raha/img/slider3.jpg" alt="Slide 3">
-          <div class="slide-content">
-            <h3>Health Tip 3</h3>
-            <p>30 minutes of exercise boosts mood</p>
-          </div>
-        </div>
-      </div>
-      <button class="slider-btn prev-btn">❮</button>
-      <button class="slider-btn next-btn">❯</button>
-      <div class="slider-dots"></div>
-    </div>
+        <button class="view-all">View All Articles</button>
+      </section>
+    </main>
 
-
-    <!-- Floating Button -->
+    <!-- Floating Chat Button -->
     <button id="btnChatOpen" class="chatbot-toggle" onclick="toggleChat()">
       <i class="fas fa-comment-dots"></i>
     </button>
@@ -172,146 +288,29 @@
       </div>
     </div>
 
-
-
-    <!-- Quick Access Section with Labels -->
-    <section class="quick-access-section">
-      <h2 class="section-title"><i class="fas fa-th-large"></i> Quick Access</h2>
-      <div class="quick-access-grid">
-        <a href="doctors.html" class="access-item" data-category="doctors">
-          <div class="access-icon">
-            <i class="fas fa-user-md"></i>
-          </div>
-          <span class="access-label">Doctors</span>
+    <!-- Bottom Navigation -->
+    <div class="navbar-container">
+      <div class="navbar">
+        <a href="index.html" class="nav-link active">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-text">Home</span>
         </a>
-        <a href="pharmacy.html" class="access-item" data-category="medicine">
-          <div class="access-icon">
-            <i class="fas fa-pills"></i>
-          </div>
-          <span class="access-label">Pharmacy</span>
+        <a href="doctors.html" class="nav-link">
+          <i class="fas fa-user-md nav-icon"></i>
+          <span class="nav-text">Doctors</span>
         </a>
-        <a href="labtests.html" class="access-item" data-category="lab">
-          <div class="access-icon">
-            <i class="fas fa-flask"></i>
-          </div>
-          <span class="access-label">Lab Tests</span>
+        <a href="appointment.html" class="nav-link">
+          <i class="fas fa-calendar-check nav-icon"></i>
+          <span class="nav-text">Appointments</span>
         </a>
-        <a href="hospitals.html" class="access-item" data-category="hospital">
-          <div class="access-icon">
-            <i class="fas fa-hospital"></i>
-          </div>
-          <span class="access-label">Hospitals</span>
+        <a href="cart.html" class="nav-link">
+          <i class="fas fa-shopping-cart nav-icon"></i>
+          <span class="nav-text">Cart</span>
         </a>
-        <a href="emergency.html" class="access-item" data-category="emergency">
-          <div class="access-icon">
-            <i class="fas fa-ambulance"></i>
-          </div>
-          <span class="access-label">Emergency</span>
-        </a>
-        <a href="tracker.html" class="access-item" data-category="tracker">
-          <div class="access-icon">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <span class="access-label">Health Tracker</span>
-        </a>
-        <a href="404.html" class="access-item" data-category="account">
-          <div class="access-icon">
-            <i class="fas fa-calendar-check"></i>
-          </div>
-          <span class="access-label">Period Tracker</span>
-        </a>
-        <a href="medications.html" class="access-item" data-category="medications">
-          <div class="access-icon">
-            <i class="fas fa-tablet"></i>
-          </div>
-          <span class="access-label">Medications</span>
-        </a>
-
       </div>
-    </section>
-
-
-    <!-- Add to your home or new section -->
-    <div class="health-articles">
-      <h3>Health Articles</h3>
-      <div class="article-list">
-        <div class="article-card">
-          <img src="https://via.placeholder.com/300x150?text=Hydration" alt="Hydration">
-          <div class="article-content">
-            <h4>The Importance of Staying Hydrated</h4>
-            <p>Learn why water is essential for your body and how much you should drink daily.</p>
-            <a href="#" class="read-more">Read More</a>
-          </div>
-        </div>
-        <div class="article-card">
-          <img src="https://via.placeholder.com/300x150?text=Sleep" alt="Sleep">
-          <div class="article-content">
-            <h4>Improving Your Sleep Quality</h4>
-            <p>Discover 5 simple tips to help you fall asleep faster and sleep more soundly.</p>
-            <a href="#" class="read-more">Read More</a>
-          </div>
-        </div>
-      </div>
-      <button class="view-all">View All Articles</button>
-    </div>
-    <!-- Featured Services -->
-    <section class="featured-services">
-      <h2 class="section-title"><i class="fas fa-medal"></i> Premium Services</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-img" style="background-image: url('https://faskey37.github.io/raha//img/blog1.jpg')">
-          </div>
-          <div class="service-content">
-            <h3>24/7 Doctor Consultations</h3>
-            <p>Connect with certified doctors anytime for virtual consultations and medical advice.</p>
-            <a href="telemedicine.html" class="btn">Learn More</a>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-img" style="background-image: url('https://faskey37.github.io/raha/img/blog3.jpg')"></div>
-          <div class="service-content">
-            <h3>Medicine Delivery</h3>
-            <p>Get your prescribed medicines delivered to your doorstep within hours.</p>
-            <a href="pharmacy.html" class="btn">Order Now</a>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-img" style="background-image: url('https://faskey37.github.io/raha/img/blog2.jpg')"></div>
-          <div class="service-content">
-            <h3>Home Lab Tests</h3>
-            <p>Book diagnostic tests with sample collection from the comfort of your home.</p>
-            <a href="labtests.html" class="btn">Book Test</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Bottom Navigation -->
-  <div class="navbar-container">
-    <div class="navbar">
-      <a href="index.html" class="nav-link active">
-        <i class="fas fa-home nav-icon"></i>
-        <span class="nav-text">Home</span>
-      </a>
-      <a href="doctors.html" class="nav-link">
-        <i class="fas fa-user-md nav-icon"></i>
-        <span class="nav-text">Doctors</span>
-      </a>
-      <a href="appointment.html" class="nav-link">
-        <i class="fas fa-calendar-check nav-icon"></i>
-        <span class="nav-text">Appointments</span>
-      </a>
-      <a href="cart.html" class="nav-link">
-        <i class="fas fa-shopping-cart nav-icon"></i>
-        <span class="nav-text">Cart</span>
-      </a>
     </div>
   </div>
-  </div>
-  </div>
+
   <script src="./js/home.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/loader.js"></script>
