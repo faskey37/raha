@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="records.html" class="dropdown-item">
           <i class="fas fa-file-medical"></i> Medical Records
         </a>
+        <a href="community.html" class="dropdown-item">
+          <i class="fas fa-users"></i> Community
+        </a>
         <div class="dropdown-divider"></div>
         <a href="settings.html" class="dropdown-item">
           <i class="fas fa-cog"></i> Settings
