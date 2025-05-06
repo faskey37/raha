@@ -197,7 +197,7 @@ header {
 }
 
 .navbar {
-    background-color: var(--card-bg);
+    background-color: var(--secondary);
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
