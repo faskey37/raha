@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="community.html" class="dropdown-item">
           <i class="fas fa-users"></i> Community
         </a>
+        <a href="insurance.html" class="dropdown-item">
+          <i class="fas fa-shield-alt"></i> Insurance
+        </a>
         <div class="dropdown-divider"></div>
         <a href="settings.html" class="dropdown-item">
           <i class="fas fa-cog"></i> Settings
