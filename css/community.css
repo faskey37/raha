@@ -1,3 +1,87 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0 0 80px 0; /* Leave space for the navbar */
+    background-color: #f5f5f5;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Optional wrapper for page content */
+.main-content {
+    padding: 20px;
+    padding-bottom: 100px; /* Extra space to prevent navbar overlap */
+}
+
+/* Navbar container - fixed at bottom */
+.navbar-container {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 1000;
+    padding: 0 10px;
+    pointer-events: auto;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px); /* Optional blur for glass effect */
+}
+
+/* Nav links */
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 10px;
+    transition: color 0.3s;
+}
+
+.nav-link.active {
+    color: var(--primary);
+}
+
+/* Icon size */
+.nav-icon {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+/* Text below icon */
+.nav-text {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .nav-icon {
+        font-size: 20px;
+    }
+
+    .nav-text {
+        font-size: 11px;
+    }
+
+    .navbar {
+        padding: 8px;
+    }
+
+    .navbar-container {
+        padding: 0 5px;
+    }
+}
 /* Community Support Styles */
 :root {
     --primary: #3498db;
@@ -197,7 +281,7 @@ header {
 }
 
 .navbar {
-    background-color: var(--secondary);
+    background-color: white;
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
