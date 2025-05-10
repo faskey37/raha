@@ -838,30 +838,38 @@ header {
     --box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   
-  /* Base Styles */
+  /* Base Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     font-family: 'Poppins', sans-serif;
     background-color: #f5f7fa;
     color: var(--text);
-    margin: 0;
-    padding: 0;
-    padding-bottom: 80px;
-    width: 100%;
+    line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
+    padding-bottom: 80px;
   }
   
+  /* Centered Container */
   .container {
     width: 100%;
-    max-width: 500px; /* Reduced for better mobile centering */
+    max-width: 500px;
     margin: 0 auto;
     padding: 0 15px;
-    box-sizing: border-box;
   }
   
   /* Header */
   header {
     background-color: white;
-    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -873,31 +881,55 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    height: 60px;
     max-width: 500px;
     margin: 0 auto;
     padding: 0 15px;
-    box-sizing: border-box;
   }
   
-  /* Content Centering */
-  .support-groups, 
-  .discussions, 
-  .expert-qa {
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  .back-btn {
+    color: var(--text);
+    font-size: 20px;
+    flex-shrink: 0;
   }
   
-  /* Groups Grid */
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .create-post-btn {
+    background-color: var(--primary);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  
+  /* Support Groups Section */
+  .support-groups {
+    margin: 20px 0;
+  }
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--text);
+  }
+  
   .groups-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 12px;
     width: 100%;
-    padding: 0 5px;
-    box-sizing: border-box;
   }
   
   .group-card {
@@ -905,39 +937,139 @@ header {
     border-radius: var(--border-radius);
     padding: 15px;
     box-shadow: var(--box-shadow);
-    width: calc(100% - 10px);
-    margin: 0 auto;
+    text-align: center;
+    transition: transform 0.2s;
   }
   
-  /* Discussion Cards */
+  .group-card:active {
+    transform: scale(0.98);
+  }
+  
+  .group-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .group-card h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .group-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  
+  /* Discussions Section */
+  .discussions {
+    margin: 25px 0;
+  }
+  
   .discussion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     width: 100%;
-    padding: 0 5px;
-    box-sizing: border-box;
   }
   
   .discussion-card {
     background: white;
     border-radius: var(--border-radius);
     padding: 15px;
-    margin-bottom: 15px;
     box-shadow: var(--box-shadow);
-    width: calc(100% - 10px);
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  
+  .user-info h4 {
+    font-size: 15px;
+  }
+  
+  .time {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  
+  .discussion-text {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  .discussion-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  
+  .discussion-meta i {
+    margin-right: 5px;
+  }
+  
+  /* Expert Q&A Section */
+  .expert-qa {
+    margin: 25px 0;
+  }
+  
+  .question-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+  }
+  
+  .question-card p {
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+  
+  .ask-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    width: 100%;
   }
   
   /* Bottom Navigation */
   .navbar-container {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    padding: 0 15px;
-    box-sizing: border-box;
+    padding: 10px 15px;
     z-index: 1000;
   }
   
@@ -947,9 +1079,8 @@ header {
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 100%;
   }
   
   .nav-link {
@@ -965,11 +1096,33 @@ header {
   .nav-icon {
     font-size: 20px;
     margin-bottom: 3px;
+    transition: transform 0.2s;
   }
   
   .nav-link.active {
     color: var(--primary);
+  }
+  
+  .nav-link.active .nav-icon {
     transform: translateY(-3px);
+  }
+  
+  /* Floating Action Button */
+  .floating-action-btn {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 999;
   }
   
   /* Responsive Adjustments */
@@ -978,13 +1131,12 @@ header {
       padding: 0 10px;
     }
     
-    .header-content {
-      padding: 0 10px;
+    .groups-grid {
+      grid-template-columns: 1fr 1fr;
     }
     
-    .group-card,
-    .discussion-card {
-      width: 100%;
+    .header-content {
+      padding: 0 10px;
     }
     
     .navbar {
@@ -996,32 +1148,16 @@ header {
     }
   }
   
-  /* Ensure all content stays centered */
-  section {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 10px;
-  }
-  
-  h1, h2, h3, h4 {
-    text-align: center;
-    width: 100%;
-  }
-  
-  /* Fix horizontal scrolling */
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
-  /* Center all text elements */
-  p, span, div, button {
+  /* Utility Classes */
+  .text-center {
     text-align: center;
   }
   
-  /* Center form elements */
-  input, select, button {
+  .mx-auto {
     margin-left: auto;
     margin-right: auto;
-    display: block;
+  }
+  
+  .w-100 {
+    width: 100%;
   }
