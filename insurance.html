@@ -9,195 +9,293 @@
     <link rel="stylesheet" href="./css/insurance.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-                <h1>Insurance</h1>
-                <div class="header-actions">
-                    <button id="add-policy-btn"><i class="fas fa-plus"></i> Add Policy</button>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                    <h1>Insurance</h1>
+                    <div class="header-actions">
+                        <button id="add-policy-btn"><i class="fas fa-plus"></i> Add Policy</button>
+                    </div>
                 </div>
+            </div>
+        </header>
+    
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Insurance Overview -->
+            <section class="insurance-overview">
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h3>Active Policies</h3>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-rupee-sign"></i>
+                        <div>
+                            <h3>Total Coverage</h3>
+                            <p>₹15,00,000</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-invoice"></i>
+                        <div>
+                            <h3>Claims This Year</h3>
+                            <p>3</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h3>Renewal Due</h3>
+                            <p>15 Jun 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- My Policies -->
+            <section class="my-policies">
+                <h2 class="section-title"><i class="fas fa-file-contract"></i> My Policies</h2>
+                <div class="policy-list">
+                    <!-- Policy Card 1 -->
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <img src="https://via.placeholder.com/80x40?text=ICICI" alt="ICICI Lombard" class="provider-logo">
+                            <div class="policy-info">
+                                <h3>ICICI Lombard Health Shield</h3>
+                                <span class="policy-status active">Active</span>
+                            </div>
+                        </div>
+                        <div class="policy-details">
+                            <div class="detail-item">
+                                <span>Policy No.</span>
+                                <strong>HL2023X45879</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Coverage</span>
+                                <strong>₹10,00,000</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Expires</span>
+                                <strong>15 Jun 2024</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Type</span>
+                                <strong>Family Floater</strong>
+                            </div>
+                        </div>
+                        <div class="policy-actions">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i> Details</button>
+                            <button class="action-btn claim-btn"><i class="fas fa-file-upload"></i> Claim</button>
+                        </div>
+                    </div>
+    
+                    <!-- Policy Card 2 -->
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <img src="https://via.placeholder.com/80x40?text=HDFC" alt="HDFC Ergo" class="provider-logo">
+                            <div class="policy-info">
+                                <h3>HDFC Ergo Health Suraksha</h3>
+                                <span class="policy-status active">Active</span>
+                            </div>
+                        </div>
+                        <div class="policy-details">
+                            <div class="detail-item">
+                                <span>Policy No.</span>
+                                <strong>HS2023Y67234</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Coverage</span>
+                                <strong>₹5,00,000</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Expires</span>
+                                <strong>30 Sep 2024</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Type</span>
+                                <strong>Individual</strong>
+                            </div>
+                        </div>
+                        <div class="policy-actions">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i> Details</button>
+                            <button class="action-btn claim-btn"><i class="fas fa-file-upload"></i> Claim</button>
+                        </div>
+                    </div>
+    
+                    <!-- Policy Card 3 (Expired) -->
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <img src="https://via.placeholder.com/80x40?text=Star" alt="Star Health" class="provider-logo">
+                            <div class="policy-info">
+                                <h3>Star Health Comprehensive</h3>
+                                <span class="policy-status expired">Expired</span>
+                            </div>
+                        </div>
+                        <div class="policy-details">
+                            <div class="detail-item">
+                                <span>Policy No.</span>
+                                <strong>SH2022A12345</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Coverage</span>
+                                <strong>₹7,50,000</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Expired</span>
+                                <strong>15 Mar 2023</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>Type</span>
+                                <strong>Senior Citizen</strong>
+                            </div>
+                        </div>
+                        <div class="policy-actions">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i> Details</button>
+                            <button class="action-btn renew-btn"><i class="fas fa-sync-alt"></i> Renew</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Insurance Providers -->
+            <section class="providers-section">
+                <h2 class="section-title"><i class="fas fa-hand-holding-medical"></i> Recommended Providers</h2>
+                <div class="providers-grid">
+                    <div class="provider-card">
+                        <img src="https://via.placeholder.com/80x40?text=Star" alt="Star Health">
+                        <p>Cashless claims at 10,000+ hospitals</p>
+                        <button class="explore-btn">Explore</button>
+                    </div>
+                    <div class="provider-card">
+                        <img src="https://via.placeholder.com/80x40?text=Max" alt="Max Bupa">
+                        <p>Preventive health checkups included</p>
+                        <button class="explore-btn">Explore</button>
+                    </div>
+                    <div class="provider-card">
+                        <img src="https://via.placeholder.com/80x40?text=Apollo" alt="Apollo Munich">
+                        <p>Specialized critical illness coverage</p>
+                        <button class="explore-btn">Explore</button>
+                    </div>
+                    <div class="provider-card">
+                        <img src="https://via.placeholder.com/80x40?text=Reliance" alt="Reliance General">
+                        <p>Affordable premiums with wide coverage</p>
+                        <button class="explore-btn">Explore</button>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Claims History -->
+            <section class="claims-section">
+                <h2 class="section-title"><i class="fas fa-history"></i> Claims History</h2>
+                <div class="claims-list">
+                    <div class="claim-item">
+                        <div class="claim-info">
+                            <h3>Apollo Hospital, Delhi</h3>
+                            <p>15 Jan 2023 • ₹25,000</p>
+                        </div>
+                        <span class="claim-status approved">Approved</span>
+                    </div>
+                    <div class="claim-item">
+                        <div class="claim-info">
+                            <h3>Medanta Hospital, Gurgaon</h3>
+                            <p>22 Mar 2023 • ₹42,500</p>
+                        </div>
+                        <span class="claim-status pending">Pending</span>
+                    </div>
+                    <div class="claim-item">
+                        <div class="claim-info">
+                            <h3>Fortis Hospital, Bangalore</h3>
+                            <p>5 May 2023 • ₹18,750</p>
+                        </div>
+                        <span class="claim-status approved">Approved</span>
+                    </div>
+                </div>
+                <button class="view-all-btn">View All Claims</button>
+            </section>
+        </main>
+    
+        <!-- Bottom Navigation -->
+        <div class="navbar-container">
+            <nav class="navbar">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="insurance.html" class="nav-link active">
+                    <i class="fas fa-shield-alt nav-icon"></i>
+                    <span>Insurance</span>
+                </a>
+                <a href="health-records.html" class="nav-link">
+                    <i class="fas fa-file-medical nav-icon"></i>
+                    <span>Records</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+    
+        <!-- Add Policy Modal (Hidden by default) -->
+        <div id="policy-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Add Insurance Policy</h2>
+                <form id="policy-form">
+                    <div class="form-group">
+                        <label for="provider">Insurance Provider</label>
+                        <select id="provider" required>
+                            <option value="">Select Provider</option>
+                            <option value="icici">ICICI Lombard</option>
+                            <option value="hdfc">HDFC Ergo</option>
+                            <option value="star">Star Health</option>
+                            <option value="max">Max Bupa</option>
+                            <option value="apollo">Apollo Munich</option>
+                            <option value="reliance">Reliance General</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="policy-number">Policy Number</label>
+                        <input type="text" id="policy-number" placeholder="Enter policy number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="policy-name">Policy Name (Optional)</label>
+                        <input type="text" id="policy-name" placeholder="e.g. Family Health Shield">
+                    </div>
+                    <div class="form-group">
+                        <label for="coverage">Coverage Amount (₹)</label>
+                        <input type="number" id="coverage" placeholder="Enter coverage amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="date" id="expiry" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="policy-type">Policy Type</label>
+                        <select id="policy-type" required>
+                            <option value="">Select type</option>
+                            <option value="individual">Individual</option>
+                            <option value="family">Family Floater</option>
+                            <option value="senior">Senior Citizen</option>
+                            <option value="critical">Critical Illness</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Save Policy</button>
+                </form>
             </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Insurance Overview -->
-        <section class="insurance-overview">
-            <div class="stats-card">
-                <div class="stat-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h3>Active Policies</h3>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-rupee-sign"></i>
-                    <div>
-                        <h3>Total Coverage</h3>
-                        <p>₹15,00,000</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- My Policies -->
-        <section class="my-policies">
-            <h2><i class="fas fa-file-contract"></i> My Policies</h2>
-            <div class="policy-list">
-                <!-- Policy Card 1 -->
-                <div class="policy-card">
-                    <div class="policy-header">
-                        <img src="https://via.placeholder.com/40?text=ICICI" alt="ICICI Lombard" class="provider-logo">
-                        <div class="policy-info">
-                            <h3>ICICI Lombard Health Shield</h3>
-                            <span class="policy-status active">Active</span>
-                        </div>
-                    </div>
-                    <div class="policy-details">
-                        <div class="detail-item">
-                            <span>Policy No.</span>
-                            <strong>HL2023X45879</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>Coverage</span>
-                            <strong>₹10,00,000</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>Expires</span>
-                            <strong>15 Jun 2024</strong>
-                        </div>
-                    </div>
-                    <div class="policy-actions">
-                        <button class="action-btn view-btn"><i class="fas fa-eye"></i> Details</button>
-                        <button class="action-btn claim-btn"><i class="fas fa-file-upload"></i> Claim</button>
-                    </div>
-                </div>
-
-                <!-- Policy Card 2 -->
-                <div class="policy-card">
-                    <div class="policy-header">
-                        <img src="https://via.placeholder.com/40?text=HDFC" alt="HDFC Ergo" class="provider-logo">
-                        <div class="policy-info">
-                            <h3>HDFC Ergo Health Suraksha</h3>
-                            <span class="policy-status active">Active</span>
-                        </div>
-                    </div>
-                    <div class="policy-details">
-                        <div class="detail-item">
-                            <span>Policy No.</span>
-                            <strong>HS2023Y67234</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>Coverage</span>
-                            <strong>₹5,00,000</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>Expires</span>
-                            <strong>30 Sep 2024</strong>
-                        </div>
-                    </div>
-                    <div class="policy-actions">
-                        <button class="action-btn view-btn"><i class="fas fa-eye"></i> Details</button>
-                        <button class="action-btn claim-btn"><i class="fas fa-file-upload"></i> Claim</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Insurance Providers -->
-        <section class="providers-section">
-            <h2><i class="fas fa-hand-holding-medical"></i> Recommended Providers</h2>
-            <div class="providers-grid">
-                <div class="provider-card">
-                    <img src="https://via.placeholder.com/80x40?text=Star" alt="Star Health">
-                    <p>Cashless claims at 10,000+ hospitals</p>
-                    <button class="explore-btn">Explore</button>
-                </div>
-                <div class="provider-card">
-                    <img src="https://via.placeholder.com/80x40?text=Max" alt="Max Bupa">
-                    <p>Preventive health checkups included</p>
-                    <button class="explore-btn">Explore</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Claims History -->
-        <section class="claims-section">
-            <h2><i class="fas fa-history"></i> Claims History</h2>
-            <div class="claims-list">
-                <div class="claim-item">
-                    <div class="claim-info">
-                        <h3>Apollo Hospital, Delhi</h3>
-                        <p>15 Jan 2023 • ₹25,000</p>
-                    </div>
-                    <span class="claim-status approved">Approved</span>
-                </div>
-                <div class="claim-item">
-                    <div class="claim-info">
-                        <h3>Medanta Hospital, Gurgaon</h3>
-                        <p>22 Mar 2023 • ₹42,500</p>
-                    </div>
-                    <span class="claim-status pending">Pending</span>
-                </div>
-            </div>
-            <button class="view-all-btn">View All Claims</button>
-        </section>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <div class="navbar-container">
-        <div class="navbar">
-            <a href="index.html" class="nav-link">
-                <i class="fas fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
-            </a>
-            <a href="insurance.html" class="nav-link active">
-                <i class="fas fa-shield-alt nav-icon"></i>
-                <span class="nav-text">Insurance</span>
-            </a>
-            <a href="health-records.html" class="nav-link">
-                <i class="fas fa-file-medical nav-icon"></i>
-                <span class="nav-text">Records</span>
-            </a>
-            <a href="profile.html" class="nav-link">
-                <i class="fas fa-user nav-icon"></i>
-                <span class="nav-text">Profile</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Add Policy Modal (Hidden by default) -->
-    <div id="policy-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Add Insurance Policy</h2>
-            <form id="policy-form">
-                <div class="form-group">
-                    <label for="provider">Insurance Provider</label>
-                    <select id="provider" required>
-                        <option value="">Select Provider</option>
-                        <option value="icici">ICICI Lombard</option>
-                        <option value="hdfc">HDFC Ergo</option>
-                        <option value="star">Star Health</option>
-                        <option value="max">Max Bupa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="policy-number">Policy Number</label>
-                    <input type="text" id="policy-number" required>
-                </div>
-                <div class="form-group">
-                    <label for="expiry">Expiry Date</label>
-                    <input type="date" id="expiry" required>
-                </div>
-                <button type="submit" class="submit-btn">Save Policy</button>
-            </form>
-        </div>
-    </div>
+    
 
     <script src="./js/insurance.js"></script>
 </body>
