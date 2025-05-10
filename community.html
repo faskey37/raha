@@ -7,15 +7,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./css/community.css">
+    <style>
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header with Search -->
     <header>
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-                <h1>Community Support</h1>
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search discussions, groups...">
+                </div>
                 <div class="header-actions">
+                    <button id="notification-btn"><i class="fas fa-bell"></i></button>
                     <a href="create-post.html" class="create-post-btn"><i class="fas fa-plus"></i></a>
                 </div>
             </div>
@@ -24,78 +35,137 @@
 
     <!-- Main Content -->
     <main class="container">
-        <!-- Support Groups -->
+        <!-- Featured Support Group -->
+        <section class="featured-group">
+            <div class="featured-content">
+                <h2>Mental Health Awareness Week</h2>
+                <p>Join our special support sessions with certified therapists</p>
+                <button class="join-btn">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Support Groups with Categories -->
         <section class="support-groups">
-            <h2><i class="fas fa-users"></i> Support Groups</h2>
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> Support Groups</h2>
+                <a href="all-groups.html" class="see-all">See All</a>
+            </div>
+            <div class="category-tabs">
+                <button class="tab-btn active">All</button>
+                <button class="tab-btn">Chronic</button>
+                <button class="tab-btn">Mental</button>
+                <button class="tab-btn">Recovery</button>
+            </div>
             <div class="groups-grid">
                 <div class="group-card" onclick="openGroup('diabetes')">
                     <div class="group-icon" style="background-color: #FF6B6B;">
                         <i class="fas fa-syringe"></i>
                     </div>
-                    <h3>Diabetes Support</h3>
-                    <p>12.5k members</p>
+                    <div class="group-info">
+                        <h3>Diabetes Support</h3>
+                        <div class="group-meta">
+                            <span><i class="fas fa-users"></i> 12.5k</span>
+                            <span><i class="fas fa-comment-dots"></i> 342 active</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
+                
+                <!-- Additional group cards -->
                 <div class="group-card" onclick="openGroup('heart')">
                     <div class="group-icon" style="background-color: #4ECDC4;">
                         <i class="fas fa-heartbeat"></i>
                     </div>
-                    <h3>Heart Health</h3>
-                    <p>8.2k members</p>
-                </div>
-                <div class="group-card" onclick="openGroup('mental-health')">
-                    <div class="group-icon" style="background-color: #FFD166;">
-                        <i class="fas fa-brain"></i>
+                    <div class="group-info">
+                        <h3>Heart Health</h3>
+                        <div class="group-meta">
+                            <span><i class="fas fa-users"></i> 8.2k</span>
+                            <span><i class="fas fa-comment-dots"></i> 198 active</span>
+                        </div>
                     </div>
-                    <h3>Mental Wellness</h3>
-                    <p>15.3k members</p>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
         </section>
 
-        <!-- Recent Discussions -->
+        <!-- Discussion Feed -->
         <section class="discussions">
-            <h2><i class="fas fa-comments"></i> Recent Discussions</h2>
+            <div class="section-header">
+                <h2><i class="fas fa-comments"></i> Community Discussions</h2>
+                <div class="sort-options">
+                    <select id="sort-discussions">
+                        <option>Newest First</option>
+                        <option>Most Active</option>
+                        <option>Top Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="discussion-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Questions</button>
+                <button class="filter-btn">Stories</button>
+                <button class="filter-btn">Advice</button>
+            </div>
+            
             <div class="discussion-list">
-                <!-- Discussion 1 -->
-                <div class="discussion-card">
+                <!-- Pinned Discussion -->
+                <div class="discussion-card pinned">
+                    <div class="pin-badge"><i class="fas fa-thumbtack"></i> Pinned</div>
                     <div class="user-info">
-                        <div class="avatar">JD</div>
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Dr. Patel" class="user-avatar">
                         <div>
-                            <h4>John D.</h4>
-                            <span class="time">2h ago</span>
+                            <h4>Dr. Priya Patel <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4>
+                            <span class="time">4h ago • <i class="fas fa-shield-alt"></i> Medical Professional</span>
                         </div>
                     </div>
-                    <p>Has anyone tried the new continuous glucose monitor from Dexcom?</p>
+                    <p class="discussion-text">Monthly AMA: Ask me anything about diabetes management and new treatments</p>
+                    <div class="discussion-tags">
+                        <span class="tag">#Diabetes</span>
+                        <span class="tag">#AMA</span>
+                    </div>
                     <div class="discussion-meta">
-                        <span><i class="fas fa-comment"></i> 14 comments</span>
-                        <span><i class="fas fa-heart"></i> 32 likes</span>
+                        <button class="meta-btn"><i class="far fa-comment"></i> 42</button>
+                        <button class="meta-btn"><i class="far fa-heart"></i> 128</button>
+                        <button class="meta-btn"><i class="fas fa-share"></i></button>
                     </div>
                 </div>
                 
-                <!-- Discussion 2 -->
+                <!-- Regular Discussion -->
                 <div class="discussion-card">
                     <div class="user-info">
-                        <div class="avatar">SM</div>
+                        <div class="user-avatar">RK</div>
                         <div>
-                            <h4>Sarah M.</h4>
-                            <span class="time">1d ago</span>
+                            <h4>Rahul K.</h4>
+                            <span class="time">1d ago • Heart Health Group</span>
                         </div>
                     </div>
-                    <p>Looking for recommendations for a good cardiologist in Mumbai...</p>
+                    <p class="discussion-text">Can anyone share their experience with cardiac rehab after bypass surgery? What exercises worked best for you?</p>
+                    <div class="discussion-images">
+                        <div class="image-preview" style="background-image: url('https://via.placeholder.com/150?text=Exercise')"></div>
+                    </div>
                     <div class="discussion-meta">
-                        <span><i class="fas fa-comment"></i> 7 comments</span>
-                        <span><i class="fas fa-heart"></i> 18 likes</span>
+                        <button class="meta-btn"><i class="far fa-comment"></i> 14</button>
+                        <button class="meta-btn"><i class="far fa-heart"></i> 32</button>
+                        <button class="meta-btn"><i class="fas fa-share"></i></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Expert Q&A -->
-        <section class="expert-qa">
-            <h2><i class="fas fa-user-md"></i> Ask the Experts</h2>
-            <div class="question-card">
-                <p>"What are the early signs of thyroid imbalance?"</p>
-                <button class="ask-btn" onclick="openQuestionForm()">Ask Your Question</button>
+        <!-- Expert Corner -->
+        <section class="expert-corner">
+            <h2><i class="fas fa-user-md"></i> Expert Corner</h2>
+            <div class="expert-card">
+                <div class="expert-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Dr. Sharma" class="expert-avatar">
+                    <div>
+                        <h3>Dr. Amit Sharma</h3>
+                        <p>Cardiologist • 15 years experience</p>
+                    </div>
+                </div>
+                <p class="expert-quote">"Remember, heart health starts with small daily choices. Walk 30 minutes today!"</p>
+                <button class="ask-expert-btn" onclick="openQuestionForm()">Ask Dr. Sharma</button>
             </div>
         </section>
     </main>
@@ -104,23 +174,36 @@
     <div class="navbar-container">
         <div class="navbar">
             <a href="index.html" class="nav-link">
-                <i class="fas fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
+                <div class="nav-item">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                </div>
             </a>
             <a href="community.html" class="nav-link active">
-                <i class="fas fa-users nav-icon"></i>
-                <span class="nav-text">Community</span>
+                <div class="nav-item">
+                    <i class="fas fa-users nav-icon"></i>
+                    <span class="nav-text">Community</span>
+                </div>
             </a>
             <a href="health-records.html" class="nav-link">
-                <i class="fas fa-file-medical nav-icon"></i>
-                <span class="nav-text">Records</span>
+                <div class="nav-item">
+                    <i class="fas fa-file-medical nav-icon"></i>
+                    <span class="nav-text">Records</span>
+                </div>
             </a>
             <a href="profile.html" class="nav-link">
-                <i class="fas fa-user nav-icon"></i>
-                <span class="nav-text">Profile</span>
+                <div class="nav-item">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-text">Profile</span>
+                </div>
             </a>
         </div>
     </div>
+
+    <!-- Create Post Floating Button -->
+    <button class="floating-post-btn" onclick="location.href='create-post.html'">
+        <i class="fas fa-plus"></i>
+    </button>
 
     <script src="./js/community.js"></script>
 </body>
