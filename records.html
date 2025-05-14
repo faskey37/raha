@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #3498db;
+           --primary: #3498db;
             --primary-dark: #3a0ca3;
-          --primary-light: #4a9df8;
+            --primary-light: #4a9df8;
             --secondary: #4cc9f0;
             --white: #ffffff;
             --gray: #f8f9fd;
@@ -1099,7 +1099,6 @@
             }
             
             // Add toast styles dynamically
-                      // Add toast styles dynamically
             const toastStyles = document.createElement('style');
             toastStyles.textContent = `
                 .toast {
@@ -1107,104 +1106,57 @@
                     bottom: 30px;
                     left: 50%;
                     transform: translateX(-50%);
-                    background-color: #333;
-                    color: #fff;
-                    padding: 12px 20px;
-                    border-radius: 8px;
+                    background: white;
+                    padding: 15px 25px;
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
                     display: flex;
                     align-items: center;
-                    gap: 10px;
+                    gap: 15px;
+                    z-index: 3000;
                     opacity: 0;
-                    pointer-events: none;
-                    transition: opacity 0.3s ease, transform 0.3s ease;
-                    z-index: 9999;
-                    font-family: 'Segoe UI', sans-serif;
-                    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                    transition: all 0.3s ease;
                 }
-
+                
                 .toast.show {
                     opacity: 1;
-                    pointer-events: auto;
-                    transform: translateX(-50%) translateY(-10px);
+                    transform: translateX(-50%) translateY(0);
                 }
-
-                .toast-icon i {
-                    font-size: 18px;
-                }
-
+                
                 .toast-success {
-                    background-color: #4CAF50;
+                    border-left: 4px solid var(--success);
                 }
-
+                
                 .toast-error {
-                    background-color: #F44336;
+                    border-left: 4px solid var(--danger);
                 }
-
+                
                 .toast-info {
-                    background-color: #2196F3;
+                    border-left: 4px solid var(--primary);
+                }
+                
+                .toast-icon {
+                    font-size: 1.2rem;
+                }
+                
+                .toast-success .toast-icon {
+                    color: var(--success);
+                }
+                
+                .toast-error .toast-icon {
+                    color: var(--danger);
+                }
+                
+                .toast-info .toast-icon {
+                    color: var(--primary);
+                }
+                
+                .toast-message {
+                    font-size: 0.95rem;
                 }
             `;
             document.head.appendChild(toastStyles);
         });
-  // Simple active link highlighting
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Add Record Modal functionality
-            const addRecordBtn = document.getElementById('addRecordBtn');
-            const recordModal = document.getElementById('recordModal');
-            const closeModal = document.querySelector('.close-modal');
-            
-            if (addRecordBtn && recordModal) {
-                addRecordBtn.addEventListener('click', function() {
-                    recordModal.style.display = 'block';
-                });
-                
-                closeModal.addEventListener('click', function() {
-                    recordModal.style.display = 'none';
-                });
-                
-                window.addEventListener('click', function(event) {
-                    if (event.target === recordModal) {
-                        recordModal.style.display = 'none';
-                    }
-                });
-            }
-            
-            // View buttons functionality
-            document.querySelectorAll('.view-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.record-card');
-                    const title = card.querySelector('.record-title').textContent;
-                    alert(`Viewing details for: ${title}\n\nThis would show a detailed view in a full implementation.`);
-                });
-            });
-            
-            // Download buttons functionality
-            document.querySelectorAll('.download-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.record-card');
-                    const title = card.querySelector('.record-title').textContent;
-                    alert(`Downloading record: ${title}\n\nThis would download the PDF in a full implementation.`);
-                });
-            });
-            
-            // Share buttons functionality
-            document.querySelectorAll('.share-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.record-card');
-                    const title = card.querySelector('.record-title').textContent;
-                    alert(`Sharing record: ${title}\n\nThis would open a share dialog in a full implementation.`);
-                });
-            });
-        });
-</script>
+    </script>
 </body>
 </html>
