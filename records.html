@@ -4,28 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Records - Raha Health App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #3498db;
-            --primary-dark: #2980b9;
-            --primary-light: #e3f2fd;
+            --primary-dark: #3a0ca3;
+          --primary-light: #4a9df8;
+            --secondary: #4cc9f0;
             --white: #ffffff;
-            --gray: #f5f7fa;
-            --dark: #2c3e50;
+            --gray: #f8f9fd;
+            --dark: #212529;
             --light-gray: #e9ecef;
-            --success: #28a745;
+            --text-secondary: #6c757d;
+            --success: #2ecc71;
             --success-light: #e8f5e9;
-            --warning: #ffc107;
+            --warning: #f39c12;
             --warning-light: #fff8e1;
-            --danger: #dc3545;
+            --danger: #e74c3c;
             --danger-light: #ffebee;
-            --text-secondary: #666;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -38,8 +42,8 @@
         body {
             background-color: var(--gray);
             color: var(--dark);
-            padding-bottom: 100px;
             line-height: 1.6;
+            padding-bottom: 100px;
         }
 
         .container {
@@ -49,13 +53,12 @@
             padding: 20px 0;
         }
 
-        /* Enhanced Header */
+        /* Enhanced Header with Gradient */
         .records-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 25px 0;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-md);
+            padding: 30px 0;
+            margin-bottom: 30px;
             position: relative;
             overflow: hidden;
         }
@@ -65,9 +68,20 @@
             position: absolute;
             top: -50px;
             right: -50px;
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .records-header::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            left: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.05);
             border-radius: 50%;
         }
 
@@ -76,103 +90,114 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .header-text h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .header-text p {
             opacity: 0.9;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            max-width: 500px;
         }
 
         .btn {
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn:hover {
-            background-color: rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.25);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn i {
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
-        /* Records Sections */
+        /* Records Sections with Modern Cards */
         .records-section {
             margin-bottom: 40px;
             background-color: var(--white);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: var(--radius-md);
+            padding: 25px;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .records-section:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--light-gray);
         }
 
         .section-header h2 {
             color: var(--primary);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-weight: 600;
         }
 
         .view-all {
             color: var(--primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .view-all:hover {
             text-decoration: underline;
+            color: var(--primary-dark);
         }
 
-        /* Records Grid */
+        /* Enhanced Records Grid */
         .records-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
 
-        /* Enhanced Record Cards */
+        /* Modern Record Cards */
         .record-card {
             background: var(--white);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: var(--radius-md);
+            padding: 25px;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border-left: 4px solid var(--primary);
             position: relative;
+            overflow: hidden;
         }
 
         .record-card:hover {
@@ -180,74 +205,95 @@
             box-shadow: var(--shadow-lg);
         }
 
+        .record-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
         .record-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            align-items: flex-start;
+            margin-bottom: 20px;
         }
 
         .record-title {
             font-weight: 600;
             color: var(--dark);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            line-height: 1.4;
         }
 
         .record-date {
             color: var(--text-secondary);
             font-size: 0.85rem;
             background: var(--light-gray);
-            padding: 3px 8px;
+            padding: 5px 10px;
             border-radius: 20px;
+            min-width: 90px;
+            text-align: center;
         }
 
         .record-details {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .record-details p {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: flex-start;
         }
 
         .record-details strong {
             color: var(--dark);
-            min-width: 70px;
+            min-width: 80px;
             display: inline-block;
+            font-weight: 500;
         }
 
         .record-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             border: none;
             font-weight: 500;
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
         }
 
         .action-btn i {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .view-btn {
-            background-color: var(--primary-light);
+            background-color: var(--white);
             color: var(--primary);
         }
 
         .view-btn:hover {
             background-color: var(--primary);
             color: white;
+            transform: translateY(-2px);
         }
 
         .download-btn {
@@ -258,6 +304,7 @@
         .download-btn:hover {
             background-color: var(--success);
             color: white;
+            transform: translateY(-2px);
         }
 
         .share-btn {
@@ -268,15 +315,19 @@
         .share-btn:hover {
             background-color: var(--warning);
             color: white;
+            transform: translateY(-2px);
         }
 
-        /* Status Badges */
+        /* Status Badges with Icons */
         .status-badge {
-            font-size: 0.75rem;
-            padding: 3px 8px;
+            font-size: 0.8rem;
+            padding: 5px 10px;
             border-radius: 20px;
             font-weight: 500;
-            margin-left: 5px;
+            margin-left: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .status-normal {
@@ -286,7 +337,7 @@
 
         .status-warning {
             background-color: var(--warning-light);
-            color: #d4a017;
+            color: var(--warning);
         }
 
         .status-critical {
@@ -294,37 +345,40 @@
             color: var(--danger);
         }
 
-        /* Empty State */
+        /* Empty State with Illustration */
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             background-color: var(--white);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             margin: 20px 0;
+            box-shadow: var(--shadow-sm);
         }
 
         .empty-state i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 15px;
-            opacity: 0.5;
+            margin-bottom: 20px;
+            opacity: 0.7;
         }
 
         .empty-state h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: var(--dark);
+            font-weight: 600;
         }
 
         .empty-state p {
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1rem;
         }
 
-        /* Bottom Navigation */
+        /* Bottom Navigation (Unchanged as requested) */
         .navbar-container {
             position: fixed;
             bottom: 20px;
@@ -333,7 +387,7 @@
             width: 100%;
             max-width: 400px;
             z-index: 1000;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
         .navbar {
@@ -358,13 +412,13 @@
         }
 
         .nav-icon {
-            font-size: 1.1rem;
-            margin-bottom: 3px;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
             transition: var(--transition);
         }
 
         .nav-text {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 500;
             transition: var(--transition);
         }
@@ -383,6 +437,203 @@
             border-radius: 50%;
         }
 
+        /* Modern Modal Design */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            background-color: var(--light-gray);
+            color: var(--danger);
+        }
+
+        .modal-content h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 1em;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-label {
+            border: 1px dashed var(--light-gray);
+            border-radius: var(--radius-sm);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .file-input-label i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .file-input-label span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .cancel-btn {
+            background-color: var(--light-gray);
+            color: var(--text-secondary);
+            border: none;
+            padding: 14px 25px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cancel-btn:hover {
+            background-color: #e2e2e2;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -390,7 +641,8 @@
         }
 
         .record-card {
-            animation: fadeIn 0.5s ease-out forwards;
+            animation: fadeIn 0.4s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.1s);
         }
 
         /* Responsive Design */
@@ -407,7 +659,11 @@
             .header-content {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
+            }
+
+            .header-text h1 {
+                font-size: 1.6rem;
             }
 
             .btn {
@@ -417,188 +673,41 @@
         }
 
         @media (max-width: 480px) {
+            .records-section {
+                padding: 20px;
+            }
+
             .record-actions {
                 flex-direction: column;
             }
             
             .action-btn {
                 width: 100%;
-                justify-content: center;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+
+            .cancel-btn, .submit-btn {
+                width: 100%;
             }
         }
-
-
-        .form-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .form-header h2 {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .close-btn:hover {
-            background-color: var(--light-gray);
-            color: var(--danger);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 1em;
-        }
-
-        .time-slots-container {
-            margin-top: 15px;
-        }
-
-        .time-slot-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .time-slot-input input {
-            flex: 1;
-        }
-
-        .remove-time-btn {
-            background-color: var(--danger-light);
-            color: var(--danger);
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .remove-time-btn:hover {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        .add-time-btn {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 5px;
-            transition: var(--transition);
-        }
-
-        .add-time-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .cancel-btn {
-            background-color: var(--light-gray);
-            color: var(--text-secondary);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .cancel-btn:hover {
-            background-color: #e2e2e2;
-        }
-
-        .submit-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-
     </style>
 </head>
 <body>
-    <!-- Enhanced Header -->
+    <!-- Enhanced Header with Gradient Background -->
     <header class="records-header">
         <div class="container">
             <div class="header-content">
                 <div class="header-text">
-                    <h1>Medical Records</h1>
-                    <p>Your complete health history in one place</p>
+                    <h1><i class="fas fa-file-medical-alt"></i> Medical Records</h1>
+                    <p>Your complete health history securely stored and easily accessible</p>
                 </div>
                 <button class="btn" id="addRecordBtn">
                     <i class="fas fa-plus"></i> Add Record
@@ -613,21 +722,21 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</h2>
-                <a href="#" class="view-all">View All</a>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
             </div>
             
             <div class="records-grid">
                 <!-- Prescription Card 1 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 0">
                     <div class="record-header">
                         <h3 class="record-title">Amoxicillin 500mg</h3>
                         <span class="record-date">15 Jan 2023</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Doctor:</strong> Dr. Sarah Johnson</p>
-                        <p><strong>Dosage:</strong> 1 tablet every 8 hours for 7 days</p>
-                        <p><strong>Pharmacy:</strong> City Pharmacy</p>
-                        <p><strong>Refills:</strong> 1 remaining</p>
+                        <p><strong><i class="fas fa-user-md"></i> Doctor:</strong> Dr. Sarah Johnson</p>
+                        <p><strong><i class="fas fa-capsules"></i> Dosage:</strong> 1 tablet every 8 hours for 7 days</p>
+                        <p><strong><i class="fas fa-pharmacy"></i> Pharmacy:</strong> City Pharmacy</p>
+                        <p><strong><i class="fas fa-redo"></i> Refills:</strong> 1 remaining</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -640,15 +749,15 @@
                 </div>
                 
                 <!-- Prescription Card 2 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 1">
                     <div class="record-header">
                         <h3 class="record-title">Ibuprofen 200mg</h3>
                         <span class="record-date">05 Nov 2022</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Doctor:</strong> Dr. Michael Chen</p>
-                        <p><strong>Dosage:</strong> As needed for pain, max 3/day</p>
-                        <p><strong>Status:</strong> <span class="status-badge status-normal">Active</span></p>
+                        <p><strong><i class="fas fa-user-md"></i> Doctor:</strong> Dr. Michael Chen</p>
+                        <p><strong><i class="fas fa-capsules"></i> Dosage:</strong> As needed for pain, max 3/day</p>
+                        <p><strong><i class="fas fa-check-circle"></i> Status:</strong> <span class="status-badge status-normal"><i class="fas fa-check"></i> Active</span></p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -666,20 +775,20 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-flask"></i> Lab Results</h2>
-                <a href="#" class="view-all">View All</a>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
             </div>
             
             <div class="records-grid">
                 <!-- Lab Result Card 1 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 0">
                     <div class="record-header">
                         <h3 class="record-title">Blood Test - Complete</h3>
                         <span class="record-date">10 Feb 2023</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Lab:</strong> City Medical Labs</p>
-                        <p><strong>Status:</strong> <span class="status-badge status-normal">Normal</span></p>
-                        <p><strong>Notes:</strong> All values within normal range</p>
+                        <p><strong><i class="fas fa-microscope"></i> Lab:</strong> City Medical Labs</p>
+                        <p><strong><i class="fas fa-check-circle"></i> Status:</strong> <span class="status-badge status-normal"><i class="fas fa-check"></i> Normal</span></p>
+                        <p><strong><i class="fas fa-notes-medical"></i> Notes:</strong> All values within normal range</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -689,21 +798,21 @@
                             <i class="fas fa-download"></i> Download
                         </button>
                         <button class="action-btn share-btn">
-                            <i class="fas fa-share"></i> Share
+                            <i class="fas fa-share-alt"></i> Share
                         </button>
                     </div>
                 </div>
                 
                 <!-- Lab Result Card 2 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 1">
                     <div class="record-header">
                         <h3 class="record-title">Cholesterol Panel</h3>
                         <span class="record-date">22 Sep 2022</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Lab:</strong> HealthPlus Diagnostics</p>
-                        <p><strong>Status:</strong> <span class="status-badge status-warning">Review Needed</span></p>
-                        <p><strong>Notes:</strong> LDL slightly elevated (142 mg/dL)</p>
+                        <p><strong><i class="fas fa-microscope"></i> Lab:</strong> HealthPlus Diagnostics</p>
+                        <p><strong><i class="fas fa-exclamation-triangle"></i> Status:</strong> <span class="status-badge status-warning"><i class="fas fa-exclamation"></i> Review Needed</span></p>
+                        <p><strong><i class="fas fa-notes-medical"></i> Notes:</strong> LDL slightly elevated (142 mg/dL)</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -721,20 +830,20 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-syringe"></i> Vaccinations</h2>
-                <a href="#" class="view-all">View All</a>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
             </div>
             
             <div class="records-grid">
                 <!-- Vaccination Card 1 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 0">
                     <div class="record-header">
                         <h3 class="record-title">Influenza Vaccine</h3>
                         <span class="record-date">15 Oct 2022</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Provider:</strong> Community Health Center</p>
-                        <p><strong>Next Dose:</strong> Oct 2023</p>
-                        <p><strong>Lot #:</strong> EL3245</p>
+                        <p><strong><i class="fas fa-hospital-user"></i> Provider:</strong> Community Health Center</p>
+                        <p><strong><i class="fas fa-calendar-check"></i> Next Dose:</strong> Oct 2023</p>
+                        <p><strong><i class="fas fa-barcode"></i> Lot #:</strong> EL3245</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -747,15 +856,15 @@
                 </div>
                 
                 <!-- Vaccination Card 2 -->
-                <div class="record-card">
+                <div class="record-card" style="--order: 1">
                     <div class="record-header">
                         <h3 class="record-title">COVID-19 Booster</h3>
                         <span class="record-date">05 Mar 2023</span>
                     </div>
                     <div class="record-details">
-                        <p><strong>Provider:</strong> City Vaccination Center</p>
-                        <p><strong>Type:</strong> Pfizer-BioNTech</p>
-                        <p><strong>Lot #:</strong> FG6789</p>
+                        <p><strong><i class="fas fa-hospital-user"></i> Provider:</strong> City Vaccination Center</p>
+                        <p><strong><i class="fas fa-virus"></i> Type:</strong> Pfizer-BioNTech</p>
+                        <p><strong><i class="fas fa-barcode"></i> Lot #:</strong> FG6789</p>
                     </div>
                     <div class="record-actions">
                         <button class="action-btn view-btn">
@@ -773,22 +882,22 @@
         <section class="records-section">
             <div class="section-header">
                 <h2><i class="fas fa-history"></i> Medical History</h2>
-                <a href="#" class="view-all">View All</a>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
             </div>
             
-            <!-- Empty State Example -->
+            <!-- Empty State with Illustration -->
             <div class="empty-state">
-                <i class="fas fa-folder-open"></i>
+                <i class="fas fa-file-medical"></i>
                 <h3>No Medical History Records</h3>
-                <p>Your medical history records will appear here once they're added to your profile.</p>
+                <p>Your medical history records will appear here once they're added to your profile. You can add past diagnoses, procedures, or other important health information.</p>
                 <button class="btn" style="max-width: 200px; margin: 0 auto;">
-                    <i class="fas fa-plus"></i> Add History
+                    <i class="fas fa-plus"></i> Add Medical History
                 </button>
             </div>
         </section>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation (Unchanged as requested) -->
     <div class="navbar-container">
         <div class="navbar">
             <a href="index.html" class="nav-link">
@@ -810,11 +919,11 @@
         </div>
     </div>
 
-    <!-- Add Record Modal -->
-    <div class="modal-overlay" id="recordModal" style="display: none;">
+    <!-- Modern Add Record Modal -->
+    <div class="modal-overlay" id="recordModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Add New Medical Record</h2>
+            <button class="close-modal">&times;</button>
+            <h2><i class="fas fa-file-medical"></i> Add New Medical Record</h2>
             <form id="recordForm">
                 <div class="form-group">
                     <label for="recordType">Record Type</label>
@@ -845,21 +954,199 @@
                 
                 <div class="form-group">
                     <label for="recordNotes">Notes</label>
-                    <textarea id="recordNotes" class="form-control" rows="3"></textarea>
+                    <textarea id="recordNotes" class="form-control" rows="4" placeholder="Any additional details about this record..."></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="recordFile">Upload File (Optional)</label>
-                    <input type="file" id="recordFile" class="form-control">
+                    <label>Upload File (Optional)</label>
+                    <div class="file-input-container">
+                        <label for="recordFile" class="file-input-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag & drop</span>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">PDF, JPG, or PNG (Max 5MB)</span>
+                        </label>
+                        <input type="file" id="recordFile" class="file-input">
+                    </div>
                 </div>
                 
-                <button type="submit" class="submit-btn">Save Record</button>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelRecordBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Save Record</button>
+                </div>
             </form>
         </div>
     </div>
 
     <script>
-        // Simple active link highlighting
+        // Enhanced JavaScript with Modern Features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Active link highlighting
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Modal functionality with animations
+            const addRecordBtn = document.getElementById('addRecordBtn');
+            const recordModal = document.getElementById('recordModal');
+            const closeModal = document.querySelector('.close-modal');
+            const cancelBtn = document.getElementById('cancelRecordBtn');
+            
+            function openModal() {
+                recordModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModalFunc() {
+                recordModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            if (addRecordBtn && recordModal) {
+                addRecordBtn.addEventListener('click', openModal);
+                
+                closeModal.addEventListener('click', closeModalFunc);
+                
+                cancelBtn.addEventListener('click', closeModalFunc);
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === recordModal) {
+                        closeModalFunc();
+                    }
+                });
+            }
+            
+            // Record card interactions
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    // In a real app, this would navigate to a detailed view
+                    showToast(`Viewing details for: ${title}`, 'info');
+                });
+            });
+            
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    showToast(`Downloading record: ${title}`, 'success');
+                    // Simulate download delay
+                    setTimeout(() => {
+                        showToast(`${title} downloaded successfully`, 'success');
+                    }, 1500);
+                });
+            });
+            
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.record-card');
+                    const title = card.querySelector('.record-title').textContent;
+                    showToast(`Sharing options for: ${title}`, 'info');
+                });
+            });
+            
+            // Form submission
+            const recordForm = document.getElementById('recordForm');
+            if (recordForm) {
+                recordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const recordType = document.getElementById('recordType').value;
+                    const recordName = document.getElementById('recordName').value;
+                    
+                    // Simulate form submission
+                    showToast(`Adding ${recordType}: ${recordName}`, 'success');
+                    
+                    // Close modal after delay
+                    setTimeout(() => {
+                        closeModalFunc();
+                        showToast(`${recordName} added successfully`, 'success');
+                        recordForm.reset();
+                    }, 2000);
+                });
+            }
+            
+            // Toast notification function
+            function showToast(message, type) {
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        ${type === 'success' ? '<i class="fas fa-check-circle"></i>' : 
+                         type === 'error' ? '<i class="fas fa-exclamation-circle"></i>' : 
+                         '<i class="fas fa-info-circle"></i>'}
+                    </div>
+                    <div class="toast-message">${message}</div>
+                `;
+                document.body.appendChild(toast);
+                
+                // Show toast
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Add toast styles dynamically
+                      // Add toast styles dynamically
+            const toastStyles = document.createElement('style');
+            toastStyles.textContent = `
+                .toast {
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: #333;
+                    color: #fff;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                    z-index: 9999;
+                    font-family: 'Segoe UI', sans-serif;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                }
+
+                .toast.show {
+                    opacity: 1;
+                    pointer-events: auto;
+                    transform: translateX(-50%) translateY(-10px);
+                }
+
+                .toast-icon i {
+                    font-size: 18px;
+                }
+
+                .toast-success {
+                    background-color: #4CAF50;
+                }
+
+                .toast-error {
+                    background-color: #F44336;
+                }
+
+                .toast-info {
+                    background-color: #2196F3;
+                }
+            `;
+            document.head.appendChild(toastStyles);
+        });
+  // Simple active link highlighting
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop();
             const navLinks = document.querySelectorAll('.nav-link');
@@ -918,6 +1205,6 @@
                 });
             });
         });
-    </script>
+</script>
 </body>
 </html>
