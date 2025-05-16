@@ -437,7 +437,7 @@
             border-radius: 50%;
         }
 
-       /* Compact Modal Design */
+        /* Modern Modal Design */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -465,9 +465,7 @@
             border-radius: var(--radius-md);
             width: 90%;
             max-width: 500px;
-            max-height: 80vh; /* Limit height */
-            overflow-y: auto; /* Make scrollable if content is long */
-            padding: 25px;
+            padding: 30px;
             box-shadow: var(--shadow-lg);
             transform: translateY(20px);
             transition: var(--transition);
@@ -478,34 +476,130 @@
             transform: translateY(0);
         }
 
-        /* Compact Form Styles */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            background-color: var(--light-gray);
+            color: var(--danger);
+        }
+
         .modal-content h2 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
             color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        /* Form Styles */
         .form-group {
-            margin-bottom: 15px; /* Reduced spacing */
+            margin-bottom: 20px;
         }
 
-        .form-control {
-            padding: 12px 15px; /* Slightly smaller padding */
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
             font-size: 0.95rem;
         }
 
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 1em;
+        }
+
         textarea.form-control {
-            min-height: 80px; /* Smaller textarea */
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
         }
 
         .file-input-label {
-            padding: 20px; /* Smaller file input area */
+            border: 1px dashed var(--light-gray);
+            border-radius: var(--radius-sm);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .file-input-label i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .file-input-label span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
         }
 
         .form-actions {
-            margin-top: 20px; /* Reduced top margin */
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
         }
-
 
         .cancel-btn {
             background-color: var(--light-gray);
