@@ -410,6 +410,78 @@
             transition: var(--transition);
             position: relative;
         }
+          /* [Previous CSS remains unchanged until the modal styles] */
+
+        /* Compact Modal Design */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh; /* Limit height */
+            overflow-y: auto; /* Make scrollable if content is long */
+            padding: 25px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Compact Form Styles */
+        .modal-content h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Reduced spacing */
+        }
+
+        .form-control {
+            padding: 12px 15px; /* Slightly smaller padding */
+            font-size: 0.95rem;
+        }
+
+        textarea.form-control {
+            min-height: 80px; /* Smaller textarea */
+        }
+
+        .file-input-label {
+            padding: 20px; /* Smaller file input area */
+        }
+
+        .form-actions {
+            margin-top: 20px; /* Reduced top margin */
+        }
+
+        /* [Rest of the CSS remains unchanged] */
 
         .nav-icon {
             font-size: 1.2rem;
