@@ -744,7 +744,6 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
 
 :root {
 --primary: #3498db;
---primary-light: #3498db;
 --secondary: #E8EDFF;
 --background: #F8F9FF;
 --text: #2c3e50;
