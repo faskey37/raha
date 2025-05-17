@@ -1,400 +1,509 @@
-  // Sample data
-  let appointments = [
-    {
-        id: 1,
-        patientName: "Jinan Carter",
-        patientImage: "https://randomuser.me/api/portraits/men/32.jpg",
-        doctorName: "Dr. Nathan Keys",
-        specialty: "cardiologist",
-        time: "13:30",
-        date: getFormattedDate(new Date()),
-        title: "Flu Checkup"
-    },
-    {
-        id: 2,
-        patientName: "Lisa Bryson",
-        patientImage: "https://randomuser.me/api/portraits/women/65.jpg",
-        doctorName: "Dr. Andrew Moss",
-        specialty: "dentist",
-        time: "14:00",
-        date: getFormattedDate(new Date()),
-        title: "Dental Cleaning"
-    },
-    {
-        id: 3,
-        patientName: "Donte Tarotto",
-        patientImage: "https://randomuser.me/api/portraits/men/44.jpg",
-        doctorName: "Dr. Ivory Williams",
-        specialty: "neurologist",
-        time: "14:30",
-        date: getFormattedDate(new Date()),
-        title: "Consultation"
-    }
-];
+// Sample data
+        let appointments = [
+            {
+                id: 1,
+                patientName: "Jinan Carter",
+                patientImage: "https://randomuser.me/api/portraits/men/32.jpg",
+                doctorName: "Dr. Nathan Keys",
+                specialty: "cardiologist",
+                time: "13:30",
+                date: getFormattedDate(new Date()),
+                title: "Annual Heart Checkup",
+                location: "City Heart Center",
+                upcoming: false
+            },
+            {
+                id: 2,
+                patientName: "Lisa Bryson",
+                patientImage: "https://randomuser.me/api/portraits/women/65.jpg",
+                doctorName: "Dr. Andrew Moss",
+                specialty: "dentist",
+                time: "14:00",
+                date: getFormattedDate(new Date()),
+                title: "Dental Cleaning",
+                location: "Bright Smile Dental",
+                upcoming: false
+            },
+            {
+                id: 3,
+                patientName: "Donte Tarotto",
+                patientImage: "https://randomuser.me/api/portraits/men/44.jpg",
+                doctorName: "Dr. Ivory Williams",
+                specialty: "neurologist",
+                time: "14:30",
+                date: getFormattedDate(new Date()),
+                title: "Migraine Consultation",
+                location: "NeuroCare Clinic",
+                upcoming: false
+            },
+            {
+                id: 4,
+                patientName: "Maria Garcia",
+                patientImage: "https://randomuser.me/api/portraits/women/33.jpg",
+                doctorName: "Dr. Sarah Johnson",
+                specialty: "dermatologist",
+                time: "09:00",
+                date: getFormattedDate(addDays(new Date(), 2)),
+                title: "Skin Allergy Check",
+                location: "Skin Health Center",
+                upcoming: true
+            },
+            {
+                id: 5,
+                patientName: "James Wilson",
+                patientImage: "https://randomuser.me/api/portraits/men/22.jpg",
+                doctorName: "Dr. Michael Brown",
+                specialty: "pediatrician",
+                time: "11:30",
+                date: getFormattedDate(addDays(new Date(), 5)),
+                title: "Child Vaccination",
+                location: "KidsCare Hospital",
+                upcoming: true
+            }
+        ];
 
-const topDoctors = [
-    {
-        id: 1,
-        name: "Dr. Katharine Moss",
-        specialty: "Head Specialist",
-        rating: 4.5,
-        image: "https://randomuser.me/api/portraits/women/33.jpg"
-    },
-    {
-        id: 2,
-        name: "Dr. Dutcher William",
-        specialty: "Cee-Sensibil",
-        rating: 4.2,
-        image: "https://randomuser.me/api/portraits/men/22.jpg"
-    }
-];
+        const topDoctors = [
+            {
+                id: 1,
+                name: "Dr. Katharine Moss",
+                specialty: "Cardiologist",
+                rating: 4.5,
+                reviews: 128,
+                image: "https://randomuser.me/api/portraits/women/33.jpg",
+                available: true
+            },
+            {
+                id: 2,
+                name: "Dr. Dutcher William",
+                specialty: "Neurologist",
+                rating: 4.8,
+                reviews: 215,
+                image: "https://randomuser.me/api/portraits/men/22.jpg",
+                available: true
+            },
+            {
+                id: 3,
+                name: "Dr. Olivia Carter",
+                specialty: "Pediatrician",
+                rating: 4.9,
+                reviews: 187,
+                image: "https://randomuser.me/api/portraits/women/45.jpg",
+                available: false
+            },
+            {
+                id: 4,
+                name: "Dr. Robert Chen",
+                specialty: "Dermatologist",
+                rating: 4.7,
+                reviews: 156,
+                image: "https://randomuser.me/api/portraits/men/55.jpg",
+                available: true
+            }
+        ];
 
-// DOM Elements
-const dateScroll = document.getElementById('dateScroll');
-const specialistTags = document.getElementById('specialistTags');
-const appointmentsList = document.getElementById('appointmentsList');
-const topDoctorsList = document.getElementById('topDoctorsList');
-const openBookingBtn = document.getElementById('openBooking');
-const bookingPopup = document.getElementById('bookingPopup');
-const bookingForm = document.getElementById('bookingForm');
-const closePopup = document.getElementById('closePopup');
-const cancelBookingBtn = document.getElementById('cancelBooking');
-const currentMonthYear = document.getElementById('currentMonthYear');
-const prevMonthBtn = document.getElementById('prevMonth');
-const nextMonthBtn = document.getElementById('nextMonth');
-const monthModal = document.getElementById('monthModal');
-const openMonthModal = document.getElementById('openMonthModal');
-const closeMonthModal = document.getElementById('closeMonthModal');
-const modalYear = document.getElementById('modalYear');
-const prevYearBtn = document.getElementById('prevYear');
-const nextYearBtn = document.getElementById('nextYear');
-const monthGrid = document.getElementById('monthGrid');
-const appointmentDateInput = document.getElementById('appointmentDate');
+        // DOM Elements
+        const dateScroll = document.getElementById('dateScroll');
+        const specialistTags = document.getElementById('specialistTags');
+        const appointmentsList = document.getElementById('appointmentsList');
+        const upcomingAppointments = document.getElementById('upcomingAppointments');
+        const topDoctorsList = document.getElementById('topDoctorsList');
+        const openBookingBtn = document.getElementById('openBooking');
+        const bookingPopup = document.getElementById('bookingPopup');
+        const bookingForm = document.getElementById('bookingForm');
+        const closePopup = document.getElementById('closePopup');
+        const cancelBookingBtn = document.getElementById('cancelBooking');
+        const currentMonthYear = document.getElementById('currentMonthYear');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        const appointmentDateInput = document.getElementById('appointmentDate');
+        const searchBtn = document.getElementById('searchBtn');
+        const notificationBtn = document.getElementById('notificationBtn');
 
-// Current state
-let currentDate = new Date();
-let currentFilter = 'all';
-let modalCurrentDate = new Date(currentDate);
+        // Current state
+        let currentDate = new Date();
+        let currentFilter = 'all';
 
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function() {
-    renderMonthYear();
-    generateDatePills();
-    renderAppointments();
-    renderTopDoctors();
-    setupEventListeners();
-    setupModalMonths();
-    
-    // Set default date to today
-    appointmentDateInput.value = getFormattedDateForInput(new Date());
-});
-
-// Render current month and year
-function renderMonthYear() {
-    const options = { month: 'long', year: 'numeric' };
-    currentMonthYear.textContent = currentDate.toLocaleDateString('en-US', options);
-}
-
-// Generate date pills for the current month
-// Update the generateDatePills function to this:
-function generateDatePills() {
-dateScroll.innerHTML = '';
-
-const year = currentDate.getFullYear();
-const month = currentDate.getMonth();
-const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-// Get first day of month and last day of month
-const firstDay = new Date(year, month, 1).getDay();
-const lastDay = new Date(year, month, daysInMonth).getDay();
-
-// Add pills for each day of the month
-for (let day = 1; day <= daysInMonth; day++) {
-const date = new Date(year, month, day);
-const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-const dayName = dayNames[date.getDay()];
-
-const dateString = getFormattedDate(date);
-const isActive = dateString === getFormattedDate(currentDate);
-
-const pill = document.createElement('div');
-pill.className = `date-pill ${isActive ? 'active' : ''}`;
-pill.dataset.date = dateString;
-pill.innerHTML = `
-    <div class="day">${dayName}</div>
-    <div class="date">${day}</div>
-    <div class="title">&nbsp;</div>
-`;
-
-pill.addEventListener('click', function() {
-    document.querySelector('.date-pill.active')?.classList.remove('active');
-    this.classList.add('active');
-    currentDate = new Date(this.dataset.date);
-    renderAppointments();
-});
-
-dateScroll.appendChild(pill);
-}
-
-// Scroll to the active date
-setTimeout(() => {
-const activePill = document.querySelector('.date-pill.active');
-if (activePill) {
-    activePill.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-    });
-}
-}, 100);
-}
-
-// Render appointments based on current filter and date
-function renderAppointments() {
-    appointmentsList.innerHTML = '';
-    
-    let filteredAppointments = appointments.filter(appointment => {
-        // Filter by date
-        const dateMatch = appointment.date === getFormattedDate(currentDate);
-        
-        // Filter by specialty
-        const specialtyMatch = currentFilter === 'all' || appointment.specialty === currentFilter;
-        
-        return dateMatch && specialtyMatch;
-    });
-    
-    if (filteredAppointments.length === 0) {
-        appointmentsList.innerHTML = '<p class="no-appointments">No appointments found for this date</p>';
-        return;
-    }
-    
-    filteredAppointments.forEach(appointment => {
-        const card = document.createElement('div');
-        card.className = 'appointment-card';
-        card.innerHTML = `
-            <div class="card-header">
-                <div class="card-title">${appointment.title}</div>
-                <div class="card-time">${formatTime(appointment.time)}</div>
-            </div>
-            <div class="card-content">
-                <img src="${appointment.patientImage}" alt="${appointment.patientName}" class="patient-avatar">
-                <div class="patient-info">
-                    <div class="patient-name">${appointment.patientName}</div>
-                    <div class="doctor-name">${appointment.doctorName}</div>
-                    <div class="doctor-specialty">${appointment.specialty.charAt(0).toUpperCase() + appointment.specialty.slice(1)}</div>
-                </div>
-            </div>
-        `;
-        appointmentsList.appendChild(card);
-    });
-}
-
-// Render top doctors
-function renderTopDoctors() {
-    topDoctorsList.innerHTML = '';
-    
-    topDoctors.forEach(doctor => {
-        const card = document.createElement('div');
-        card.className = 'doctor-card';
-        card.innerHTML = `
-            <img src="${doctor.image}" alt="${doctor.name}" class="doctor-avatar">
-            <div class="doctor-details">
-                <div class="doctor-name">${doctor.name}</div>
-                <div class="doctor-specialty">${doctor.specialty}</div>
-                <div class="doctor-rating">
-                    <div class="stars">
-                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(doctor.rating))}
-                        ${doctor.rating % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
-                    </div>
-                    <div class="rating-value">${doctor.rating}</div>
-                </div>
-            </div>
-        `;
-        topDoctorsList.appendChild(card);
-    });
-}
-
-// Set up month selection modal
-function setupModalMonths() {
-    const months = [
-        'January', 'February', 'March', 'April', 
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
-    ];
-    
-    monthGrid.innerHTML = '';
-    
-    months.forEach((month, index) => {
-        const monthBtn = document.createElement('button');
-        monthBtn.className = 'month-btn';
-        if (index === modalCurrentDate.getMonth() && 
-            modalCurrentDate.getFullYear() === currentDate.getFullYear()) {
-            monthBtn.classList.add('active');
-        }
-        monthBtn.textContent = month;
-        monthBtn.dataset.month = index;
-        
-        monthBtn.addEventListener('click', function() {
-            modalCurrentDate.setMonth(index);
-            currentDate = new Date(modalCurrentDate);
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
             renderMonthYear();
             generateDatePills();
             renderAppointments();
-            monthModal.classList.remove('active');
+            renderUpcomingAppointments();
+            renderTopDoctors();
+            setupEventListeners();
+            
+            // Set default date to today
+            appointmentDateInput.value = getFormattedDateForInput(new Date());
+            
+            // Mark dates with appointments
+            markDatesWithAppointments();
         });
-        
-        monthGrid.appendChild(monthBtn);
-    });
-    
-    modalYear.textContent = modalCurrentDate.getFullYear();
-}
 
-// Set up event listeners
-function setupEventListeners() {
-    // Month navigation
-    prevMonthBtn.addEventListener('click', function() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        modalCurrentDate = new Date(currentDate);
-        renderMonthYear();
-        generateDatePills();
-        renderAppointments();
-        setupModalMonths();
-    });
-    
-    nextMonthBtn.addEventListener('click', function() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        modalCurrentDate = new Date(currentDate);
-        renderMonthYear();
-        generateDatePills();
-        renderAppointments();
-        setupModalMonths();
-    });
-    
-    // Specialist tag clicks
-    specialistTags.querySelectorAll('.specialist-tag').forEach(tag => {
-        tag.addEventListener('click', function() {
-            specialistTags.querySelector('.specialist-tag.active').classList.remove('active');
-            this.classList.add('active');
-            currentFilter = this.dataset.specialty;
-            renderAppointments();
-        });
-    });
-    
-    // Book appointment button
-    openBookingBtn.addEventListener('click', function() {
-        bookingPopup.classList.add('active');
-        // Set default date to currently selected date
-        appointmentDateInput.value = getFormattedDate(currentDate);
-    });
-    
-    // Close popup form
-    closePopup.addEventListener('click', closeBookingForm);
-    cancelBookingBtn.addEventListener('click', closeBookingForm);
-    
-    // Close when clicking outside form
-    bookingPopup.addEventListener('click', function(e) {
-        if (e.target === bookingPopup) {
-            closeBookingForm();
+        // Helper functions
+        function getFormattedDate(date) {
+            const d = new Date(date);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
-    });
-    
-    // Form submission
-    bookingForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const date = document.getElementById('appointmentDate').value;
-        const time = document.getElementById('appointmentTime').value;
-        const doctor = document.getElementById('doctorSelect').value;
-        const reason = document.getElementById('appointmentReason').value;
-        
-        // Extract specialty from doctor selection
-        const specialtyMatch = doctor.match(/\((.*?)\)/);
-        const specialty = specialtyMatch ? specialtyMatch[1].toLowerCase() : '';
-        
-        // Create new appointment
-        const newAppointment = {
-            id: appointments.length + 1,
-            patientName: "You", // In a real app, this would be the logged in user
-            patientImage: "https://randomuser.me/api/portraits/lego/1.jpg", // Default image
-            doctorName: doctor.split(' (')[0],
-            specialty: specialty,
-            time: time,
-            date: date,
-            title: reason.substring(0, 20) + (reason.length > 20 ? '...' : '') // Truncate if too long
-        };
-        
-        // Add to appointments array
-        appointments.push(newAppointment);
-        
-        // If the date is the current date, update the view
-        if (date === getFormattedDate(currentDate)) {
-            renderAppointments();
+
+        function getFormattedDateForInput(date) {
+            return getFormattedDate(date);
         }
-        
-        // Show success message
-        alert('Appointment booked successfully!');
-        
-        // Reset form and close
-        bookingForm.reset();
-        closeBookingForm();
-    });
-    
-    // Month modal controls
-    openMonthModal.addEventListener('click', function() {
-        monthModal.classList.add('active');
-    });
-    
-    closeMonthModal.addEventListener('click', function() {
-        monthModal.classList.remove('active');
-    });
-    
-    prevYearBtn.addEventListener('click', function() {
-        modalCurrentDate.setFullYear(modalCurrentDate.getFullYear() - 1);
-        modalYear.textContent = modalCurrentDate.getFullYear();
-        setupModalMonths();
-    });
-    
-    nextYearBtn.addEventListener('click', function() {
-        modalCurrentDate.setFullYear(modalCurrentDate.getFullYear() + 1);
-        modalYear.textContent = modalCurrentDate.getFullYear();
-        setupModalMonths();
-    });
-    
-    // Close modal when clicking outside
-    monthModal.addEventListener('click', function(e) {
-        if (e.target === monthModal) {
-            monthModal.classList.remove('active');
+
+        function formatTime(time) {
+            if (!time) return '';
+            
+            const [hours, minutes] = time.split(':');
+            const hourNum = parseInt(hours, 10);
+            const period = hourNum >= 12 ? 'PM' : 'AM';
+            const displayHour = hourNum % 12 || 12;
+            
+            return `${displayHour}:${minutes} ${period}`;
         }
-    });
-}
 
-function closeBookingForm() {
-    bookingPopup.classList.remove('active');
-}
+        function addDays(date, days) {
+            const result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
 
-// Helper function to format date as YYYY-MM-DD
-function getFormattedDate(date) {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
+        // Render current month and year
+        function renderMonthYear() {
+            const options = { month: 'long', year: 'numeric' };
+            currentMonthYear.textContent = currentDate.toLocaleDateString('en-US', options);
+        }
 
-// Helper function to format date for input field
-function getFormattedDateForInput(date) {
-    return getFormattedDate(date);
-}
+        // Generate date pills for the current month
+        function generateDatePills() {
+            dateScroll.innerHTML = '';
 
-// Helper function to format time (HH:MM to HH:MM AM/PM)
-function formatTime(time) {
-    if (!time) return '';
-    
-    const [hours, minutes] = time.split(':');
-    const hourNum = parseInt(hours, 10);
-    const period = hourNum >= 12 ? 'PM' : 'AM';
-    const displayHour = hourNum % 12 || 12;
-    
-    return `${displayHour}:${minutes} ${period}`;
-}
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            const todayFormatted = getFormattedDate(today);
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateFormatted = getFormattedDate(date);
+                const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                const dayName = dayNames[date.getDay()];
+
+                // Check if this date has any appointments
+                const hasAppointment = appointments.some(app => app.date === dateFormatted);
+                const isToday = dateFormatted === todayFormatted;
+
+                const pill = document.createElement('div');
+                pill.className = `date-pill ${isToday ? 'active' : ''} ${hasAppointment ? 'has-appointment' : ''}`;
+                pill.dataset.date = dateFormatted;
+                pill.innerHTML = `
+                    <div class="day">${dayName}</div>
+                    <div class="date">${day}</div>
+                    <div class="indicator"></div>
+                `;
+
+                pill.addEventListener('click', function() {
+                    document.querySelector('.date-pill.active')?.classList.remove('active');
+                    this.classList.add('active');
+                    currentDate = new Date(this.dataset.date);
+                    renderAppointments();
+                });
+
+                dateScroll.appendChild(pill);
+            }
+
+            // Scroll to today's date
+            setTimeout(() => {
+                const activePill = document.querySelector('.date-pill.active');
+                if (activePill) {
+                    activePill.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            }, 100);
+        }
+
+        // Mark dates that have appointments
+        function markDatesWithAppointments() {
+            const appointmentDates = [...new Set(appointments.map(app => app.date))];
+            
+            document.querySelectorAll('.date-pill').forEach(pill => {
+                if (appointmentDates.includes(pill.dataset.date)) {
+                    pill.classList.add('has-appointment');
+                }
+            });
+        }
+
+        // Render appointments based on current filter and date
+        function renderAppointments() {
+            appointmentsList.innerHTML = '';
+            
+            const dateFormatted = getFormattedDate(currentDate);
+            let filteredAppointments = appointments.filter(appointment => {
+                // Filter by date
+                const dateMatch = appointment.date === dateFormatted;
+                
+                // Filter by specialty
+                const specialtyMatch = currentFilter === 'all' || appointment.specialty === currentFilter;
+                
+                return dateMatch && specialtyMatch && !appointment.upcoming;
+            });
+            
+            if (filteredAppointments.length === 0) {
+                appointmentsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-times"></i>
+                        <h3>No Appointments</h3>
+                        <p>You don't have any appointments scheduled for this date.</p>
+                        <button class="empty-btn" id="bookNowEmpty">Book Now</button>
+                    </div>
+                `;
+                
+                document.getElementById('bookNowEmpty').addEventListener('click', () => {
+                    bookingPopup.classList.add('active');
+                });
+                
+                return;
+            }
+            
+            filteredAppointments.forEach(appointment => {
+                const card = document.createElement('div');
+                card.className = 'appointment-card';
+                card.innerHTML = `
+                    <div class="appointment-header">
+                        <div class="appointment-time">
+                            <i class="far fa-clock"></i>
+                            ${formatTime(appointment.time)}
+                        </div>
+                        <div class="appointment-type">${appointment.specialty.charAt(0).toUpperCase() + appointment.specialty.slice(1)}</div>
+                    </div>
+                    <div class="appointment-body">
+                        <img src="${appointment.patientImage}" alt="${appointment.patientName}" class="doctor-avatar">
+                        <div class="doctor-info">
+                            <h4 class="doctor-name">${appointment.doctorName}</h4>
+                            <p class="doctor-specialty">${appointment.title}</p>
+                            <p class="doctor-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${appointment.location}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="appointment-footer">
+                        <button class="action-btn secondary">
+                            <i class="fas fa-clock"></i>
+                            Reschedule
+                        </button>
+                        <button class="action-btn primary">
+                            <i class="fas fa-video"></i>
+                            Join
+                        </button>
+                    </div>
+                `;
+                appointmentsList.appendChild(card);
+            });
+        }
+
+        // Render upcoming appointments
+        function renderUpcomingAppointments() {
+            upcomingAppointments.innerHTML = '';
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            let upcoming = appointments.filter(appointment => {
+                const appDate = new Date(appointment.date);
+                return appDate > today && appointment.upcoming;
+            });
+            
+            if (upcoming.length === 0) {
+                upcomingAppointments.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-plus"></i>
+                        <h3>No Upcoming Appointments</h3>
+                        <p>You don't have any upcoming appointments scheduled.</p>
+                        <button class="empty-btn" id="bookNowUpcoming">Book Now</button>
+                    </div>
+                `;
+                
+                document.getElementById('bookNowUpcoming').addEventListener('click', () => {
+                    bookingPopup.classList.add('active');
+                });
+                
+                return;
+            }
+            
+            upcoming.forEach(appointment => {
+                const card = document.createElement('div');
+                card.className = 'appointment-card';
+                
+                // Format the date display (e.g., "Mon, Jun 5")
+                const appDate = new Date(appointment.date);
+                const options = { weekday: 'short', month: 'short', day: 'numeric' };
+                const formattedDate = appDate.toLocaleDateString('en-US', options);
+                
+                card.innerHTML = `
+                    <div class="appointment-header">
+                        <div class="appointment-time">
+                            <i class="far fa-calendar-alt"></i>
+                            ${formattedDate}, ${formatTime(appointment.time)}
+                        </div>
+                        <div class="appointment-type">${appointment.specialty.charAt(0).toUpperCase() + appointment.specialty.slice(1)}</div>
+                    </div>
+                    <div class="appointment-body">
+                        <img src="${appointment.patientImage}" alt="${appointment.patientName}" class="doctor-avatar">
+                        <div class="doctor-info">
+                            <h4 class="doctor-name">${appointment.doctorName}</h4>
+                            <p class="doctor-specialty">${appointment.title}</p>
+                            <p class="doctor-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${appointment.location}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="appointment-footer">
+                        <button class="action-btn secondary">
+                            <i class="fas fa-clock"></i>
+                            Reschedule
+                        </button>
+                        <button class="action-btn primary">
+                            <i class="fas fa-directions"></i>
+                            Directions
+                        </button>
+                    </div>
+                `;
+                upcomingAppointments.appendChild(card);
+            });
+        }
+
+        // Render top doctors
+        function renderTopDoctors() {
+            topDoctorsList.innerHTML = '';
+            
+            topDoctors.forEach(doctor => {
+                const card = document.createElement('div');
+                card.className = 'doctor-card-lg';
+                card.innerHTML = `
+                    <img src="${doctor.image}" alt="${doctor.name}" class="doctor-avatar-lg">
+                    <h4 class="doctor-name-lg">${doctor.name}</h4>
+                    <p class="doctor-specialty-lg">${doctor.specialty}</p>
+                    <div class="doctor-rating-lg">
+                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(doctor.rating))}
+                        ${doctor.rating % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                        <span>${doctor.rating} (${doctor.reviews})</span>
+                    </div>
+                    <button class="book-btn-sm" ${doctor.available ? '' : 'disabled'}>
+                        ${doctor.available ? 'Book Now' : 'Not Available'}
+                    </button>
+                `;
+                topDoctorsList.appendChild(card);
+            });
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Month navigation
+            prevMonthBtn.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderMonthYear();
+                generateDatePills();
+                renderAppointments();
+            });
+            
+            nextMonthBtn.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderMonthYear();
+                generateDatePills();
+                renderAppointments();
+            });
+            
+            // Specialist tag clicks
+            specialistTags.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    specialistTags.querySelector('.filter-tag.active').classList.remove('active');
+                    this.classList.add('active');
+                    currentFilter = this.dataset.specialty;
+                    renderAppointments();
+                });
+            });
+            
+            // Book appointment button
+            openBookingBtn.addEventListener('click', function() {
+                bookingPopup.classList.add('active');
+                // Set default date to currently selected date
+                appointmentDateInput.value = getFormattedDateForInput(currentDate);
+            });
+            
+            // Close popup form
+            closePopup.addEventListener('click', closeBookingForm);
+            cancelBookingBtn.addEventListener('click', closeBookingForm);
+            
+            // Close when clicking outside form
+            bookingPopup.addEventListener('click', function(e) {
+                if (e.target === bookingPopup) {
+                    closeBookingForm();
+                }
+            });
+            
+            // Form submission
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const date = document.getElementById('appointmentDate').value;
+                const time = document.getElementById('appointmentTime').value;
+                const doctor = document.getElementById('doctorSelect').value;
+                const reason = document.getElementById('appointmentReason').value;
+                
+                // Extract specialty from doctor selection
+                const specialtyMatch = doctor.match(/\((.*?)\)/);
+                const specialty = specialtyMatch ? specialtyMatch[1].toLowerCase() : '';
+                
+                // Create new appointment
+                const newAppointment = {
+                    id: appointments.length + 1,
+                    patientName: "You",
+                    patientImage: "https://randomuser.me/api/portraits/lego/1.jpg",
+                    doctorName: doctor.split(' (')[0],
+                    specialty: specialty,
+                    time: time,
+                    date: date,
+                    title: reason.substring(0, 20) + (reason.length > 20 ? '...' : ''),
+                    location: "Raha Health Center",
+                    upcoming: new Date(date) > new Date()
+                };
+                
+                // Add to appointments array
+                appointments.push(newAppointment);
+                
+                // Update the views
+                if (date === getFormattedDate(currentDate)) {
+                    renderAppointments();
+                }
+                renderUpcomingAppointments();
+                generateDatePills(); // To update the indicators
+                
+                // Show success message
+                alert('Appointment booked successfully!');
+                
+                // Reset form and close
+                bookingForm.reset();
+                closeBookingForm();
+            });
+            
+            // Header buttons
+            searchBtn.addEventListener('click', function() {
+                alert('Search functionality will be implemented here');
+            });
+            
+            notificationBtn.addEventListener('click', function() {
+                alert('Notifications will be shown here');
+            });
+        }
+
+        function closeBookingForm() {
+            bookingPopup.classList.remove('active');
+        }
