@@ -47,35 +47,77 @@
             <!-- Appointments will be populated by JavaScript -->
         </div>
 
-        <div class="telemedicine">
-          <h3>Quick Consult</h3>
-          <div class="consult-options">
-            <button class="consult-option">
-              <i class="fas fa-comment-medical"></i>
-              <span>Chat with Doctor</span>
-            </button>
-            <button class="consult-option">
-              <i class="fas fa-video"></i>
-              <span>Video Consult</span>
-            </button>
-            <button class="consult-option">
-              <i class="fas fa-phone-alt"></i>
-              <span>Phone Consult</span>
-            </button>
-          </div>
-          <div class="available-doctors">
-            <h4>Available Now</h4>
-            <div class="doctor-card">
-              <div class="doctor-avatar">👨‍⚕️</div>
-              <div class="doctor-info">
-                <h5>Dr. Michael Smith</h5>
-                <p>General Physician</p>
-                <div class="rating">4.8 ★</div>
-              </div>
-              <button class="consult-now">Consult</button>
+         <!-- Telemedicine Section -->
+        <div class="telemedicine-section">
+            <h3 class="section-title">
+                <i class="fas fa-laptop-medical"></i>
+                Quick Consult
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 10px;">
+                Connect with a doctor instantly for your medical needs
+            </p>
+            
+            <div class="consult-options">
+                <button class="consult-option">
+                    <i class="fas fa-comment-medical"></i>
+                    <span>Chat</span>
+                </button>
+                <button class="consult-option">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </button>
+                <button class="consult-option">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Phone</span>
+                </button>
+                <button class="consult-option">
+                    <i class="fas fa-envelope"></i>
+                    <span>Message</span>
+                </button>
             </div>
-          </div>
+            
+            <div class="available-doctors">
+                <h4 class="available-title">
+                    <i class="fas fa-circle" style="font-size: 0.6rem;"></i>
+                    Available Now
+                </h4>
+                
+                <div class="doctor-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Michael Smith" class="doctor-avatar-sm">
+                    <div class="doctor-details">
+                        <h5 class="doctor-name-sm">Dr. Michael Smith</h5>
+                        <p class="doctor-specialty-sm">General Physician</p>
+                        <div class="doctor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.8 (120)</span>
+                        </div>
+                    </div>
+                    <button class="consult-btn">Consult</button>
+                </div>
+                
+                <div class="doctor-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Sarah Johnson" class="doctor-avatar-sm">
+                    <div class="doctor-details">
+                        <h5 class="doctor-name-sm">Dr. Sarah Johnson</h5>
+                        <p class="doctor-specialty-sm">Pediatrician</p>
+                        <div class="doctor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0 (98)</span>
+                        </div>
+                    </div>
+                    <button class="consult-btn">Consult</button>
+                </div>
+            </div>
         </div>
+
         
         <section class="appointments-section">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Upcoming Appointments</h2>
