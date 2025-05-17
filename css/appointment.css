@@ -1,6 +1,5 @@
 /* Base Styles */
 :root{
-     --secondary: #3f37c9;
             --success: #4cc9f0;
             --danger: #f72585;
             --warning: #f8961e;
@@ -745,7 +744,7 @@ bottom: 80px; /* Increased from 90px to prevent overlap */
 
 :root {
 --primary: #3498db;
---primary-light: #7a84d8;
+--primary-light: #3498db;
 --secondary: #E8EDFF;
 --background: #F8F9FF;
 --text: #2c3e50;
