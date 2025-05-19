@@ -57,6 +57,19 @@
           </label>
         </div>
       </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Notification Sound</h3>
+          <p>Play sound when notifications arrive</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="notificationSound">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
     </div>
 
     <!-- Privacy Settings -->
@@ -87,6 +100,19 @@
             <option value="my">My doctors only</option>
             <option value="none">None</option>
           </select>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Biometric Login</h3>
+          <p>Use fingerprint or face recognition to login</p>
+        </div>
+        <div class="setting-control">
+          <label class="switch">
+            <input type="checkbox" id="biometricLogin">
+            <span class="slider"></span>
+          </label>
         </div>
       </div>
     </div>
@@ -122,6 +148,16 @@
           </select>
         </div>
       </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>App Icon</h3>
+          <p>Choose a different icon for your home screen</p>
+        </div>
+        <div class="setting-control">
+          <button id="changeIconBtn">Change</button>
+        </div>
+      </div>
     </div>
 
     <!-- Account Settings -->
@@ -134,7 +170,17 @@
           <p>Update your account security</p>
         </div>
         <div class="setting-control">
-          <button id="changePasswordBtn">Change</button>
+          <button id="changePasswordBtn"><i class="fas fa-key"></i> Change</button>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Two-Factor Authentication</h3>
+          <p>Add an extra layer of security to your account</p>
+        </div>
+        <div class="setting-control">
+          <button id="enable2FABtn"><i class="fas fa-shield-alt"></i> Enable</button>
         </div>
       </div>
       
@@ -144,7 +190,7 @@
           <p>Permanently remove your account and data</p>
         </div>
         <div class="setting-control">
-          <button class="danger" id="deleteAccountBtn">Delete</button>
+          <button class="danger" id="deleteAccountBtn"><i class="fas fa-trash-alt"></i> Delete</button>
         </div>
       </div>
     </div>
@@ -160,15 +206,35 @@
       </div>
       <div class="form-group">
         <label for="newPassword">New Password</label>
-        <input type="password" id="newPassword" placeholder="Enter new password">
+        <input type="password" id="newPassword" placeholder="Enter new password (min 8 characters)">
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" placeholder="Confirm new password">
       </div>
+      <div class="form-group">
+        <div class="password-strength">
+          <div class="strength-meter">
+            <div class="strength-bar"></div>
+          </div>
+          <span class="strength-text">Password strength</span>
+        </div>
+      </div>
       <div class="modal-actions">
-        <button id="cancelPasswordChange">Cancel</button>
-        <button id="savePassword">Save Changes</button>
+        <button class="secondary" id="cancelPasswordChange"><i class="fas fa-times"></i> Cancel</button>
+        <button id="savePassword"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Confirmation -->
+  <div class="confirmation-dialog" id="deleteConfirmation">
+    <div class="confirmation-content">
+      <h3 class="confirmation-title"><i class="fas fa-exclamation-triangle"></i> Delete Account</h3>
+      <p class="confirmation-message">Are you sure you want to permanently delete your account? This action cannot be undone and all your data will be lost.</p>
+      <div class="confirmation-actions">
+        <button class="secondary" id="cancelDelete"><i class="fas fa-times"></i> Cancel</button>
+        <button class="danger" id="confirmDelete"><i class="fas fa-trash-alt"></i> Delete</button>
       </div>
     </div>
   </div>
