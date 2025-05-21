@@ -24,7 +24,7 @@
           <p>Book diagnostic tests with ease</p>
         </div>
         <div class="header-actions">
-          <div class="search-icon">
+          <div class="search-icon" id="openSearch">
             <i class="fas fa-search"></i>
           </div>
         </div>
@@ -37,30 +37,9 @@
     <!-- Test Categories -->
     <section class="test-categories">
       <h2 class="section-title"><i class="fas fa-filter"></i> Test Categories</h2>
-      <div class="categories-grid">
-        <div class="category-card active">
-          <i class="fas fa-vial"></i>
-          <span>All Tests</span>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-heartbeat"></i>
-          <span>Cardiac</span>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-dna"></i>
-          <span>Hormones</span>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-virus"></i>
-          <span>Infections</span>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-bone"></i>
-          <span>Bone</span>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-lungs"></i>
-          <span>Respiratory</span>
+      <div class="categories-container">
+        <div class="categories-scroll" id="categoriesScroll">
+          <!-- Categories will be populated by JavaScript -->
         </div>
       </div>
     </section>
@@ -69,146 +48,71 @@
     <section class="popular-tests">
       <div class="section-header">
         <h2 class="section-title"><i class="fas fa-fire"></i> Popular Tests</h2>
-        <a href="#" class="see-all">See All</a>
+        <a href="#" class="see-all">See All <i class="fas fa-chevron-right"></i></a>
       </div>
-      
-      <div class="tests-grid">
-        <div class="test-card">
-          <div class="test-info">
-            <h3>Complete Blood Count (CBC)</h3>
-            <p class="test-desc">Measures overall health and detects disorders</p>
-            <div class="test-meta">
-              <span class="price">₹499</span>
-              <span class="original-price">₹799</span>
-              <span class="discount">38% OFF</span>
-            </div>
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-        
-        <div class="test-card">
-          <div class="test-info">
-            <h3>Thyroid Profile (T3, T4, TSH)</h3>
-            <p class="test-desc">Evaluates thyroid gland function</p>
-            <div class="test-meta">
-              <span class="price">₹899</span>
-              <span class="original-price">₹1299</span>
-              <span class="discount">31% OFF</span>
-            </div>
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-        
-        <div class="test-card">
-          <div class="test-info">
-            <h3>Lipid Profile</h3>
-            <p class="test-desc">Measures cholesterol and triglycerides</p>
-            <div class="test-meta">
-              <span class="price">₹599</span>
-              <span class="original-price">₹899</span>
-              <span class="discount">33% OFF</span>
-            </div>
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-        
-        <div class="test-card">
-          <div class="test-info">
-            <h3>Liver Function Test</h3>
-            <p class="test-desc">Assesses liver health and enzymes</p>
-            <div class="test-meta">
-              <span class="price">₹699</span>
-              <span class="original-price">₹999</span>
-              <span class="discount">30% OFF</span>
-            </div>
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
+
+      <div class="tests-grid" id="popularTests">
+        <!-- Popular tests will be populated by JavaScript -->
       </div>
     </section>
 
     <!-- Test Packages -->
     <section class="test-packages">
       <h2 class="section-title"><i class="fas fa-box-open"></i> Health Packages</h2>
-      
-      <div class="packages-grid">
-        <div class="package-card">
-          <div class="package-badge">Most Popular</div>
-          <div class="package-info">
-            <h3>Basic Full Body Checkup</h3>
-            <ul class="package-tests">
-              <li>CBC</li>
-              <li>Blood Glucose</li>
-              <li>Liver Function</li>
-              <li>Kidney Function</li>
-              <li>Lipid Profile</li>
-            </ul>
-            <div class="package-meta">
-              <div class="price-info">
-                <span class="price">₹1499</span>
-                <span class="original-price">₹2999</span>
-                <span class="discount">50% OFF</span>
-              </div>
-              <button class="add-btn">Add</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="package-card">
-          <div class="package-badge">Best Value</div>
-          <div class="package-info">
-            <h3>Advanced Health Package</h3>
-            <ul class="package-tests">
-              <li>Complete Hemogram</li>
-              <li>Thyroid Profile</li>
-              <li>Diabetes Screening</li>
-              <li>Vitamin D & B12</li>
-              <li>Iron Studies</li>
-            </ul>
-            <div class="package-meta">
-              <div class="price-info">
-                <span class="price">₹2499</span>
-                <span class="original-price">₹4999</span>
-                <span class="discount">50% OFF</span>
-              </div>
-              <button class="add-btn">Add</button>
-            </div>
-          </div>
-        </div>
+
+      <div class="packages-grid" id="testPackages">
+        <!-- Test packages will be populated by JavaScript -->
       </div>
     </section>
 
     <!-- How It Works -->
     <section class="how-it-works">
       <h2 class="section-title"><i class="fas fa-question-circle"></i> How It Works</h2>
-      
+
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">1</div>
           <div class="step-content">
             <h3>Book Your Test</h3>
-            <p>Select tests and schedule appointment</p>
+            <p>Select tests and schedule appointment at your convenience</p>
           </div>
         </div>
-        
+
         <div class="step-card">
           <div class="step-number">2</div>
           <div class="step-content">
             <h3>Sample Collection</h3>
-            <p>Get samples collected at home</p>
+            <p>Our trained phlebotomist collects samples from your home</p>
           </div>
         </div>
-        
+
         <div class="step-card">
           <div class="step-number">3</div>
           <div class="step-content">
             <h3>Get Reports</h3>
-            <p>Receive digital reports in 24-48 hours</p>
+            <p>Receive digital reports via email within 24-48 hours</p>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-container">
+      <div class="search-header">
+        <h3 class="search-title">Search Lab Tests</h3>
+        <button class="close-search" id="closeSearch"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="search-input-container">
+        <i class="fas fa-search search-icon-input"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search for tests...">
+      </div>
+      <div class="search-results" id="searchResults">
+        <!-- Search results will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
 
   <!-- Bottom Navigation -->
   <div class="navbar-container">
@@ -236,7 +140,7 @@
   <div class="cart-floating">
     <a href="cart.html">
       <i class="fas fa-shopping-cart"></i>
-      <span class="cart-count">2</span>
+      <span class="cart-count" id="cartCount">0</span>
     </a>
   </div>
 
